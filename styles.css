@@ -338,6 +338,7 @@ section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); }
   font-size: 0.95rem;
   color: var(--purple-700);
   background: #fff;
+  overflow: hidden;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 .logo-card img {
@@ -347,7 +348,7 @@ section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); }
   height: auto;
   object-fit: contain;
 }
-.logo-card img.is-lg { transform: scale(1.55); }
+.logo-card img.is-lg { transform: scale(2.2); }
 .logo-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 26px -16px rgba(91, 52, 176, 0.6);
