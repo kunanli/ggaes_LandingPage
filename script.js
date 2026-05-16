@@ -104,7 +104,7 @@
     {
       name: "Christopher Headleand", img: "Christopher Headleand.jpeg",
       en: "University of Staffordshire\nHead of Digital, Technology, Innovation & Business",
-      zh: "斯塔福德郡大学\n数字、技术、创新与商业系主任"
+      zh: "斯泰福厦大学\n数字、技术、创新与商业系主任"
     },
     {
       name: "Philip Meredith", img: "Philip Meredith.webp",
