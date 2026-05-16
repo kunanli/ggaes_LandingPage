@@ -103,7 +103,7 @@
     { name: "Escape Studios", logo: "Escape.webp" },
     { name: "University of Staffordshire", logo: "Staffordshire.png" },
     { name: "DigiPen", logo: "DigiPen_web_logo.png" },
-    { name: "SMU Guildhall", logo: "SMU.jpg" },
+    { name: "SMU Guildhall", logo: "SMU.jpg", big: true },
     { name: "Abertay University", logo: "Abertay.png" },
     { name: "Gnomon", logo: "Gnomon.jpg" },
     { name: "Teesside University", logo: "Teessi.webp" },
@@ -205,7 +205,7 @@
       zh: "奥蒂斯艺术与设计学院 游戏设计系主任\n曾任职 Heavy Iron Studios，参与《海绵宝宝》《玩具总动员》IP 游戏"
     },
     {
-      name: "Yi Tian", img: "Yi Tian.png",
+      name: "Yi Tan", img: "Yi Tian.png",
       en: "UAL Beijing Admissions Office\nAcademic Advisor",
       zh: "伦敦艺术大学北京招生办公室\n学术顾问"
     },
@@ -317,8 +317,8 @@
               start: "2026-06-26T16:00:00+08:00", end: "2026-06-26T17:00:00+08:00", type: "uk",
               titleEn: "Art Meets Technology: How UAL Empowers Game Creation Both Ways",
               titleZh: "艺术与技术：伦艺如何双向赋能游戏创作？",
-              speakerEn: "Yi Tian · Academic Counsellor, UAL Beijing Office",
-              speakerZh: "Yi Tian · 伦敦艺术大学北京招生办公室 学术顾问"
+              speakerEn: "Yi Tan · Academic Counsellor, UAL Beijing Office",
+              speakerZh: "Yi Tan · 伦敦艺术大学北京招生办公室 学术顾问"
             },
             {
               start: "2026-06-26T17:00:00+08:00", end: "2026-06-26T18:00:00+08:00", type: "uk",
