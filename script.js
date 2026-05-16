@@ -94,31 +94,31 @@
   /* ---------- Data ---------- */
   var institutions = [
     { name: "University of the Arts London", logo: "UAL.webp" },
-    { name: "Hong Kong Polytechnic University", logo: "Poly U.png", big: true },
-    { name: "University of Utah", logo: "Utah.jpg" },
+    { name: "Hong Kong Polytechnic University", logo: "Poly U.webp", big: true },
+    { name: "University of Utah", logo: "Utah.webp" },
     { name: "CalArts", logo: "Calarts.webp" },
-    { name: "Bournemouth University", logo: "Bu.png" },
+    { name: "Bournemouth University", logo: "Bu.webp" },
     { name: "Escape Studios", logo: "Escape.webp" },
-    { name: "University of Staffordshire", logo: "Staffordshire.png" },
-    { name: "DigiPen", logo: "DigiPen_web_logo.png" },
-    { name: "SMU Guildhall", logo: "SMU.jpg", big: true },
-    { name: "Abertay University", logo: "Abertay.png" },
-    { name: "Gnomon", logo: "Gnomon.jpg" },
+    { name: "University of Staffordshire", logo: "Staffordshire.webp" },
+    { name: "DigiPen", logo: "DigiPen_web_logo.webp" },
+    { name: "SMU Guildhall", logo: "SMU.webp", big: true },
+    { name: "Abertay University", logo: "Abertay.webp" },
+    { name: "Gnomon", logo: "Gnomon.webp" },
     { name: "Teesside University", logo: "Teessi.webp" },
     { name: "The Glasgow School of Art", logo: "GSA.webp" },
-    { name: "University of Hertfordshire", logo: "University_of_Hertfordshire_Logo.svg.png" },
-    { name: "Otis College of Art and Design", logo: "OTis.png" },
-    { name: "MAGES Institute", logo: "MAGES.png" }
+    { name: "University of Hertfordshire", logo: "University_of_Hertfordshire_Logo.svg.webp" },
+    { name: "Otis College of Art and Design", logo: "OTis.webp" },
+    { name: "MAGES Institute", logo: "MAGES.webp" }
   ];
 
   var academicSpeakers = [
     {
-      name: "Niccolò Temperanza", img: "niccolo-temperanza.jpg",
+      name: "Niccolò Temperanza", img: "niccolo-temperanza.webp",
       en: "Game Art Course Leader, Escape Studios\nVeteran game art professional",
       zh: "Escape Studios 游戏美术课程教授\n资深游戏美术从业者"
     },
     {
-      name: "Christopher Headleand", img: "Christopher Headleand.jpeg",
+      name: "Christopher Headleand", img: "Christopher Headleand.webp",
       en: "University of Staffordshire\nHead of Digital, Technology, Innovation & Business",
       zh: "斯泰福厦大学\n数字、技术、创新与商业系主任"
     },
@@ -128,57 +128,57 @@
       zh: "Escape Studios 游戏科系主管\n曾参与《哈利·波特：死亡圣器》《寂静岭：破碎的记忆》"
     },
     {
-      name: "Ruth Falconer", img: "Ruth.jpg",
+      name: "Ruth Falconer", img: "Ruth.webp",
       en: "Head of Games Tech & Maths, Abertay University\nCreaTech Lead, CoSTAR National Lab",
       zh: "阿伯泰大学 游戏技术与数学系系主任\nCoSTAR 国家实验室 CreaTech 负责人"
     },
     {
-      name: "Ashley Stegon", img: "Ashley Stegon.jpg",
+      name: "Ashley Stegon", img: "Ashley Stegon.webp",
       en: "Digital Sculpting Instructor, Gnomon\nCredits: Avengers: Infinity War, The Mandalorian",
       zh: "诺蒙视觉特效学院 数字雕刻教师\n曾参与《复仇者联盟3：无限战争》《曼达洛人》"
     },
     {
-      name: "Phillip Vaughan", img: "Philip.jpg",
+      name: "Phillip Vaughan", img: "Philip.webp",
       en: "Abertay University\nSenior Lecturer, Technical Art & Visual Effects",
       zh: "阿伯泰大学\n技术艺术与视觉特效高级讲师"
     },
     {
-      name: "Russell Miller", img: "Russell Miller.jpg",
+      name: "Russell Miller", img: "Russell Miller.webp",
       en: "Academic Lead, The Glasgow School of Art\n30 years in design, visual arts & creative education",
       zh: "格拉斯哥艺术学院 学术主管\n30 年平面设计、视觉艺术与创意教育经验"
     },
     {
-      name: "Xiaosong Yang", img: "Xiaosong Yang.jpg",
+      name: "Xiaosong Yang", img: "Xiaosong Yang.webp",
       en: "Bournemouth University\nDeputy Director, UK National Centre for Computer Animation",
       zh: "伯恩茅斯大学\n英国国家计算机动画中心副主任"
     },
     {
-      name: "Patrick Schmid", img: "Patrick Schmid.png",
+      name: "Patrick Schmid", img: "Patrick Schmid.webp",
       en: "School of Film/Video, CalArts\nAssistant Director of Admissions — Animation",
       zh: "加州艺术学院 电影/视频学院\n招生助理主任——动画方向"
     },
     {
-      name: "Jae-Eun Oh", img: "Jae-Eun Oh.jpg",
+      name: "Jae-Eun Oh", img: "Jae-Eun Oh.webp",
       en: "Associate Professor, Hong Kong Polytechnic University\nProgramme Leader, BA (Hons) Digital Media",
       zh: "香港理工大学 副教授\n数字媒体（荣誉）文学士项目主任"
     },
     {
-      name: "Daniel Livingstone", img: "Daniel Livingstone.png",
+      name: "Daniel Livingstone", img: "Daniel Livingstone.webp",
       en: "School of Innovation & Technology, The Glasgow School of Art\nAcademic Portfolio Lead",
       zh: "格拉斯哥艺术学院 创新与技术学院\n学术项目主管"
     },
     {
-      name: "Joowon Kim MacDowell", img: "Joowon Kim MacDowell.png",
+      name: "Joowon Kim MacDowell", img: "Joowon Kim MacDowell.webp",
       en: "Professor, SMU Guildhall\nGame Art & Production · Immersive Tech (VR/AR) expert",
       zh: "南卫理公会大学 SMU Guildhall 教授\n游戏美术与制作专业 · 沉浸式技术（VR/AR）专家"
     },
     {
-      name: "Ryan Bown", img: "Ryan Bown.jpg",
+      name: "Ryan Bown", img: "Ryan Bown.webp",
       en: "Graduate Faculty, Games Division, University of Utah\nCredits: EIRE, Disney Infinity",
       zh: "犹他大学 游戏学部研究生课程教授\n曾参与开发《EIRE》与《迪士尼无限》"
     },
     {
-      name: "David Tree", img: "David Tree.jpg",
+      name: "David Tree", img: "David Tree.webp",
       en: "University of Hertfordshire\nCourse Leader, Animation & Games Technology",
       zh: "赫特福德大学\n动画与游戏技术专业课程主任"
     },
@@ -188,27 +188,27 @@
       zh: "迪吉彭理工学院 数字艺术与动画专业项目主任\n曾参与初代 Xbox 主机的开发设计"
     },
     {
-      name: "Kingston Chan", img: "KingstonChan-ConceptArtProgramHead-MAGESInstitute.jpg",
+      name: "Kingston Chan", img: "KingstonChan-ConceptArtProgramHead-MAGESInstitute.webp",
       en: "Dean of Art, MAGES Institute Singapore\nFormer senior game artist at SEGA & Koei Tecmo",
       zh: "新加坡 MAGES 学院 艺术学院院长\n曾任 SEGA、Koei Tecmo 资深游戏美术师"
     },
     {
-      name: "Darren Phillipson", img: "darren-phillipson.jpg",
+      name: "Darren Phillipson", img: "darren-phillipson.webp",
       en: "Professor of Toy Design, Otis College of Art and Design\nFormerly at Lucasfilm, Disney and other top studios",
       zh: "奥蒂斯艺术与设计学院 玩具设计教授\n曾任职于卢卡斯影业、迪士尼等顶级公司"
     },
     {
-      name: "Joffery Black", img: "Joffery Black.jpg",
+      name: "Joffery Black", img: "Joffery Black.webp",
       en: "Chair of Game Design, Otis College of Art and Design\nFormer Heavy Iron Studios — SpongeBob, Toy Story games",
       zh: "奥蒂斯艺术与设计学院 游戏设计系主任\n曾任职 Heavy Iron Studios，参与《海绵宝宝》《玩具总动员》IP 游戏"
     },
     {
-      name: "Yi Tan", img: "Yi Tian.png",
+      name: "Yi Tan", img: "Yi Tian.webp",
       en: "UAL Beijing Admissions Office\nAcademic Advisor",
       zh: "伦敦艺术大学北京招生办公室\n学术顾问"
     },
     {
-      name: "Pingyao Sun", img: "Pingyao Sun.png",
+      name: "Pingyao Sun", img: "Pingyao Sun.webp",
       en: "China Admissions Manager, Teesside University\n11 years in the UK study-abroad sector",
       zh: "提赛德大学 中国区招生经理\n11 年英国留学行业经验"
     },
@@ -226,22 +226,22 @@
       zh: "Global Game Jam 执行总监\n《纽约时报》畅销书作者 · 2016 白宫女性峰会演讲嘉宾"
     },
     {
-      name: "Shaojun Sun", img: "Shaojun Sun.jpg",
+      name: "Shaojun Sun", img: "Shaojun Sun.webp",
       en: "Miora Lead, Tencent CodeBuddy\nAI Product Manager · Product Experience Designer",
       zh: "腾讯 CodeBuddy 团队 Miora 负责人\nAI 产品经理 · 产品体验设计师"
     },
     {
-      name: "Irene Liu", img: "Irene Liu.jpg",
+      name: "Irene Liu", img: "Irene Liu.webp",
       en: "Genie Product Lead, Tencent CodeBuddy\nSenior AI-Native Product Manager",
       zh: "腾讯 CodeBuddy 团队 Genie 产品负责人\n资深 AI Native 产品经理"
     },
     {
-      name: "Chris Ebeling", img: "Chris Ebeling.jpg",
+      name: "Chris Ebeling", img: "Chris Ebeling.webp",
       en: "Unreal Engine Global Partner & Education Advisor\nVeteran digital artist, creative director & entrepreneur",
       zh: "虚幻引擎 全球合作伙伴兼教育顾问\n资深数字艺术家、创意总监与创业者"
     },
     {
-      name: "Jin Wang", img: "Jin Wang.png",
+      name: "Jin Wang", img: "Jin Wang.webp",
       en: "Official Unreal Engine Certified Instructor\nTop knowledge creator on Bilibili",
       zh: "虚幻引擎官方认证讲师\nBilibili 知识区头部创作者"
     }
