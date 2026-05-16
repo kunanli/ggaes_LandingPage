@@ -203,7 +203,7 @@
       zh: "奥蒂斯艺术与设计学院 游戏设计系主任\n曾任职 Heavy Iron Studios，参与《海绵宝宝》《玩具总动员》IP 游戏"
     },
     {
-      name: "Yi Tan", img: "Yi Tian.webp",
+      name: "Yi Tan", img: "Yi Tan.webp",
       en: "UAL Beijing Admissions Office\nAcademic Advisor",
       zh: "伦敦艺术大学北京招生办公室\n学术顾问"
     },
