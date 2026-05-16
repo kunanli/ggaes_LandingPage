@@ -294,8 +294,8 @@
               start: "2026-06-26T10:30:00+08:00", end: "2026-06-26T11:15:00+08:00", type: "us",
               titleEn: "Storytellers Beyond the Algorithm: From Students to Creators of the Stories You Know",
               titleZh: "超越算法的故事讲述者：从学生到你所熟知故事的创作者",
-              speakerEn: "CalArts",
-              speakerZh: "加州艺术学院 CalArts"
+              speakerEn: "Patrick Schmid · CalArts",
+              speakerZh: "Patrick Schmid · 加州艺术学院 CalArts"
             },
             {
               start: "2026-06-26T11:30:00+08:00", end: "2026-06-26T12:15:00+08:00", type: "hk",
