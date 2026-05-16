@@ -409,8 +409,8 @@ section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); }
 .footer-bottom {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 0.8rem;
+  align-items: center;
+  gap: 0.8rem 1.4rem;
   padding: 1.4rem clamp(1.25rem, 6vw, 5rem);
   border-top: 1px solid rgba(255, 255, 255, 0.18);
   font-size: 0.85rem;
@@ -418,6 +418,16 @@ section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); }
 .footer-email { font-weight: 600; }
 .footer-email:hover { text-decoration: underline; }
 .footer-copy { color: rgba(255, 255, 255, 0.7); }
+.footer-social { display: flex; gap: 0.7rem; margin-left: auto; }
+.footer-social a { display: flex; }
+.footer-social img {
+  width: 30px;
+  height: 30px;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.footer-social a:hover img { opacity: 1; transform: translateY(-2px); }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
