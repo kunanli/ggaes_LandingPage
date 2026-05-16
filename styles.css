@@ -58,6 +58,48 @@ a { color: inherit; text-decoration: none; }
   color: var(--purple-700);
   box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.5);
 }
+.btn-disabled {
+  background: var(--line);
+  color: var(--muted);
+  cursor: not-allowed;
+  font-family: inherit;
+}
+.btn-disabled:hover { transform: none; }
+
+/* Disabled brochure CTA tooltip */
+.brochure-cta { position: relative; display: inline-block; }
+.brochure-cta::after {
+  content: attr(data-tip-en);
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 10px);
+  transform: translateX(-50%);
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+  padding: 0.4rem 0.7rem;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+.brochure-cta::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: calc(100% + 4px);
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+html[lang="zh"] .brochure-cta::after { content: attr(data-tip-zh); }
+.brochure-cta:hover::after,
+.brochure-cta:hover::before { opacity: 1; }
 
 /* ---------- Header ---------- */
 .site-header {
