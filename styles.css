@@ -590,6 +590,7 @@ section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); }
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   .site-nav { display: none; }
+  .header-actions { margin-left: auto; }
   .stats { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 560px) {
