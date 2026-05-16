@@ -121,7 +121,7 @@ html[lang="zh"] .brochure-cta::after { content: attr(data-tip-zh); }
   border-bottom: 1px solid var(--line);
 }
 .brand { display: flex; align-items: center; }
-.brand-logo { height: clamp(38px, 4.6vw, 48px); width: auto; display: block; }
+.brand-logo { height: 44px; width: auto; display: block; }
 
 .site-nav { display: flex; gap: 1.6rem; margin-left: auto; }
 .site-nav a {
