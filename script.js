@@ -710,6 +710,34 @@
     setInterval(tick, 1000);
   }
 
+  /* ---------- CTA click tracking ---------- */
+  function initCtaTracking() {
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest(".btn");
+      if (!btn || btn.classList.contains("btn-disabled") || btn.disabled) return;
+
+      var section = "other";
+      if (btn.closest("header")) section = "header";
+      else if (btn.closest("footer")) section = "footer";
+      else if (btn.closest(".hero")) section = "hero";
+      else {
+        var sec = btn.closest("section");
+        if (sec && sec.id) section = sec.id;
+      }
+
+      var data = {
+        cta_id: btn.getAttribute("data-i18n") || (btn.textContent || "").trim(),
+        cta_text: (btn.textContent || "").trim(),
+        cta_section: section
+      };
+      if (btn.href) data.link_url = btn.href;
+
+      if (typeof window.gtag === "function") {
+        window.gtag("event", "cta_click", data);
+      }
+    });
+  }
+
   /* ---------- Init ---------- */
   function getInitialLang() {
     var stored;
@@ -733,5 +761,6 @@
     });
 
     startCountdown();
+    initCtaTracking();
   });
 })();
