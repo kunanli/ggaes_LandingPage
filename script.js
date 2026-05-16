@@ -35,7 +35,7 @@
       industryTitle: "Industry Speakers",
       footerCtaTitle: "Ready to join GGAES 2026?",
       footerCtaDesc: "Register now to secure your spot at the summit.",
-      email: "Email: support@artdico.co",
+      email: "Email: ggaes@artdico.co",
       copyright: "© 2026 GGAES · Global Game & Animation Education Summit"
     },
     zh: {
@@ -70,7 +70,7 @@
       industryTitle: "行业嘉宾",
       footerCtaTitle: "准备好加入 GGAES 2026 了吗？",
       footerCtaDesc: "立即报名，锁定你的峰会席位。",
-      email: "电子邮箱：support@artdico.co",
+      email: "电子邮箱：ggaes@artdico.co",
       copyright: "© 2026 GGAES · 全球游戏动画留学峰会"
     }
   };
