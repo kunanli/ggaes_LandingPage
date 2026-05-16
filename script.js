@@ -358,8 +358,8 @@
               start: "2026-06-27T10:30:00+08:00", end: "2026-06-27T11:15:00+08:00", type: "sgus",
               titleEn: "From Playing Games to Making Games: Careers in Game Development",
               titleZh: "从玩游戏到做游戏：游戏开发的职业之路",
-              speakerEn: "Tan Yong Zhen 'YZ' · Dean of Arts, DigiPen",
-              speakerZh: "Tan Yong Zhen 'YZ' · 迪吉彭理工学院 艺术学院院长"
+              speakerEn: "Matt Brunner · Tan Yong Zhen 'YZ' · DigiPen",
+              speakerZh: "Matt Brunner · Tan Yong Zhen 'YZ' · 迪吉彭理工学院"
             },
             {
               start: "2026-06-27T11:30:00+08:00", end: "2026-06-27T12:15:00+08:00", type: "sg",
