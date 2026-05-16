@@ -263,9 +263,9 @@
     keynote: { en: "Keynote", zh: "主题演讲" },
     us: { en: "US School", zh: "美国院校" },
     uk: { en: "UK School", zh: "英国院校" },
-    hk: { en: "Hong Kong School", zh: "香港院校" },
-    sg: { en: "Singapore School", zh: "新加坡院校" },
-    sgus: { en: "Singapore & US School", zh: "新加坡&美国院校" },
+    hk: { en: "HK School", zh: "香港院校" },
+    sg: { en: "SG School", zh: "新加坡院校" },
+    sgus: { en: "SG & US School", zh: "新加坡&美国院校" },
     tba: { en: "Topic to be announced", zh: "主题待公布" }
   };
 
