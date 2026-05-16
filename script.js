@@ -23,7 +23,6 @@
       hours: "Hours",
       minutes: "Minutes",
       seconds: "Seconds",
-      viewSchedule: "View Full Schedule",
       scheduleNote: "Held online over 3 days · June 26–28, 2026 (China Standard Time)",
       scheduleTitle: "Full Schedule",
       scheduleDayLabel: "Day",
@@ -67,7 +66,6 @@
       hours: "时",
       minutes: "分",
       seconds: "秒",
-      viewSchedule: "查看完整日程表",
       scheduleNote: "3天线上召开 · 2026年6月26日-28日中国标准时间档期",
       scheduleTitle: "完整日程",
       scheduleDayLabel: "日期",
@@ -254,6 +252,8 @@
     { id: "Asia/Shanghai", en: "China · UTC+8", zh: "中国 · UTC+8" },
     { id: "Europe/London", en: "UK · UTC+1", zh: "英国 · UTC+1" },
     { id: "America/New_York", en: "US Eastern · UTC-4", zh: "美国东部 · UTC-4" },
+    { id: "America/Chicago", en: "US Central · UTC-5", zh: "美国中部 · UTC-5" },
+    { id: "America/Denver", en: "US Mountain · UTC-6", zh: "美国山区 · UTC-6" },
     { id: "America/Los_Angeles", en: "US Pacific · UTC-7", zh: "美国西部 · UTC-7" }
   ];
 
@@ -646,6 +646,13 @@
       var key = el.getAttribute("data-i18n");
       if (dict[key] != null) el.textContent = dict[key];
     });
+
+    var heroTitle = document.querySelector(".hero-title");
+    if (heroTitle) {
+      heroTitle.innerHTML = lang === "zh"
+        ? "全球游戏动画留学峰会"
+        : "GGAES <span>2026</span>";
+    }
 
     document.querySelectorAll(".speaker-role").forEach(function (el) {
       var bio = el.getAttribute("data-bio-" + lang) || el.getAttribute("data-bio-en");

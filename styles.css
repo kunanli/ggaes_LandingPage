@@ -121,7 +121,13 @@ html[lang="zh"] .brochure-cta::after { content: attr(data-tip-zh); }
   border-bottom: 1px solid var(--line);
 }
 .brand { display: flex; align-items: center; }
-.brand-logo { height: 44px; width: auto; display: block; }
+.brand-logo {
+  height: 44px;
+  width: 46px;
+  object-fit: cover;
+  object-position: left center;
+  display: block;
+}
 
 .site-nav { display: flex; gap: 1.6rem; margin-left: auto; }
 .site-nav a {
@@ -184,6 +190,7 @@ html[lang="zh"] .brochure-cta::after { content: attr(data-tip-zh); }
   color: var(--ink);
 }
 .hero-title span { color: var(--purple-500); }
+html[lang="zh"] .hero-title { font-size: clamp(2.2rem, 7vw, 3.6rem); }
 .hero-desc {
   font-size: 1.02rem;
   color: var(--muted);
