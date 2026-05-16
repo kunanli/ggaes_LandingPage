@@ -284,14 +284,14 @@
               speakerZh: "Maria Burns Ortiz · Global Game Jam"
             },
             {
-              start: "2026-06-26T09:30:00+08:00", end: "2026-06-26T10:30:00+08:00", type: "us",
+              start: "2026-06-26T09:30:00+08:00", end: "2026-06-26T10:15:00+08:00", type: "us",
               titleEn: "How We Become a Professional Game Artist — Leveling Up in SMU",
               titleZh: "如何成为专业游戏美术师——在 SMU 一路升级",
               speakerEn: "Joowon Kim MacDowell · SMU Guildhall",
               speakerZh: "Joowon Kim MacDowell · 南卫理公会大学 SMU Guildhall"
             },
             {
-              start: "2026-06-26T10:30:00+08:00", end: "2026-06-26T11:30:00+08:00", type: "us",
+              start: "2026-06-26T10:30:00+08:00", end: "2026-06-26T11:15:00+08:00", type: "us",
               titleEn: "Storytellers Beyond the Algorithm: From Students to Creators of the Stories You Know",
               titleZh: "超越算法的故事讲述者：从学生到你所熟知故事的创作者",
               speakerEn: "CalArts",
@@ -317,7 +317,7 @@
               speakerZh: "Shaojun Sun · Irene Liu · 腾讯游戏"
             },
             {
-              start: "2026-06-26T16:00:00+08:00", end: "2026-06-26T17:00:00+08:00", type: "uk",
+              start: "2026-06-26T16:00:00+08:00", end: "2026-06-26T16:45:00+08:00", type: "uk",
               titleEn: "Art Meets Technology: How UAL Empowers Game Creation Both Ways",
               titleZh: "艺术与技术：伦艺如何双向赋能游戏创作？",
               speakerEn: "Yi Tan · Academic Counsellor, UAL Beijing Office",
@@ -348,14 +348,14 @@
               speakerZh: "Chris Ebeling · 虚幻引擎 教育顾问"
             },
             {
-              start: "2026-06-27T09:30:00+08:00", end: "2026-06-27T10:30:00+08:00", type: "us",
+              start: "2026-06-27T09:30:00+08:00", end: "2026-06-27T10:15:00+08:00", type: "us",
               titleEn: "10 Questions You Should Ask Before Applying to School",
               titleZh: "申请院校前你应该问的 10 个问题",
               speakerEn: "Ryan Bown · Professor, Division of Games, University of Utah",
               speakerZh: "Ryan Bown · 犹他大学 游戏学部教授"
             },
             {
-              start: "2026-06-27T10:30:00+08:00", end: "2026-06-27T11:30:00+08:00", type: "sgus",
+              start: "2026-06-27T10:30:00+08:00", end: "2026-06-27T11:15:00+08:00", type: "sgus",
               titleEn: "From Playing Games to Making Games: Careers in Game Development",
               titleZh: "从玩游戏到做游戏：游戏开发的职业之路",
               speakerEn: "Tan Yong Zhen 'YZ' · Dean of Arts, DigiPen",
@@ -381,13 +381,13 @@
               speakerZh: "Philip Meredith · Escape Studios 游戏科系主管"
             },
             {
-              start: "2026-06-27T16:00:00+08:00", end: "2026-06-27T17:00:00+08:00", type: "uk",
+              start: "2026-06-27T16:00:00+08:00", end: "2026-06-27T16:45:00+08:00", type: "uk",
               titleEn: null, titleZh: null,
               speakerEn: "Russell Miller (UG) & Daniel Livingstone (PG) · The Glasgow School of Art",
               speakerZh: "Russell Miller（本科）& Daniel Livingstone（研究生）· 格拉斯哥艺术学院"
             },
             {
-              start: "2026-06-27T17:00:00+08:00", end: "2026-06-27T18:00:00+08:00", type: "uk",
+              start: "2026-06-27T17:00:00+08:00", end: "2026-06-27T17:45:00+08:00", type: "uk",
               titleEn: "AI Reshaping the Creative Future: How Art Students Can Seize the New AI Track in the Media Industry",
               titleZh: "AI 重塑创意未来：艺术生如何抢占媒体行业的 AI 新赛道？",
               speakerEn: "Xiaosong Yang · Deputy Director, Bournemouth NCCA",
@@ -417,7 +417,7 @@
               speakerZh: "王瑨 · 艺术家"
             },
             {
-              start: "2026-06-28T09:30:00+08:00", end: "2026-06-28T10:30:00+08:00", type: "us",
+              start: "2026-06-28T09:30:00+08:00", end: "2026-06-28T10:15:00+08:00", type: "us",
               titleEn: "Creature Design Pipeline: Starting the ZBrush Sculpt from a 2D Concept",
               titleZh: "生物设计流程：从 2D 概念图开始 ZBrush 雕刻",
               speakerEn: "Ashley Stegon · Gnomon",
@@ -442,14 +442,14 @@
               speakerZh: "Christopher Headleand · 斯泰福厦大学"
             },
             {
-              start: "2026-06-28T16:00:00+08:00", end: "2026-06-28T17:00:00+08:00", type: "uk",
+              start: "2026-06-28T16:00:00+08:00", end: "2026-06-28T16:45:00+08:00", type: "uk",
               titleEn: "Building a China–UK Creative Industry Talent Bridge: Teesside University's Perspective and Practice",
               titleZh: "构建中英创意产业人才桥梁——提赛德大学的视角与实践",
               speakerEn: "Pingyao Sun · Recruitment Manager, Teesside University",
               speakerZh: "Pingyao Sun · 提赛德大学 招生经理"
             },
             {
-              start: "2026-06-28T17:00:00+08:00", end: "2026-06-28T18:00:00+08:00", type: "uk",
+              start: "2026-06-28T17:00:00+08:00", end: "2026-06-28T17:45:00+08:00", type: "uk",
               titleEn: "Create the Unreal: Next-Level Visual Effects Starts Here…",
               titleZh: "创造非凡：进阶视觉特效从这里开始……",
               speakerEn: "Ruth Falconer & Phillip Vaughan · Abertay University",
