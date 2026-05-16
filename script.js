@@ -263,6 +263,9 @@
     keynote: { en: "Keynote", zh: "主题演讲" },
     us: { en: "US School", zh: "美国院校" },
     uk: { en: "UK School", zh: "英国院校" },
+    hk: { en: "Hong Kong School", zh: "香港院校" },
+    sg: { en: "Singapore School", zh: "新加坡院校" },
+    sgus: { en: "Singapore & US School", zh: "新加坡&美国院校" },
     tba: { en: "Topic to be announced", zh: "主题待公布" }
   };
 
@@ -295,7 +298,7 @@
               speakerZh: "加州艺术学院 CalArts"
             },
             {
-              start: "2026-06-26T11:30:00+08:00", end: "2026-06-26T12:30:00+08:00", type: "us",
+              start: "2026-06-26T11:30:00+08:00", end: "2026-06-26T12:30:00+08:00", type: "hk",
               titleEn: "Bridging Education and Industry: New Horizons in Immersive Media",
               titleZh: "连接教育与产业：沉浸式媒体的新视野",
               speakerEn: "Jae-Eun Oh · Hong Kong Polytechnic University",
@@ -352,14 +355,14 @@
               speakerZh: "Ryan Bown · 犹他大学 游戏学部教授"
             },
             {
-              start: "2026-06-27T10:30:00+08:00", end: "2026-06-27T11:30:00+08:00", type: "us",
+              start: "2026-06-27T10:30:00+08:00", end: "2026-06-27T11:30:00+08:00", type: "sgus",
               titleEn: "From Playing Games to Making Games: Careers in Game Development",
               titleZh: "从玩游戏到做游戏：游戏开发的职业之路",
               speakerEn: "Tan Yong Zhen 'YZ' · Dean of Arts, DigiPen",
               speakerZh: "Tan Yong Zhen 'YZ' · 迪吉彭理工学院 艺术学院院长"
             },
             {
-              start: "2026-06-27T11:30:00+08:00", end: "2026-06-27T12:30:00+08:00", type: "us",
+              start: "2026-06-27T11:30:00+08:00", end: "2026-06-27T12:30:00+08:00", type: "sg",
               titleEn: "The Value of Entertainment Art: What Skillset Is Needed as an Artist in the Industry",
               titleZh: "娱乐美术的价值：行业美术师需要具备哪些技能",
               speakerEn: "Kingston Chan · Head of Art, MAGES Institute",

@@ -397,6 +397,9 @@ section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); }
 .session-tag--keynote { background: var(--purple-600); color: #fff; }
 .session-tag--us { background: #ece5fb; color: var(--purple-700); }
 .session-tag--uk { background: #e3eefb; color: #285f9e; }
+.session-tag--hk { background: #fbe3e6; color: #a02a3c; }
+.session-tag--sg { background: #e0f2ed; color: #1f7a5c; }
+.session-tag--sgus { background: #fdeedd; color: #a8651b; }
 .session-title { font-weight: 700; font-size: 1rem; line-height: 1.4; }
 .session-title--tba { font-weight: 600; font-style: italic; color: var(--muted); }
 .session-speaker { font-size: 0.88rem; color: var(--muted); margin-top: 0.3rem; }
