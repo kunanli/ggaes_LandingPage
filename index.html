@@ -25,7 +25,7 @@
 
     <nav class="site-nav" aria-label="Primary">
       <a href="#about" data-i18n="navAbout">About</a>
-      <a href="#countdown" data-i18n="navSchedule">Schedule</a>
+      <a href="#schedule" data-i18n="navSchedule">Schedule</a>
       <a href="#highlights" data-i18n="navHighlights">Highlights</a>
       <a href="#institutions" data-i18n="navInstitutions">Institutions</a>
       <a href="#speakers" data-i18n="navSpeakers">Speakers</a>
@@ -78,8 +78,24 @@
           <div class="cd-unit"><span class="cd-num" id="cd-seconds">00</span><span class="cd-label" data-i18n="seconds">Seconds</span></div>
         </div>
       </div>
-      <a class="btn btn-primary" href="#register" data-i18n="viewSchedule">View Full Schedule</a>
-      <p class="countdown-note" data-i18n="scheduleNote">Held online over 5 days · June 26–28, 2026 (China Standard Time)</p>
+      <a class="btn btn-primary" href="#schedule" data-i18n="viewSchedule">View Full Schedule</a>
+      <p class="countdown-note" data-i18n="scheduleNote">Held online over 3 days · June 26–28, 2026 (China Standard Time)</p>
+    </section>
+
+    <section class="schedule" id="schedule">
+      <h2 class="section-title" data-i18n="scheduleTitle">Full Schedule</h2>
+      <div class="schedule-controls">
+        <label class="schedule-field">
+          <span data-i18n="scheduleDayLabel">Day</span>
+          <select id="schedule-day"></select>
+        </label>
+        <label class="schedule-field">
+          <span data-i18n="scheduleTzLabel">Timezone</span>
+          <select id="schedule-tz"></select>
+        </label>
+      </div>
+      <p class="schedule-hint" data-i18n="scheduleHint">Session times update to your selected timezone.</p>
+      <div class="schedule-body" id="schedule-body"></div>
     </section>
 
     <section class="highlights" id="highlights">

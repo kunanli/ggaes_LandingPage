@@ -24,6 +24,10 @@
       seconds: "Seconds",
       viewSchedule: "View Full Schedule",
       scheduleNote: "Held online over 3 days · June 26–28, 2026 (China Standard Time)",
+      scheduleTitle: "Full Schedule",
+      scheduleDayLabel: "Day",
+      scheduleTzLabel: "Timezone",
+      scheduleHint: "Session times update to your selected timezone.",
       highlightsTitle: "Summit Highlights",
       stat1: "Viewers per live session",
       stat2: "Top universities",
@@ -59,6 +63,10 @@
       seconds: "秒",
       viewSchedule: "查看完整日程表",
       scheduleNote: "3天线上召开 · 2026年6月26日-28日中国标准时间档期",
+      scheduleTitle: "完整日程",
+      scheduleDayLabel: "日期",
+      scheduleTzLabel: "时区",
+      scheduleHint: "场次时间会根据所选时区自动换算。",
       highlightsTitle: "峰会亮点",
       stat1: "每场直播观看人数",
       stat2: "顶尖大学",
@@ -231,6 +239,221 @@
     }
   ];
 
+  /* ---------- Schedule ---------- */
+  var timezones = [
+    { id: "Asia/Shanghai", en: "China · UTC+8", zh: "中国 · UTC+8" },
+    { id: "Europe/London", en: "UK · UTC+1", zh: "英国 · UTC+1" },
+    { id: "America/New_York", en: "US Eastern · UTC-4", zh: "美国东部 · UTC-4" },
+    { id: "America/Los_Angeles", en: "US Pacific · UTC-7", zh: "美国西部 · UTC-7" }
+  ];
+
+  var scheduleLabels = {
+    morning: { en: "Morning", zh: "上午场" },
+    afternoon: { en: "Afternoon", zh: "下午场" },
+    keynote: { en: "Keynote", zh: "主题演讲" },
+    us: { en: "US School", zh: "美国院校" },
+    uk: { en: "UK School", zh: "英国院校" },
+    tba: { en: "Topic to be announced", zh: "主题待公布" }
+  };
+
+  var schedule = [
+    {
+      en: "Day 1 — Fri, Jun 26", zh: "第一天 — 6月26日 周五",
+      blocks: [
+        {
+          part: "morning",
+          sessions: [
+            {
+              start: "2026-06-26T09:00:00+08:00", end: "2026-06-26T09:30:00+08:00", type: "keynote",
+              titleEn: "Game Jams: The Ultimate XP Boost",
+              titleZh: "游戏 Jam：终极经验值加成",
+              speakerEn: "Maria Burns Ortiz · Global Game Jam",
+              speakerZh: "Maria Burns Ortiz · Global Game Jam"
+            },
+            {
+              start: "2026-06-26T09:30:00+08:00", end: "2026-06-26T10:30:00+08:00", type: "us",
+              titleEn: "How We Become a Professional Game Artist — Leveling Up in SMU",
+              titleZh: "如何成为专业游戏美术师——在 SMU 一路升级",
+              speakerEn: "Joowon Kim MacDowell · SMU Guildhall",
+              speakerZh: "Joowon Kim MacDowell · 南卫理公会大学 SMU Guildhall"
+            },
+            {
+              start: "2026-06-26T10:30:00+08:00", end: "2026-06-26T11:30:00+08:00", type: "us",
+              titleEn: "Storytellers Beyond the Algorithm: From Students to Creators of the Stories You Know",
+              titleZh: "超越算法的故事讲述者：从学生到你所熟知故事的创作者",
+              speakerEn: "CalArts",
+              speakerZh: "加州艺术学院 CalArts"
+            },
+            {
+              start: "2026-06-26T11:30:00+08:00", end: "2026-06-26T12:30:00+08:00", type: "us",
+              titleEn: "Bridging Education and Industry: New Horizons in Immersive Media",
+              titleZh: "连接教育与产业：沉浸式媒体的新视野",
+              speakerEn: "Jae-Eun Oh · Hong Kong Polytechnic University",
+              speakerZh: "Jae-Eun Oh · 香港理工大学"
+            }
+          ]
+        },
+        {
+          part: "afternoon",
+          sessions: [
+            {
+              start: "2026-06-26T15:30:00+08:00", end: "2026-06-26T16:00:00+08:00", type: "keynote",
+              titleEn: "Reshaping the Creative Paradigm: When AIGC Meets the Next Generation of Animation & Game Developers",
+              titleZh: "重塑创作范式：当 AIGC 遇见新一代动画与游戏开发者",
+              speakerEn: "Shaojun Sun · Irene Liu · Tencent Games",
+              speakerZh: "Shaojun Sun · Irene Liu · 腾讯游戏"
+            },
+            {
+              start: "2026-06-26T16:00:00+08:00", end: "2026-06-26T17:00:00+08:00", type: "uk",
+              titleEn: "Art Meets Technology: How UAL Empowers Game Creation Both Ways",
+              titleZh: "艺术与技术：伦艺如何双向赋能游戏创作？",
+              speakerEn: "Yi Tian · Academic Counsellor, UAL Beijing Office",
+              speakerZh: "Yi Tian · 伦敦艺术大学北京招生办公室 学术顾问"
+            },
+            {
+              start: "2026-06-26T17:00:00+08:00", end: "2026-06-26T18:00:00+08:00", type: "uk",
+              titleEn: "From Concept to Screen: How Professional Game Artists Work at Escape Studios",
+              titleZh: "从概念到屏幕：Escape Studios 的专业游戏美术师如何工作",
+              speakerEn: "Niccolò Temperanza · Escape Studios",
+              speakerZh: "Niccolò Temperanza · Escape Studios"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      en: "Day 2 — Sat, Jun 27", zh: "第二天 — 6月27日 周六",
+      blocks: [
+        {
+          part: "morning",
+          sessions: [
+            {
+              start: "2026-06-27T09:00:00+08:00", end: "2026-06-27T09:30:00+08:00", type: "keynote",
+              titleEn: "From Passion to Profession: Navigating Careers in Game Development and Beyond",
+              titleZh: "从热爱到职业：在游戏开发及更广阔领域规划职业路径",
+              speakerEn: "Chris Ebeling · Education Advisor, Unreal Engine",
+              speakerZh: "Chris Ebeling · 虚幻引擎 教育顾问"
+            },
+            {
+              start: "2026-06-27T09:30:00+08:00", end: "2026-06-27T10:30:00+08:00", type: "us",
+              titleEn: "10 Questions You Should Ask Before Applying to School",
+              titleZh: "申请院校前你应该问的 10 个问题",
+              speakerEn: "Ryan Bown · Professor, Division of Games, University of Utah",
+              speakerZh: "Ryan Bown · 犹他大学 游戏学部教授"
+            },
+            {
+              start: "2026-06-27T10:30:00+08:00", end: "2026-06-27T11:30:00+08:00", type: "us",
+              titleEn: "From Playing Games to Making Games: Careers in Game Development",
+              titleZh: "从玩游戏到做游戏：游戏开发的职业之路",
+              speakerEn: "Tan Yong Zhen 'YZ' · Dean of Arts, DigiPen",
+              speakerZh: "Tan Yong Zhen 'YZ' · 迪吉彭理工学院 艺术学院院长"
+            },
+            {
+              start: "2026-06-27T11:30:00+08:00", end: "2026-06-27T12:30:00+08:00", type: "us",
+              titleEn: "The Value of Entertainment Art: What Skillset Is Needed as an Artist in the Industry",
+              titleZh: "娱乐美术的价值：行业美术师需要具备哪些技能",
+              speakerEn: "Kingston Chan · Head of Art, MAGES Institute",
+              speakerZh: "Kingston Chan · MAGES 学院 艺术学院院长"
+            }
+          ]
+        },
+        {
+          part: "afternoon",
+          sessions: [
+            {
+              start: "2026-06-27T15:30:00+08:00", end: "2026-06-27T16:00:00+08:00", type: "keynote",
+              titleEn: "How to Land Your First Job in Games: An Insider's Guide from Escape Studios",
+              titleZh: "如何拿下你的第一份游戏工作：Escape Studios 的内行指南",
+              speakerEn: "Philip Meredith · Head of Games, Escape Studios",
+              speakerZh: "Philip Meredith · Escape Studios 游戏科系主管"
+            },
+            {
+              start: "2026-06-27T16:00:00+08:00", end: "2026-06-27T17:00:00+08:00", type: "uk",
+              titleEn: null, titleZh: null,
+              speakerEn: "Russell Miller (UG) & Daniel Livingstone (PG) · The Glasgow School of Art",
+              speakerZh: "Russell Miller（本科）& Daniel Livingstone（研究生）· 格拉斯哥艺术学院"
+            },
+            {
+              start: "2026-06-27T17:00:00+08:00", end: "2026-06-27T18:00:00+08:00", type: "uk",
+              titleEn: "AI Reshaping the Creative Future: How Art Students Can Seize the New AI Track in the Media Industry",
+              titleZh: "AI 重塑创意未来：艺术生如何抢占媒体行业的 AI 新赛道？",
+              speakerEn: "Xiaosong Yang · Deputy Director, Bournemouth NCCA",
+              speakerZh: "Xiaosong Yang · 伯恩茅斯大学 国家计算机动画中心副主任"
+            },
+            {
+              start: "2026-06-27T18:00:00+08:00", end: "2026-06-27T19:00:00+08:00", type: "uk",
+              titleEn: null, titleZh: null,
+              speakerEn: "Chris Headleand · Head of Games, University of Staffordshire",
+              speakerZh: "Chris Headleand · 斯泰福厦大学 游戏科系主管"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      en: "Day 3 — Sun, Jun 28", zh: "第三天 — 6月28日 周日",
+      blocks: [
+        {
+          part: "morning",
+          sessions: [
+            {
+              start: "2026-06-28T09:00:00+08:00", end: "2026-06-28T09:30:00+08:00", type: "keynote",
+              titleEn: "Creative Fusion of the UE Physics Engine and Sensors",
+              titleZh: "UE 物理引擎 + 传感器的创意结合",
+              speakerEn: "Jin Wang · Artist",
+              speakerZh: "王瑨 · 艺术家"
+            },
+            {
+              start: "2026-06-28T09:30:00+08:00", end: "2026-06-28T10:30:00+08:00", type: "us",
+              titleEn: "Creature Design Pipeline: Starting the ZBrush Sculpt from a 2D Concept",
+              titleZh: "生物设计流程：从 2D 概念图开始 ZBrush 雕刻",
+              speakerEn: "Ashley Stegon · Gnomon",
+              speakerZh: "Ashley Stegon · 诺蒙视觉特效学院 Gnomon"
+            },
+            {
+              start: "2026-06-28T10:30:00+08:00", end: "2026-06-28T11:30:00+08:00", type: "us",
+              titleEn: "Game and Entertainment Design Overview",
+              titleZh: "游戏与娱乐设计概览",
+              speakerEn: "Joffery Black (Chair, Game & Entertainment Design) & Darren Phillipson (Lecturer, BFA Toy Design) · Otis College of Art and Design",
+              speakerZh: "Joffery Black（游戏与娱乐设计系主任）& Darren Phillipson（玩具设计讲师）· 奥蒂斯艺术与设计学院"
+            }
+          ]
+        },
+        {
+          part: "afternoon",
+          sessions: [
+            {
+              start: "2026-06-28T15:30:00+08:00", end: "2026-06-28T16:00:00+08:00", type: "keynote",
+              titleEn: null, titleZh: null,
+              speakerEn: "Christopher Headleand · University of Staffordshire",
+              speakerZh: "Christopher Headleand · 斯泰福厦大学"
+            },
+            {
+              start: "2026-06-28T16:00:00+08:00", end: "2026-06-28T17:00:00+08:00", type: "uk",
+              titleEn: "Building a China–UK Creative Industry Talent Bridge: Teesside University's Perspective and Practice",
+              titleZh: "构建中英创意产业人才桥梁——提赛德大学的视角与实践",
+              speakerEn: "Pingyao Sun · Recruitment Manager, Teesside University",
+              speakerZh: "Pingyao Sun · 提赛德大学 招生经理"
+            },
+            {
+              start: "2026-06-28T17:00:00+08:00", end: "2026-06-28T18:00:00+08:00", type: "uk",
+              titleEn: "Create the Unreal: Next-Level Visual Effects Starts Here…",
+              titleZh: "创造非凡：进阶视觉特效从这里开始……",
+              speakerEn: "Ruth Falconer & Phillip Vaughan · Abertay University",
+              speakerZh: "Ruth Falconer & Phillip Vaughan · 阿伯泰大学"
+            },
+            {
+              start: "2026-06-28T18:00:00+08:00", end: "2026-06-28T19:00:00+08:00", type: "uk",
+              titleEn: null, titleZh: null,
+              speakerEn: "David Tree · University of Hertfordshire",
+              speakerZh: "David Tree · 赫特福德大学"
+            }
+          ]
+        }
+      ]
+    }
+  ];
+
   /* ---------- Render helpers ---------- */
   function initials(name) {
     var parts = name.replace(/[^A-Za-zÀ-ÿ一-鿿 ]/g, "").trim().split(/\s+/);
@@ -299,6 +522,110 @@
     });
   }
 
+  /* ---------- Schedule rendering ---------- */
+  function fmtTime(iso, tz) {
+    return new Intl.DateTimeFormat("en-GB", {
+      timeZone: tz, hour: "2-digit", minute: "2-digit", hour12: false
+    }).format(new Date(iso));
+  }
+
+  function fmtDate(iso, tz, lang) {
+    return new Intl.DateTimeFormat(lang === "zh" ? "zh-CN" : "en-US", {
+      timeZone: tz, month: "short", day: "numeric", weekday: "short"
+    }).format(new Date(iso));
+  }
+
+  function renderSchedule() {
+    var body = document.getElementById("schedule-body");
+    var daySel = document.getElementById("schedule-day");
+    var tzSel = document.getElementById("schedule-tz");
+    if (!body || !daySel || !tzSel) return;
+
+    var lang = document.documentElement.lang === "zh" ? "zh" : "en";
+    var dayIdx = parseInt(daySel.value, 10) || 0;
+    var tz = tzSel.value || "Asia/Shanghai";
+    var day = schedule[dayIdx];
+
+    body.textContent = "";
+
+    day.blocks.forEach(function (block) {
+      var blockEl = document.createElement("div");
+      blockEl.className = "schedule-block";
+
+      var heading = document.createElement("h3");
+      heading.className = "schedule-part";
+      heading.textContent = scheduleLabels[block.part][lang];
+      blockEl.appendChild(heading);
+
+      block.sessions.forEach(function (s) {
+        var row = document.createElement("div");
+        row.className = "session";
+
+        var timeEl = document.createElement("div");
+        timeEl.className = "session-time";
+        var hours = document.createElement("span");
+        hours.className = "session-hours";
+        hours.textContent = fmtTime(s.start, tz) + "–" + fmtTime(s.end, tz);
+        var dateEl = document.createElement("span");
+        dateEl.className = "session-date";
+        dateEl.textContent = fmtDate(s.start, tz, lang);
+        timeEl.appendChild(hours);
+        timeEl.appendChild(dateEl);
+
+        var info = document.createElement("div");
+        info.className = "session-info";
+
+        var tag = document.createElement("span");
+        tag.className = "session-tag session-tag--" + s.type;
+        tag.textContent = scheduleLabels[s.type][lang];
+
+        var title = document.createElement("p");
+        title.className = "session-title";
+        var t = lang === "zh" ? s.titleZh : s.titleEn;
+        if (t) {
+          title.textContent = t;
+        } else {
+          title.textContent = scheduleLabels.tba[lang];
+          title.classList.add("session-title--tba");
+        }
+
+        var speaker = document.createElement("p");
+        speaker.className = "session-speaker";
+        speaker.textContent = lang === "zh" ? s.speakerZh : s.speakerEn;
+
+        info.appendChild(tag);
+        info.appendChild(title);
+        info.appendChild(speaker);
+
+        row.appendChild(timeEl);
+        row.appendChild(info);
+        blockEl.appendChild(row);
+      });
+
+      body.appendChild(blockEl);
+    });
+  }
+
+  function initSchedule() {
+    var daySel = document.getElementById("schedule-day");
+    var tzSel = document.getElementById("schedule-tz");
+    if (!daySel || !tzSel) return;
+
+    schedule.forEach(function (d, i) {
+      var opt = document.createElement("option");
+      opt.value = i;
+      daySel.appendChild(opt);
+    });
+    timezones.forEach(function (tz) {
+      var opt = document.createElement("option");
+      opt.value = tz.id;
+      tzSel.appendChild(opt);
+    });
+
+    daySel.addEventListener("change", renderSchedule);
+    tzSel.addEventListener("change", renderSchedule);
+  }
+
   /* ---------- Language ---------- */
   function applyLanguage(lang) {
     var dict = i18n[lang] || i18n.en;
@@ -314,6 +641,20 @@
       var bio = el.getAttribute("data-bio-" + lang) || el.getAttribute("data-bio-en");
       if (bio != null) el.textContent = bio;
     });
+
+    var daySel = document.getElementById("schedule-day");
+    if (daySel) {
+      Array.prototype.forEach.call(daySel.options, function (opt, i) {
+        opt.textContent = schedule[i][lang];
+      });
+    }
+    var tzSel = document.getElementById("schedule-tz");
+    if (tzSel) {
+      Array.prototype.forEach.call(tzSel.options, function (opt, i) {
+        opt.textContent = timezones[i][lang];
+      });
+    }
+    renderSchedule();
 
     document.querySelectorAll(".lang-toggle button").forEach(function (btn) {
       btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
@@ -361,6 +702,7 @@
     renderInstitutions();
     renderSpeakers("academic-grid", academicSpeakers);
     renderSpeakers("industry-grid", industrySpeakers);
+    initSchedule();
 
     applyLanguage(getInitialLang());
 
