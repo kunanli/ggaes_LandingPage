@@ -298,7 +298,7 @@
               speakerZh: "加州艺术学院 CalArts"
             },
             {
-              start: "2026-06-26T11:30:00+08:00", end: "2026-06-26T12:30:00+08:00", type: "hk",
+              start: "2026-06-26T11:30:00+08:00", end: "2026-06-26T12:15:00+08:00", type: "hk",
               titleEn: "Bridging Education and Industry: New Horizons in Immersive Media",
               titleZh: "连接教育与产业：沉浸式媒体的新视野",
               speakerEn: "Jae-Eun Oh · Hong Kong Polytechnic University",
@@ -324,7 +324,7 @@
               speakerZh: "Yi Tan · 伦敦艺术大学北京招生办公室 学术顾问"
             },
             {
-              start: "2026-06-26T17:00:00+08:00", end: "2026-06-26T18:00:00+08:00", type: "uk",
+              start: "2026-06-26T17:00:00+08:00", end: "2026-06-26T17:45:00+08:00", type: "uk",
               titleEn: "From Concept to Screen: How Professional Game Artists Work at Escape Studios",
               titleZh: "从概念到屏幕：Escape Studios 的专业游戏美术师如何工作",
               speakerEn: "Niccolò Temperanza · Escape Studios",
@@ -362,7 +362,7 @@
               speakerZh: "Tan Yong Zhen 'YZ' · 迪吉彭理工学院 艺术学院院长"
             },
             {
-              start: "2026-06-27T11:30:00+08:00", end: "2026-06-27T12:30:00+08:00", type: "sg",
+              start: "2026-06-27T11:30:00+08:00", end: "2026-06-27T12:15:00+08:00", type: "sg",
               titleEn: "The Value of Entertainment Art: What Skillset Is Needed as an Artist in the Industry",
               titleZh: "娱乐美术的价值：行业美术师需要具备哪些技能",
               speakerEn: "Kingston Chan · Head of Art, MAGES Institute",
@@ -424,7 +424,7 @@
               speakerZh: "Ashley Stegon · 诺蒙视觉特效学院 Gnomon"
             },
             {
-              start: "2026-06-28T10:30:00+08:00", end: "2026-06-28T11:30:00+08:00", type: "us",
+              start: "2026-06-28T10:30:00+08:00", end: "2026-06-28T11:15:00+08:00", type: "us",
               titleEn: "Game and Entertainment Design Overview",
               titleZh: "游戏与娱乐设计概览",
               speakerEn: "Joffery Black (Chair, Game & Entertainment Design) & Darren Phillipson (Lecturer, BFA Toy Design) · Otis College of Art and Design",
