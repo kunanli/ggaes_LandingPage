@@ -65,6 +65,12 @@ a { color: inherit; text-decoration: none; }
   font-family: inherit;
 }
 .btn-disabled:hover { transform: none; }
+.btn-outline {
+  background: transparent;
+  color: var(--purple-700);
+  box-shadow: inset 0 0 0 1.6px var(--purple-400);
+}
+.btn-outline:hover { background: var(--bg-soft); }
 
 /* Disabled brochure CTA tooltip */
 .brochure-cta { position: relative; display: inline-block; }
@@ -505,6 +511,42 @@ section { padding: clamp(3rem, 7vw, 5.5rem) clamp(1.25rem, 6vw, 5rem); }
   white-space: pre-line;
   line-height: 1.5;
   margin-top: 0.3rem;
+}
+
+/* ---------- Sponsor ---------- */
+.sponsor { text-align: center; }
+.sponsor-lead {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 1.08rem;
+  color: var(--muted);
+}
+.sponsor-reach {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 2.6rem;
+  margin: 2.2rem auto;
+  max-width: 760px;
+}
+.sponsor-reach li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.sponsor-reach strong {
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: var(--purple-600);
+  letter-spacing: -0.02em;
+}
+.sponsor-reach span { font-size: 0.85rem; color: var(--muted); }
+.sponsor-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.9rem;
 }
 
 /* ---------- Footer ---------- */
