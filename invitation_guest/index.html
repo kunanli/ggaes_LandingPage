@@ -79,6 +79,28 @@
   .btn:disabled{opacity:.6;cursor:wait;}
   .hint{font-size:11px;color:#9498ab;margin-top:10px;line-height:1.5;}
 
+  .resources{
+    margin-top:16px;border-top:1px solid #e6e7ef;padding-top:14px;
+  }
+  .resources .rs-title{
+    font-size:12px;font-weight:700;color:var(--deep);
+    margin-bottom:6px;letter-spacing:.3px;
+  }
+  .resources a{
+    display:flex;align-items:center;gap:8px;
+    font-size:12px;color:var(--deep);background:#f5f4fc;
+    border:1px solid #e4e0f6;border-radius:9px;
+    padding:9px 11px;margin-top:8px;
+    text-decoration:none;font-weight:600;
+  }
+  .resources a:hover{background:#ece9fa;border-color:#d2cbf2;}
+  .resources a .rs-icon{
+    flex:0 0 auto;color:var(--purple);font-size:14px;line-height:1;
+  }
+  .resources a .rs-sub{
+    color:#8a8ea3;font-weight:500;font-size:11px;
+  }
+
   /* ---------- Preview ---------- */
   .preview-col{flex:1;min-width:0;}
   .preview-col .panel-title{
@@ -221,6 +243,18 @@
       <button class="btn btn-ghost" id="pdfBtn">Print / Save PDF</button>
     </div>
     <div class="hint">Session, topic, speaker and meeting ID are pre-set by the organiser and cannot be edited here. Contact the organiser if any detail is incorrect.</div>
+
+    <div class="resources">
+      <div class="rs-title">Resources for guests</div>
+      <a href="../VooVMeetingRegistrationGuide.pdf" target="_blank" rel="noopener" download>
+        <span class="rs-icon">↓</span>
+        <span>VooV Meeting Registration Guide <span class="rs-sub">(PDF)</span></span>
+      </a>
+      <a href="https://voovmeeting.com/download-center.html" target="_blank" rel="noopener">
+        <span class="rs-icon">↗</span>
+        <span>Download VooV Meeting <span class="rs-sub">(voovmeeting.com)</span></span>
+      </a>
+    </div>
   </div>
 
   <!-- ============ PREVIEW ============ -->
