@@ -525,11 +525,31 @@
     return p.year+'.'+p.month+'.'+p.day+'  '+hh+':'+p.minute;
   }
 
+  function fmtClock(instant, tz){
+    var p = getParts(instant, tz);
+    var hh = p.hour==='24' ? '00' : p.hour;
+    return hh+':'+p.minute;
+  }
+  function fmtRange(start, end, tz){
+    var p = getParts(start, tz);
+    return p.year+'.'+p.month+'.'+p.day+'  '+fmtClock(start,tz)+'–'+fmtClock(end,tz);
+  }
+
   function hasSessionTime(s){ return !!(s.date && s.time); }
 
   function sessionInstant(s){
     var dp = s.date.split('-'), tp = s.time.split(':');
     return wallToInstant(+dp[0],+dp[1],+dp[2],+tp[0],+tp[1],'Asia/Shanghai');
+  }
+
+  // session length: 30 min keynote, 45 min institution, 60 min for the
+  // 18:00–19:00 closing sessions.
+  function sessionDuration(s){
+    if(s.time==='18:00') return 60;
+    return s.type==='keynote' ? 30 : 45;
+  }
+  function sessionEndInstant(s){
+    return new Date(sessionInstant(s).getTime() + sessionDuration(s)*60000);
   }
 
   /* ---------- populate session dropdown ---------- */
@@ -597,10 +617,11 @@
     // session time -> China time, plus the entity's local time
     if(hasSessionTime(s)){
       var instant = sessionInstant(s);
-      var chinaTxt = fmtDateTime(instant,'Asia/Shanghai')+'   China Standard Time (UTC+8)';
+      var endInst = sessionEndInstant(s);
+      var chinaTxt = fmtRange(instant,endInst,'Asia/Shanghai')+'   China Standard Time (UTC+8)';
       if(s.tz && s.tz !== 'Asia/Shanghai'){
         var off = offsetLabel(instant, s.tz);
-        $('pvSlocal').textContent = fmtDateTime(instant,s.tz)+'   '+tzCity(s.tz)+' Time'+(off?' ('+off+')':'');
+        $('pvSlocal').textContent = fmtRange(instant,endInst,s.tz)+'   '+tzCity(s.tz)+' Time'+(off?' ('+off+')':'');
         $('pvScn').textContent = chinaTxt;
       }else{
         $('pvSlocal').textContent = chinaTxt;
@@ -649,7 +670,7 @@
     var sessionTxt;
     if(hasSessionTime(s)){
       var inst = sessionInstant(s);
-      sessionTxt = s.day + ' · ' + fmtDateTime(inst,'Asia/Shanghai') + ' China Time';
+      sessionTxt = s.day + ' · ' + fmtRange(inst,sessionEndInstant(s),'Asia/Shanghai') + ' China Time';
     }else{
       sessionTxt = (s.day || 'Day —') + ' · ' + TBA;
     }

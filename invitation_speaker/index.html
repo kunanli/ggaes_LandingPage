@@ -328,6 +328,16 @@
     </div>
 
     <div class="field">
+      <label>場次時長 Duration <span class="req">*</span></label>
+      <select id="dur">
+        <option value="30">30 分鐘（Keynote 主題演講）</option>
+        <option value="45" selected>45 分鐘（院校場次）</option>
+        <option value="60">60 分鐘（壓軸場次 18:00–19:00）</option>
+      </select>
+      <div class="tip">選擇場次後自動帶入，可手動調整；Test 場次採相同時長。</div>
+    </div>
+
+    <div class="field">
       <label>會議平台 Platform</label>
       <input type="text" id="mplat" value="Voov Meeting">
     </div>
@@ -492,15 +502,27 @@ Please apply the official virtual background. See the attachment for the Voov Me
     return p.year+'.'+p.month+'.'+p.day+'  '+hh+':'+p.minute;
   }
 
+  function fmtClock(instant, tz){
+    var p = getParts(instant, tz);
+    var hh = p.hour==='24' ? '00' : p.hour;
+    return hh+':'+p.minute;
+  }
+
   function renderSession(dateId,timeId,localEl,cnEl){
     var dv=$(dateId).value, tv=$(timeId).value, tz=$('tz').value;
     if(!dv||!tv){ $(localEl).textContent=''; $(cnEl).textContent=''; return; }
     var dp=dv.split('-'), tp=tv.split(':');
     // input is China time; convert to the institution's local time for display
-    var inst=wallToInstant(+dp[0],+dp[1],+dp[2],+tp[0],+tp[1],'Asia/Shanghai');
-    var off=offsetLabel(inst,tz);
-    $(localEl).textContent = fmtDateTime(inst,tz)+'   '+tzCity(tz)+' Time'+(off?' ('+off+')':'');
-    $(cnEl).textContent = fmtDateTime(inst,'Asia/Shanghai')+'   China Standard Time (UTC+8)';
+    var start=wallToInstant(+dp[0],+dp[1],+dp[2],+tp[0],+tp[1],'Asia/Shanghai');
+    var dur=parseInt($('dur').value,10)||45;
+    var end=new Date(start.getTime()+dur*60000);
+    var off=offsetLabel(start,tz);
+    function range(zone){
+      var p=getParts(start,zone);
+      return p.year+'.'+p.month+'.'+p.day+'  '+fmtClock(start,zone)+'–'+fmtClock(end,zone);
+    }
+    $(localEl).textContent = range(tz)+'   '+tzCity(tz)+' Time'+(off?' ('+off+')':'');
+    $(cnEl).textContent = range('Asia/Shanghai')+'   China Standard Time (UTC+8)';
   }
 
   function render(){
@@ -589,7 +611,7 @@ Please apply the official virtual background. See the attachment for the Voov Me
   }
 
   // bind inputs
-  ['speaker','topic','day','tz','sdate','stime','mplat','mid','tdate','ttime','tid','notes','footer']
+  ['speaker','topic','day','tz','sdate','stime','dur','mplat','mid','tdate','ttime','tid','notes','footer']
     .forEach(function(id){
       var el = $(id);
       el.addEventListener('input', render);
@@ -604,77 +626,79 @@ Please apply the official virtual background. See the attachment for the Voov Me
   // ---- summit sessions (from the official GGAES 2026 schedule) ----
   // date / time are China Standard Time (UTC+8); the card converts them
   // to the speaker's institution time zone.
+  // dur = session length in minutes: 30 keynote, 45 institution,
+  // 60 for the 18:00–19:00 closing sessions.
   var SESSIONS = [
     /* ---- Day 1 — Fri, Jun 26 ---- */
     { name:'Global Game Jam', logo:'GGJ.webp', speaker:'Maria Burns Ortiz',
       topic:'Game Jams: The Ultimate XP Boost',
-      tz:'America/New_York', day:'Day 1', date:'2026-06-26', time:'09:00' },
+      tz:'America/New_York', day:'Day 1', date:'2026-06-26', time:'09:00', dur:30 },
     { name:'Southern Methodist University', logo:'SMU.webp', speaker:'Joowon Kim MacDowell',
       topic:'How We Become a Professional Game Artist — Leveling Up in SMU',
-      tz:'America/Chicago', day:'Day 1', date:'2026-06-26', time:'09:30' },
+      tz:'America/Chicago', day:'Day 1', date:'2026-06-26', time:'09:30', dur:45 },
     { name:'California Institute of the Arts', logo:'Calarts.webp', speaker:'Patrick Schmid',
       topic:'Storytellers Beyond the Algorithm: From Students to Creators of the Stories You Know',
-      tz:'America/Los_Angeles', day:'Day 1', date:'2026-06-26', time:'10:30' },
+      tz:'America/Los_Angeles', day:'Day 1', date:'2026-06-26', time:'10:30', dur:45 },
     { name:'Hong Kong Polytechnic University', logo:'PolyU.webp', speaker:'Jae-Eun Oh',
       topic:'Bridging Education and Industry: New Horizons in Immersive Media',
-      tz:'Asia/Hong_Kong', day:'Day 1', date:'2026-06-26', time:'11:30' },
+      tz:'Asia/Hong_Kong', day:'Day 1', date:'2026-06-26', time:'11:30', dur:45 },
     { name:'Tencent Games', logo:'Tencent.webp', speaker:'Shaojun Sun & Irene Liu',
       topic:'Reshaping the Creative Paradigm: When AIGC Meets the Next Generation of Animation & Game Developers',
-      tz:'Asia/Shanghai', day:'Day 1', date:'2026-06-26', time:'15:30' },
+      tz:'Asia/Shanghai', day:'Day 1', date:'2026-06-26', time:'15:30', dur:30 },
     { name:'University of the Arts London', logo:'UAL.webp', speaker:'Yi Tan',
       topic:'Art Meets Technology: How UAL Empowers Game Creation Both Ways',
-      tz:'Europe/London', day:'Day 1', date:'2026-06-26', time:'16:00' },
+      tz:'Europe/London', day:'Day 1', date:'2026-06-26', time:'16:00', dur:45 },
     { name:'Escape Studios', logo:'Escape.webp', speaker:'Niccolò Temperanza',
       topic:'From Concept to Screen: How Professional Game Artists Work at Escape Studios',
-      tz:'Europe/London', day:'Day 1', date:'2026-06-26', time:'17:00' },
+      tz:'Europe/London', day:'Day 1', date:'2026-06-26', time:'17:00', dur:45 },
 
     /* ---- Day 2 — Sat, Jun 27 ---- */
     { name:'Unreal Engine', logo:'UnrealEngine.webp', speaker:'Chris Ebeling',
       topic:'From Passion to Profession: Navigating Careers in Game Development and Beyond',
-      tz:'America/New_York', day:'Day 2', date:'2026-06-27', time:'09:00' },
+      tz:'America/New_York', day:'Day 2', date:'2026-06-27', time:'09:00', dur:30 },
     { name:'University of Utah', logo:'Utah.webp', speaker:'Ryan Bown',
       topic:'10 Questions You Should Ask Before Applying to School',
-      tz:'America/Denver', day:'Day 2', date:'2026-06-27', time:'09:30' },
+      tz:'America/Denver', day:'Day 2', date:'2026-06-27', time:'09:30', dur:45 },
     { name:'DigiPen Institute of Technology (USA)', logo:'DigiPen_web_logo.webp', speaker:'Matt Brunner & Tan Yong Zhen',
       topic:'From Playing Games to Making Games: Careers in Game Development',
-      tz:'America/Los_Angeles', day:'Day 2', date:'2026-06-27', time:'10:30' },
+      tz:'America/Los_Angeles', day:'Day 2', date:'2026-06-27', time:'10:30', dur:45 },
     { name:'DigiPen Institute of Technology (Singapore)', logo:'DigiPen_web_logo.webp', speaker:'Matt Brunner & Tan Yong Zhen',
       topic:'From Playing Games to Making Games: Careers in Game Development',
-      tz:'Asia/Singapore', day:'Day 2', date:'2026-06-27', time:'10:30' },
+      tz:'Asia/Singapore', day:'Day 2', date:'2026-06-27', time:'10:30', dur:45 },
     { name:'MAGES Institute (Singapore)', logo:'MAGES.webp', speaker:'Kingston Chan',
       topic:'The Value of Entertainment Art: What Skillset Is Needed as an Artist in the Industry',
-      tz:'Asia/Singapore', day:'Day 2', date:'2026-06-27', time:'11:30' },
+      tz:'Asia/Singapore', day:'Day 2', date:'2026-06-27', time:'11:30', dur:45 },
     { name:'Escape Studios', logo:'Escape.webp', speaker:'Philip Meredith',
       topic:"How to Land Your First Job in Games: An Insider's Guide from Escape Studios",
-      tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'15:30' },
+      tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'15:30', dur:30 },
     { name:'The Glasgow School of Art', logo:'GSA.webp', speaker:'Russell Miller & Daniel Livingstone',
-      topic:'', tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'16:00' },
+      topic:'', tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'16:00', dur:45 },
     { name:'Bournemouth University', logo:'Bu.webp', speaker:'Xiaosong Yang',
       topic:'AI Reshaping the Creative Future: How Art Students Can Seize the New AI Track in the Media Industry',
-      tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'17:00' },
+      tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'17:00', dur:45 },
     { name:'University of Staffordshire', logo:'Staffordshire.webp', speaker:'Chris Headleand',
-      topic:'', tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'18:00' },
+      topic:'', tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'18:00', dur:60 },
 
     /* ---- Day 3 — Sun, Jun 28 ---- */
     { name:'Jin Wang', logo:'', speaker:'Jin Wang',
       topic:'Creative Fusion of the UE Physics Engine and Sensors',
-      tz:'Asia/Shanghai', day:'Day 3', date:'2026-06-28', time:'09:00' },
+      tz:'Asia/Shanghai', day:'Day 3', date:'2026-06-28', time:'09:00', dur:30 },
     { name:'Gnomon', logo:'Gnomon.webp', speaker:'Ashley Stegon',
       topic:'Creature Design Pipeline: Starting the ZBrush Sculpt from a 2D Concept',
-      tz:'America/Los_Angeles', day:'Day 3', date:'2026-06-28', time:'09:30' },
+      tz:'America/Los_Angeles', day:'Day 3', date:'2026-06-28', time:'09:30', dur:45 },
     { name:'Otis College of Art and Design', logo:'OTis.webp', speaker:'Joffery Black & Darren Phillipson',
       topic:'Game and Entertainment Design Overview',
-      tz:'America/Los_Angeles', day:'Day 3', date:'2026-06-28', time:'10:30' },
+      tz:'America/Los_Angeles', day:'Day 3', date:'2026-06-28', time:'10:30', dur:45 },
     { name:'University of Staffordshire', logo:'Staffordshire.webp', speaker:'Christopher Headleand',
-      topic:'', tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'15:30' },
+      topic:'', tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'15:30', dur:30 },
     { name:'Teesside University', logo:'Teessi.webp', speaker:'Pingyao Sun',
       topic:"Building a China–UK Creative Industry Talent Bridge: Teesside University's Perspective and Practice",
-      tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'16:00' },
+      tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'16:00', dur:45 },
     { name:'Abertay University', logo:'Abertay.webp', speaker:'Ruth Falconer & Phillip Vaughan',
       topic:'Create the Unreal: Next-Level Visual Effects Starts Here...',
-      tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'17:00' },
+      tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'17:00', dur:45 },
     { name:'University of Hertfordshire', logo:'University_of_Hertfordshire_Logo.svg.webp', speaker:'David Tree',
-      topic:'', tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'18:00' }
+      topic:'', tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'18:00', dur:60 }
   ];
 
   (function(){
@@ -704,6 +728,7 @@ Please apply the official virtual background. See the attachment for the Voov Me
     $('tz').value      = s.tz;
     $('sdate').value   = s.date;             // China date
     $('stime').value   = s.time;             // China time
+    $('dur').value     = String(s.dur || 45);
     $('tdate').value   = shiftDate(s.date, -7); // test run one week earlier
     $('ttime').value   = s.time;
     autofillMeetingIds();
