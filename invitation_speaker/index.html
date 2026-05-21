@@ -316,11 +316,11 @@
         <option value="Australia/Sydney">澳洲 雪梨</option>
         <option value="Pacific/Auckland">紐西蘭 奧克蘭</option>
       </select>
-      <div class="tip">下方時間以此時區輸入，會自動換算成中國時間。</div>
+      <div class="tip">下方時間請以中國時間輸入，會依此時區自動換算成講者當地時間。</div>
     </div>
 
     <div class="field">
-      <label>Your session time（院校當地時間）<span class="req">*</span></label>
+      <label>Your session time（中國時間輸入）<span class="req">*</span></label>
       <div class="grid2">
         <input type="date" id="sdate" value="2026-06-26">
         <input type="time" id="stime" value="09:00">
@@ -338,7 +338,7 @@
     </div>
 
     <div class="field">
-      <label>Test session time（院校當地時間）<span class="req">*</span></label>
+      <label>Test session time（中國時間輸入）<span class="req">*</span></label>
       <div class="grid2">
         <input type="date" id="tdate" value="2026-06-19">
         <input type="time" id="ttime" value="09:00">
@@ -496,7 +496,8 @@ Please apply the official virtual background. See the attachment for the Voov Me
     var dv=$(dateId).value, tv=$(timeId).value, tz=$('tz').value;
     if(!dv||!tv){ $(localEl).textContent=''; $(cnEl).textContent=''; return; }
     var dp=dv.split('-'), tp=tv.split(':');
-    var inst=wallToInstant(+dp[0],+dp[1],+dp[2],+tp[0],+tp[1],tz);
+    // input is China time; convert to the institution's local time for display
+    var inst=wallToInstant(+dp[0],+dp[1],+dp[2],+tp[0],+tp[1],'Asia/Shanghai');
     var off=offsetLabel(inst,tz);
     $(localEl).textContent = fmtDateTime(inst,tz)+'   '+tzCity(tz)+' Time'+(off?' ('+off+')':'');
     $(cnEl).textContent = fmtDateTime(inst,'Asia/Shanghai')+'   China Standard Time (UTC+8)';
@@ -573,11 +574,9 @@ Please apply the official virtual background. See the attachment for the Voov Me
   };
 
   function chinaBlock(){
-    var dv=$('sdate').value, tv=$('stime').value, tz=$('tz').value;
-    if(!dv||!tv||!tz) return 'am';
-    var dp=dv.split('-'), tp=tv.split(':');
-    var inst=wallToInstant(+dp[0],+dp[1],+dp[2],+tp[0],+tp[1],tz);
-    return (+getParts(inst,'Asia/Shanghai').hour < 13) ? 'am' : 'pm';
+    var tv=$('stime').value;  // session time is entered in China time
+    if(!tv) return 'am';
+    return (+tv.split(':')[0] < 13) ? 'am' : 'pm';
   }
 
   function autofillMeetingIds(){
