@@ -255,11 +255,11 @@
     <p class="sub">填寫下列欄位，右側即時預覽。完成後可下載 JPEG 或列印成 PDF。</p>
 
     <div class="field">
-      <label>學校 / 機構 LOGO <span class="req">*</span></label>
-      <select id="logoSelect">
-        <option value="">— 選擇學校 / 機構 —</option>
+      <label>場次 Session <span class="req">*</span></label>
+      <select id="sessionSelect">
+        <option value="">— 選擇場次 —</option>
       </select>
-      <div class="tip">LOGO 已內建，選擇後自動帶入，無需上傳。</div>
+      <div class="tip">選擇場次後，自動帶入 LOGO、講師、主題、時間（中國時間）與時區，可再手動調整。</div>
     </div>
 
     <div class="field">
@@ -530,7 +530,8 @@ Please apply the official virtual background. See the attachment for the Voov Me
 
     // logo
     var pv = $('pvLogo');
-    var logoFile = $('logoSelect').value;
+    var selSess = SESSIONS[$('sessionSelect').value];
+    var logoFile = selSess ? selSess.logo : '';
     if(logoFile){
       pv.innerHTML = '<img src="'+logoFile+'" alt="logo">';
     }else{
@@ -588,7 +589,7 @@ Please apply the official virtual background. See the attachment for the Voov Me
   }
 
   // bind inputs
-  ['logoSelect','speaker','topic','day','tz','sdate','stime','mplat','mid','tdate','ttime','tid','notes','footer']
+  ['speaker','topic','day','tz','sdate','stime','mplat','mid','tdate','ttime','tid','notes','footer']
     .forEach(function(id){
       var el = $(id);
       el.addEventListener('input', render);
@@ -600,38 +601,115 @@ Please apply the official virtual background. See the attachment for the Voov Me
     $(id).addEventListener('change', function(){ autofillMeetingIds(); render(); });
   });
 
-  // ---- institution logo (pre-loaded) ----
-  var INSTITUTIONS = [
-    { name:'Abertay University', logo:'Abertay.webp' },
-    { name:'Bournemouth University', logo:'Bu.webp' },
-    { name:'California Institute of the Arts', logo:'Calarts.webp' },
-    { name:'DigiPen Institute of Technology', logo:'DigiPen_web_logo.webp' },
-    { name:'Escape Studios', logo:'Escape.webp' },
-    { name:'Global Game Jam', logo:'GGJ.webp' },
-    { name:'Gnomon', logo:'Gnomon.webp' },
-    { name:'Hong Kong Polytechnic University', logo:'PolyU.webp' },
-    { name:'MAGES Institute (Singapore)', logo:'MAGES.webp' },
-    { name:'Otis College of Art and Design', logo:'OTis.webp' },
-    { name:'Southern Methodist University', logo:'SMU.webp' },
-    { name:'Teesside University', logo:'Teessi.webp' },
-    { name:'Tencent Games', logo:'Tencent.webp' },
-    { name:'The Glasgow School of Art', logo:'GSA.webp' },
-    { name:'Unreal Engine', logo:'UnrealEngine.webp' },
-    { name:'University of Hertfordshire', logo:'University_of_Hertfordshire_Logo.svg.webp' },
-    { name:'University of Staffordshire', logo:'Staffordshire.webp' },
-    { name:'University of the Arts London', logo:'UAL.webp' },
-    { name:'University of Utah', logo:'Utah.webp' }
+  // ---- summit sessions (from the official GGAES 2026 schedule) ----
+  // date / time are China Standard Time (UTC+8); the card converts them
+  // to the speaker's institution time zone.
+  var SESSIONS = [
+    /* ---- Day 1 — Fri, Jun 26 ---- */
+    { name:'Global Game Jam', logo:'GGJ.webp', speaker:'Maria Burns Ortiz',
+      topic:'Game Jams: The Ultimate XP Boost',
+      tz:'America/New_York', day:'Day 1', date:'2026-06-26', time:'09:00' },
+    { name:'Southern Methodist University', logo:'SMU.webp', speaker:'Joowon Kim MacDowell',
+      topic:'How We Become a Professional Game Artist — Leveling Up in SMU',
+      tz:'America/Chicago', day:'Day 1', date:'2026-06-26', time:'09:30' },
+    { name:'California Institute of the Arts', logo:'Calarts.webp', speaker:'Patrick Schmid',
+      topic:'Storytellers Beyond the Algorithm: From Students to Creators of the Stories You Know',
+      tz:'America/Los_Angeles', day:'Day 1', date:'2026-06-26', time:'10:30' },
+    { name:'Hong Kong Polytechnic University', logo:'PolyU.webp', speaker:'Jae-Eun Oh',
+      topic:'Bridging Education and Industry: New Horizons in Immersive Media',
+      tz:'Asia/Hong_Kong', day:'Day 1', date:'2026-06-26', time:'11:30' },
+    { name:'Tencent Games', logo:'Tencent.webp', speaker:'Shaojun Sun & Irene Liu',
+      topic:'Reshaping the Creative Paradigm: When AIGC Meets the Next Generation of Animation & Game Developers',
+      tz:'Asia/Shanghai', day:'Day 1', date:'2026-06-26', time:'15:30' },
+    { name:'University of the Arts London', logo:'UAL.webp', speaker:'Yi Tan',
+      topic:'Art Meets Technology: How UAL Empowers Game Creation Both Ways',
+      tz:'Europe/London', day:'Day 1', date:'2026-06-26', time:'16:00' },
+    { name:'Escape Studios', logo:'Escape.webp', speaker:'Niccolò Temperanza',
+      topic:'From Concept to Screen: How Professional Game Artists Work at Escape Studios',
+      tz:'Europe/London', day:'Day 1', date:'2026-06-26', time:'17:00' },
+
+    /* ---- Day 2 — Sat, Jun 27 ---- */
+    { name:'Unreal Engine', logo:'UnrealEngine.webp', speaker:'Chris Ebeling',
+      topic:'From Passion to Profession: Navigating Careers in Game Development and Beyond',
+      tz:'America/New_York', day:'Day 2', date:'2026-06-27', time:'09:00' },
+    { name:'University of Utah', logo:'Utah.webp', speaker:'Ryan Bown',
+      topic:'10 Questions You Should Ask Before Applying to School',
+      tz:'America/Denver', day:'Day 2', date:'2026-06-27', time:'09:30' },
+    { name:'DigiPen Institute of Technology (USA)', logo:'DigiPen_web_logo.webp', speaker:'Matt Brunner & Tan Yong Zhen',
+      topic:'From Playing Games to Making Games: Careers in Game Development',
+      tz:'America/Los_Angeles', day:'Day 2', date:'2026-06-27', time:'10:30' },
+    { name:'DigiPen Institute of Technology (Singapore)', logo:'DigiPen_web_logo.webp', speaker:'Matt Brunner & Tan Yong Zhen',
+      topic:'From Playing Games to Making Games: Careers in Game Development',
+      tz:'Asia/Singapore', day:'Day 2', date:'2026-06-27', time:'10:30' },
+    { name:'MAGES Institute (Singapore)', logo:'MAGES.webp', speaker:'Kingston Chan',
+      topic:'The Value of Entertainment Art: What Skillset Is Needed as an Artist in the Industry',
+      tz:'Asia/Singapore', day:'Day 2', date:'2026-06-27', time:'11:30' },
+    { name:'Escape Studios', logo:'Escape.webp', speaker:'Philip Meredith',
+      topic:"How to Land Your First Job in Games: An Insider's Guide from Escape Studios",
+      tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'15:30' },
+    { name:'The Glasgow School of Art', logo:'GSA.webp', speaker:'Russell Miller & Daniel Livingstone',
+      topic:'', tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'16:00' },
+    { name:'Bournemouth University', logo:'Bu.webp', speaker:'Xiaosong Yang',
+      topic:'AI Reshaping the Creative Future: How Art Students Can Seize the New AI Track in the Media Industry',
+      tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'17:00' },
+    { name:'University of Staffordshire', logo:'Staffordshire.webp', speaker:'Chris Headleand',
+      topic:'', tz:'Europe/London', day:'Day 2', date:'2026-06-27', time:'18:00' },
+
+    /* ---- Day 3 — Sun, Jun 28 ---- */
+    { name:'Jin Wang', logo:'', speaker:'Jin Wang',
+      topic:'Creative Fusion of the UE Physics Engine and Sensors',
+      tz:'Asia/Shanghai', day:'Day 3', date:'2026-06-28', time:'09:00' },
+    { name:'Gnomon', logo:'Gnomon.webp', speaker:'Ashley Stegon',
+      topic:'Creature Design Pipeline: Starting the ZBrush Sculpt from a 2D Concept',
+      tz:'America/Los_Angeles', day:'Day 3', date:'2026-06-28', time:'09:30' },
+    { name:'Otis College of Art and Design', logo:'OTis.webp', speaker:'Joffery Black & Darren Phillipson',
+      topic:'Game and Entertainment Design Overview',
+      tz:'America/Los_Angeles', day:'Day 3', date:'2026-06-28', time:'10:30' },
+    { name:'University of Staffordshire', logo:'Staffordshire.webp', speaker:'Christopher Headleand',
+      topic:'', tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'15:30' },
+    { name:'Teesside University', logo:'Teessi.webp', speaker:'Pingyao Sun',
+      topic:"Building a China–UK Creative Industry Talent Bridge: Teesside University's Perspective and Practice",
+      tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'16:00' },
+    { name:'Abertay University', logo:'Abertay.webp', speaker:'Ruth Falconer & Phillip Vaughan',
+      topic:'Create the Unreal: Next-Level Visual Effects Starts Here...',
+      tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'17:00' },
+    { name:'University of Hertfordshire', logo:'University_of_Hertfordshire_Logo.svg.webp', speaker:'David Tree',
+      topic:'', tz:'Europe/London', day:'Day 3', date:'2026-06-28', time:'18:00' }
   ];
+
   (function(){
-    var logoSel = $('logoSelect');
-    INSTITUTIONS.forEach(function(it){
+    var sel = $('sessionSelect');
+    SESSIONS.forEach(function(s,i){
       var o = document.createElement('option');
-      o.value = it.logo;
-      o.textContent = it.name;
-      logoSel.appendChild(o);
+      o.value = String(i);
+      o.textContent = s.day + ' · ' + s.time + ' · ' + s.name;
+      sel.appendChild(o);
     });
-    logoSel.value = 'Escape.webp';
   })();
+
+  function shiftDate(iso, days){
+    var p = iso.split('-');
+    var d = new Date(Date.UTC(+p[0], +p[1]-1, +p[2]));
+    d.setUTCDate(d.getUTCDate() + days);
+    return d.toISOString().slice(0,10);
+  }
+
+  // selecting a session auto-fills speaker / topic / day / time (China) / tz
+  function applySession(){
+    var s = SESSIONS[$('sessionSelect').value];
+    if(!s) return;
+    $('speaker').value = s.speaker || '';
+    $('topic').value   = s.topic || '';
+    $('day').value     = s.day;
+    $('tz').value      = s.tz;
+    $('sdate').value   = s.date;             // China date
+    $('stime').value   = s.time;             // China time
+    $('tdate').value   = shiftDate(s.date, -7); // test run one week earlier
+    $('ttime').value   = s.time;
+    autofillMeetingIds();
+    render();
+  }
+  $('sessionSelect').addEventListener('change', applySession);
 
   window.addEventListener('resize', fit);
 
@@ -670,8 +748,8 @@ Please apply the official virtual background. See the attachment for the Voov Me
     window.print();
   });
 
-  autofillMeetingIds();
-  render();
+  $('sessionSelect').value = '0';
+  applySession();
 })();
 </script>
 </body>
