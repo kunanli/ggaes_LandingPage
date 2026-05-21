@@ -244,9 +244,66 @@
     #scaler{transform:none!important;width:1080px;}
     .preview-col .panel-title{display:none;}
   }
+
+  /* ---------- Access gate ---------- */
+  .gate{
+    position:fixed;inset:0;z-index:9999;display:none;
+    align-items:center;justify-content:center;padding:24px;
+    background:linear-gradient(135deg,#2d1b69,#6c3fd6);
+  }
+  body.locked .gate{display:flex;}
+  body.locked .app{display:none;}
+  .gate-box{
+    background:#fff;border-radius:16px;padding:32px 28px;max-width:380px;width:100%;
+    box-shadow:0 20px 60px rgba(0,0,0,.3);text-align:center;
+    font-family:'Poppins','Noto Sans SC',sans-serif;
+  }
+  .gate-box h2{margin:0 0 8px;color:var(--deep);font-size:20px;}
+  .gate-box p{margin:0 0 18px;color:#7a7e93;font-size:13px;line-height:1.6;}
+  .gate-box input{
+    width:100%;border:1px solid #d6d9e6;border-radius:9px;padding:11px 13px;
+    font-size:15px;font-family:inherit;text-align:center;margin-bottom:12px;
+  }
+  .gate-box input:focus{outline:none;border-color:var(--purple);}
+  .gate-box button{
+    width:100%;border:none;border-radius:10px;padding:12px;background:var(--purple);
+    color:#fff;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;
+  }
+  .gate-box button:hover{background:#5a31bd;}
+  .gate-err{color:#d23b3b;font-size:12px;margin-top:10px;min-height:16px;}
 </style>
 </head>
-<body>
+<body class="locked">
+
+<div class="gate" id="gate">
+  <div class="gate-box">
+    <h2>GGAES 2026</h2>
+    <p>本工具仅供 GGAES 授权工作人员使用。<br>This tool is for authorised GGAES organisers only.<br>请输入访问密码 · Please enter the access password</p>
+    <input type="password" id="gatePw" placeholder="访问密码 · Access password" autocomplete="off">
+    <button type="button" id="gateBtn">进入 · Enter</button>
+    <div class="gate-err" id="gateErr"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var KEY='ggaes_access', PW='artdico2026ggaes';
+  try{ if(sessionStorage.getItem(KEY)==='1'){ document.body.classList.remove('locked'); } }catch(e){}
+  var pw=document.getElementById('gatePw'), btn=document.getElementById('gateBtn'), err=document.getElementById('gateErr');
+  function tryUnlock(){
+    if(pw.value===PW){
+      try{ sessionStorage.setItem(KEY,'1'); }catch(e){}
+      document.body.classList.remove('locked');
+    }else{
+      err.textContent='密码错误 · Incorrect password';
+      pw.value=''; pw.focus();
+    }
+  }
+  btn.addEventListener('click', tryUnlock);
+  pw.addEventListener('keydown', function(e){ if(e.key==='Enter'){ tryUnlock(); } });
+  setTimeout(function(){ if(document.body.classList.contains('locked')){ pw.focus(); } }, 50);
+})();
+</script>
+
 <div class="app">
 
   <!-- ============ FORM ============ -->
