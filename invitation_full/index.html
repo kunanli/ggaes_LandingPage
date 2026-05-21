@@ -33,6 +33,15 @@
     box-shadow:0 8px 30px rgba(30,20,80,.08);
     position:sticky;top:28px;max-height:calc(100vh - 56px);overflow:auto;
   }
+  .lang-toggle{
+    display:inline-flex;border:1px solid #d6d9e6;border-radius:9px;
+    overflow:hidden;margin-bottom:16px;
+  }
+  .lang-toggle button{
+    border:none;background:#fff;color:#5a5e74;font-family:inherit;
+    font-size:13px;font-weight:700;padding:8px 16px;cursor:pointer;
+  }
+  .lang-toggle button.active{background:var(--purple);color:#fff;}
   .form-col h1{font-size:22px;margin:0 0 4px;color:var(--deep);}
   .form-col .sub{font-size:13px;color:#7a7e93;margin:0 0 18px;}
   .field{margin-bottom:16px;}
@@ -175,36 +184,41 @@
 
   <!-- ============ FORM ============ -->
   <div class="form-col">
-    <h1>Full Programme Invitation</h1>
-    <p class="sub">Enter a guest's name to generate an invitation showing the complete three-day GGAES 2026 programme and the meeting IDs for every session.</p>
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
+
+    <h1 data-i18n="formH1">Full Programme Invitation</h1>
+    <p class="sub" data-i18n="formSub">Enter a guest's name to generate an invitation showing the complete three-day GGAES 2026 programme and the meeting IDs for every session.</p>
 
     <div class="field">
-      <label>Guest Name <span class="req">*</span></label>
-      <input type="text" id="guest" placeholder="Enter the guest's name">
-      <div class="tip">One invitation per guest: enter a name, download, then move on to the next.</div>
+      <label data-i18n="guestLabel">Guest Name</label>
+      <input type="text" id="guest" data-i18n-ph="guestPh" placeholder="Enter the guest's name">
+      <div class="tip" data-i18n="guestTip">One invitation per guest: enter a name, download, then move on to the next.</div>
     </div>
 
     <div class="field">
-      <label>Contact Email</label>
-      <input type="text" id="email" placeholder="e.g. ggaes@artdico.co">
-      <div class="tip">Appears at the bottom of the invitation.</div>
+      <label data-i18n="emailLabel">Contact Email</label>
+      <input type="text" id="email" data-i18n-ph="emailPh" placeholder="e.g. ggaes@artdico.co">
+      <div class="tip" data-i18n="emailTip">Appears at the bottom of the invitation.</div>
     </div>
 
     <div class="actions">
-      <button class="btn btn-primary" id="dlBtn">Download JPEG</button>
-      <button class="btn btn-ghost" id="pdfBtn">Print / Save PDF</button>
+      <button class="btn btn-primary" id="dlBtn" data-i18n="dlBtn">Download JPEG</button>
+      <button class="btn btn-ghost" id="pdfBtn" data-i18n="pdfBtn">Print / Save PDF</button>
     </div>
-    <div class="hint">The programme, times and meeting IDs are pre-set from the official GGAES 2026 schedule. All times are China Standard Time (UTC+8).</div>
+    <div class="hint" data-i18n="hint">The programme, times and meeting IDs are pre-set from the official GGAES 2026 schedule. All times are China Standard Time (UTC+8).</div>
 
     <div class="resources">
-      <div class="rs-title">Resources for guests</div>
+      <div class="rs-title" data-i18n="resTitle">Resources for guests</div>
       <a href="../VooVMeetingRegistrationGuide.pdf" target="_blank" rel="noopener" download>
         <span class="rs-icon">↓</span>
-        <span>VooV Meeting Registration Guide <span class="rs-sub">(PDF)</span></span>
+        <span><span data-i18n="resGuide">VooV Meeting Registration Guide</span> <span class="rs-sub" data-i18n="resGuideSub">(PDF)</span></span>
       </a>
       <a href="https://voovmeeting.com/download-center.html" target="_blank" rel="noopener">
         <span class="rs-icon">↗</span>
-        <span>Download VooV Meeting <span class="rs-sub">(voovmeeting.com)</span></span>
+        <span><span data-i18n="resDl">Download VooV Meeting</span> <span class="rs-sub" data-i18n="resDlSub">(voovmeeting.com)</span></span>
       </a>
     </div>
   </div>
@@ -220,22 +234,22 @@
             <div class="summit-mark">
               <img src="SummitLOGO.png" alt="Global Game &amp; Animation Education Summit">
             </div>
-            <div class="summit-title">Global Game &amp; Animation Education Summit in China 2026</div>
+            <div class="summit-title" data-i18n="summitTitle">Global Game &amp; Animation Education Summit in China 2026</div>
           </div>
 
           <div class="invite-block">
-            <div class="invite-title">Invitation</div>
+            <div class="invite-title" data-i18n="inviteTitle">Invitation</div>
           </div>
 
           <div class="greeting" id="pvGreeting">Dear Guest,</div>
 
-          <div class="welcome">On behalf of the Global Game &amp; Animation Education Summit 2026, we are delighted to invite you to join us across all three days. The full programme and the meeting ID for each session are listed below — we look forward to seeing you there!</div>
-          <div class="tz-note">All times shown in China Standard Time (UTC+8).</div>
+          <div class="welcome" data-i18n="welcome">On behalf of the Global Game &amp; Animation Education Summit 2026, we are delighted to invite you to join us across all three days. The full programme and the meeting ID for each session are listed below — we look forward to seeing you there!</div>
+          <div class="tz-note" data-i18n="tzNote">All times shown in China Standard Time (UTC+8).</div>
 
           <div id="pvSchedule"></div>
 
           <div class="notes">
-            <div class="nt-title">Participation Notes:</div>
+            <div class="nt-title" data-i18n="notesTitle">Participation Notes:</div>
             <ul id="pvNotes"></ul>
           </div>
           <div class="footer-line" id="pvFooter"></div>
@@ -250,11 +264,7 @@
 <script>
 (function(){
   var $ = function(id){return document.getElementById(id);};
-  var TBA = 'To be announced';
-
-  var DEFAULT_NOTES =
-    'Participants in mainland China should use Tencent Meeting; participants outside mainland China should use VooV Meeting. Please register an account in advance.\n' +
-    'Each summit day uses one meeting room in the morning and another in the afternoon — use the meeting ID shown for the half-day you are joining.';
+  var lang = 'en';
 
   /* ---- meeting IDs: one VooV room per half-day block ---- */
   var MEETING_IDS = {
@@ -263,70 +273,149 @@
     'Day 3': { am:'476 861 832', pm:'228 629 949' }
   };
 
-  var DAYS = [
-    { key:'Day 1', label:'Day 1 · Friday, June 26, 2026' },
-    { key:'Day 2', label:'Day 2 · Saturday, June 27, 2026' },
-    { key:'Day 3', label:'Day 3 · Sunday, June 28, 2026' }
-  ];
+  var DAY_KEYS = ['Day 1', 'Day 2', 'Day 3'];
 
   /* ---- sessions (China Standard Time; from the official schedule) ----
      dur = minutes: 30 keynote, 45 institution, 60 for 18:00 closers. */
   var SESSIONS = [
     /* Day 1 */
-    { name:'Global Game Jam', type:'keynote', speaker:'Maria Burns Ortiz',
-      topic:'Game Jams: The Ultimate XP Boost', day:'Day 1', time:'09:00', dur:30 },
-    { name:'Southern Methodist University', type:'school', speaker:'Joowon Kim MacDowell',
-      topic:'How We Become a Professional Game Artist — Leveling Up in SMU', day:'Day 1', time:'09:30', dur:45 },
-    { name:'California Institute of the Arts', type:'school', speaker:'Patrick Schmid',
-      topic:'Storytellers Beyond the Algorithm: From Students to Creators of the Stories You Know', day:'Day 1', time:'10:30', dur:45 },
-    { name:'Hong Kong Polytechnic University', type:'school', speaker:'Jae-Eun Oh',
-      topic:'Bridging Education and Industry: New Horizons in Immersive Media', day:'Day 1', time:'11:30', dur:45 },
-    { name:'Tencent Games', type:'keynote', speaker:'Shaojun Sun & Irene Liu',
-      topic:'Reshaping the Creative Paradigm: When AIGC Meets the Next Generation of Animation & Game Developers', day:'Day 1', time:'15:30', dur:30 },
-    { name:'University of the Arts London', type:'school', speaker:'Yi Tan',
-      topic:'Art Meets Technology: How UAL Empowers Game Creation Both Ways', day:'Day 1', time:'16:00', dur:45 },
-    { name:'Escape Studios', type:'school', speaker:'Niccolò Temperanza',
-      topic:'From Concept to Screen: How Professional Game Artists Work at Escape Studios', day:'Day 1', time:'17:00', dur:45 },
+    { type:'keynote', day:'Day 1', time:'09:00', dur:30,
+      topicEn:'Game Jams: The Ultimate XP Boost', topicZh:'游戏 Jam：终极经验值加成',
+      whoEn:'Maria Burns Ortiz · Global Game Jam', whoZh:'Maria Burns Ortiz · Global Game Jam' },
+    { type:'school', day:'Day 1', time:'09:30', dur:45,
+      topicEn:'How We Become a Professional Game Artist — Leveling Up in SMU', topicZh:'如何成为专业游戏美术师——在 SMU 一路升级',
+      whoEn:'Joowon Kim MacDowell · SMU Guildhall', whoZh:'Joowon Kim MacDowell · 南卫理公会大学 SMU Guildhall' },
+    { type:'school', day:'Day 1', time:'10:30', dur:45,
+      topicEn:'Storytellers Beyond the Algorithm: From Students to Creators of the Stories You Know', topicZh:'超越算法的故事讲述者：从学生到你所熟知故事的创作者',
+      whoEn:'Patrick Schmid · CalArts', whoZh:'Patrick Schmid · 加州艺术学院 CalArts' },
+    { type:'school', day:'Day 1', time:'11:30', dur:45,
+      topicEn:'Bridging Education and Industry: New Horizons in Immersive Media', topicZh:'连接教育与产业：沉浸式媒体的新视野',
+      whoEn:'Jae-Eun Oh · Hong Kong Polytechnic University', whoZh:'Jae-Eun Oh · 香港理工大学' },
+    { type:'keynote', day:'Day 1', time:'15:30', dur:30,
+      topicEn:'Reshaping the Creative Paradigm: When AIGC Meets the Next Generation of Animation & Game Developers', topicZh:'重塑创作范式：当 AIGC 遇见新一代动画与游戏开发者',
+      whoEn:'Shaojun Sun · Irene Liu · Tencent Games', whoZh:'Shaojun Sun · Irene Liu · 腾讯游戏' },
+    { type:'school', day:'Day 1', time:'16:00', dur:45,
+      topicEn:'Art Meets Technology: How UAL Empowers Game Creation Both Ways', topicZh:'艺术与技术：伦艺如何双向赋能游戏创作？',
+      whoEn:'Yi Tan · Academic Counsellor, UAL Beijing Office', whoZh:'Yi Tan · 伦敦艺术大学北京招生办公室 学术顾问' },
+    { type:'school', day:'Day 1', time:'17:00', dur:45,
+      topicEn:'From Concept to Screen: How Professional Game Artists Work at Escape Studios', topicZh:'从概念到屏幕：Escape Studios 的专业游戏美术师如何工作',
+      whoEn:'Niccolò Temperanza · Escape Studios', whoZh:'Niccolò Temperanza · Escape Studios' },
 
     /* Day 2 */
-    { name:'Unreal Engine', type:'keynote', speaker:'Chris Ebeling',
-      topic:'From Passion to Profession: Navigating Careers in Game Development and Beyond', day:'Day 2', time:'09:00', dur:30 },
-    { name:'University of Utah', type:'school', speaker:'Ryan Bown',
-      topic:'10 Questions You Should Ask Before Applying to School', day:'Day 2', time:'09:30', dur:45 },
-    { name:'DigiPen Institute of Technology (USA)', type:'school', speaker:'Matt Brunner & Tan Yong Zhen',
-      topic:'From Playing Games to Making Games: Careers in Game Development', day:'Day 2', time:'10:30', dur:45 },
-    { name:'DigiPen Institute of Technology (Singapore)', type:'school', speaker:'Matt Brunner & Tan Yong Zhen',
-      topic:'From Playing Games to Making Games: Careers in Game Development', day:'Day 2', time:'10:30', dur:45 },
-    { name:'MAGES Institute (Singapore)', type:'school', speaker:'Kingston Chan',
-      topic:'The Value of Entertainment Art: What Skillset Is Needed as an Artist in the Industry', day:'Day 2', time:'11:30', dur:45 },
-    { name:'Escape Studios', type:'keynote', speaker:'Philip Meredith',
-      topic:"How to Land Your First Job in Games: An Insider's Guide from Escape Studios", day:'Day 2', time:'15:30', dur:30 },
-    { name:'The Glasgow School of Art', type:'school', speaker:'Russell Miller & Daniel Livingstone',
-      topic:'', day:'Day 2', time:'16:00', dur:45 },
-    { name:'Bournemouth University', type:'school', speaker:'Xiaosong Yang',
-      topic:'AI Reshaping the Creative Future: How Art Students Can Seize the New AI Track in the Media Industry', day:'Day 2', time:'17:00', dur:45 },
-    { name:'University of Staffordshire', type:'school', speaker:'Chris Headleand',
-      topic:'', day:'Day 2', time:'18:00', dur:60 },
+    { type:'keynote', day:'Day 2', time:'09:00', dur:30,
+      topicEn:'From Passion to Profession: Navigating Careers in Game Development and Beyond', topicZh:'从热爱到职业：在游戏开发及更广阔领域规划职业路径',
+      whoEn:'Chris Ebeling · Education Advisor, Unreal Engine', whoZh:'Chris Ebeling · 虚幻引擎 教育顾问' },
+    { type:'school', day:'Day 2', time:'09:30', dur:45,
+      topicEn:'10 Questions You Should Ask Before Applying to School', topicZh:'申请院校前你应该问的 10 个问题',
+      whoEn:'Ryan Bown · Professor, Division of Games, University of Utah', whoZh:'Ryan Bown · 犹他大学 游戏学部教授' },
+    { type:'school', day:'Day 2', time:'10:30', dur:45,
+      topicEn:'From Playing Games to Making Games: Careers in Game Development', topicZh:'从玩游戏到做游戏：游戏开发的职业之路',
+      whoEn:"Matt Brunner · Tan Yong Zhen 'YZ' · DigiPen", whoZh:"Matt Brunner · Tan Yong Zhen 'YZ' · 迪吉彭理工学院" },
+    { type:'school', day:'Day 2', time:'11:30', dur:45,
+      topicEn:'The Value of Entertainment Art: What Skillset Is Needed as an Artist in the Industry', topicZh:'娱乐美术的价值：行业美术师需要具备哪些技能',
+      whoEn:'Kingston Chan · Head of Art, MAGES Institute', whoZh:'Kingston Chan · MAGES 学院 艺术学院院长' },
+    { type:'keynote', day:'Day 2', time:'15:30', dur:30,
+      topicEn:"How to Land Your First Job in Games: An Insider's Guide from Escape Studios", topicZh:'如何拿下你的第一份游戏工作：Escape Studios 的内行指南',
+      whoEn:'Philip Meredith · Head of Games, Escape Studios', whoZh:'Philip Meredith · Escape Studios 游戏科系主管' },
+    { type:'school', day:'Day 2', time:'16:00', dur:45,
+      topicEn:'', topicZh:'',
+      whoEn:'Russell Miller (UG) & Daniel Livingstone (PG) · The Glasgow School of Art', whoZh:'Russell Miller（本科）& Daniel Livingstone（研究生）· 格拉斯哥艺术学院' },
+    { type:'school', day:'Day 2', time:'17:00', dur:45,
+      topicEn:'AI Reshaping the Creative Future: How Art Students Can Seize the New AI Track in the Media Industry', topicZh:'AI 重塑创意未来：艺术生如何抢占媒体行业的 AI 新赛道？',
+      whoEn:'Xiaosong Yang · Deputy Director, Bournemouth NCCA', whoZh:'Xiaosong Yang · 伯恩茅斯大学 国家计算机动画中心副主任' },
+    { type:'school', day:'Day 2', time:'18:00', dur:60,
+      topicEn:'', topicZh:'',
+      whoEn:'Chris Headleand · Head of Games, University of Staffordshire', whoZh:'Chris Headleand · 斯泰福厦大学 游戏科系主管' },
 
     /* Day 3 */
-    { name:'Jin Wang', type:'keynote', speaker:'Jin Wang',
-      topic:'Creative Fusion of the UE Physics Engine and Sensors', day:'Day 3', time:'09:00', dur:30 },
-    { name:'Gnomon', type:'school', speaker:'Ashley Stegon',
-      topic:'Creature Design Pipeline: Starting the ZBrush Sculpt from a 2D Concept', day:'Day 3', time:'09:30', dur:45 },
-    { name:'Otis College of Art and Design', type:'school', speaker:'Joffery Black & Darren Phillipson',
-      topic:'Game and Entertainment Design Overview', day:'Day 3', time:'10:30', dur:45 },
-    { name:'University of Staffordshire', type:'keynote', speaker:'Christopher Headleand',
-      topic:'', day:'Day 3', time:'15:30', dur:30 },
-    { name:'Teesside University', type:'school', speaker:'Pingyao Sun',
-      topic:"Building a China–UK Creative Industry Talent Bridge: Teesside University's Perspective and Practice", day:'Day 3', time:'16:00', dur:45 },
-    { name:'Abertay University', type:'school', speaker:'Ruth Falconer & Phillip Vaughan',
-      topic:'Create the Unreal: Next-Level Visual Effects Starts Here...', day:'Day 3', time:'17:00', dur:45 },
-    { name:'University of Hertfordshire', type:'school', speaker:'David Tree',
-      topic:'', day:'Day 3', time:'18:00', dur:60 }
+    { type:'keynote', day:'Day 3', time:'09:00', dur:30,
+      topicEn:'Creative Fusion of the UE Physics Engine and Sensors', topicZh:'UE 物理引擎 + 传感器的创意结合',
+      whoEn:'Jin Wang · Artist', whoZh:'王瑨 · 艺术家' },
+    { type:'school', day:'Day 3', time:'09:30', dur:45,
+      topicEn:'Creature Design Pipeline: Starting the ZBrush Sculpt from a 2D Concept', topicZh:'生物设计流程：从 2D 概念图开始 ZBrush 雕刻',
+      whoEn:'Ashley Stegon · Gnomon', whoZh:'Ashley Stegon · 诺蒙视觉特效学院 Gnomon' },
+    { type:'school', day:'Day 3', time:'10:30', dur:45,
+      topicEn:'Game and Entertainment Design Overview', topicZh:'游戏与娱乐设计概览',
+      whoEn:'Joffery Black (Chair, Game & Entertainment Design) & Darren Phillipson (Lecturer, BFA Toy Design) · Otis College of Art and Design', whoZh:'Joffery Black（游戏与娱乐设计系主任）& Darren Phillipson（玩具设计讲师）· 奥蒂斯艺术与设计学院' },
+    { type:'keynote', day:'Day 3', time:'15:30', dur:30,
+      topicEn:'', topicZh:'',
+      whoEn:'Christopher Headleand · University of Staffordshire', whoZh:'Christopher Headleand · 斯泰福厦大学' },
+    { type:'school', day:'Day 3', time:'16:00', dur:45,
+      topicEn:"Building a China–UK Creative Industry Talent Bridge: Teesside University's Perspective and Practice", topicZh:'构建中英创意产业人才桥梁——提赛德大学的视角与实践',
+      whoEn:'Pingyao Sun · Recruitment Manager, Teesside University', whoZh:'Pingyao Sun · 提赛德大学 招生经理' },
+    { type:'school', day:'Day 3', time:'17:00', dur:45,
+      topicEn:'Create the Unreal: Next-Level Visual Effects Starts Here…', topicZh:'创造非凡：进阶视觉特效从这里开始……',
+      whoEn:'Ruth Falconer & Phillip Vaughan · Abertay University', whoZh:'Ruth Falconer & Phillip Vaughan · 阿伯泰大学' },
+    { type:'school', day:'Day 3', time:'18:00', dur:60,
+      topicEn:'', topicZh:'',
+      whoEn:'David Tree · University of Hertfordshire', whoZh:'David Tree · 赫特福德大学' }
   ];
 
-  function block(time){ return (+time.split(':')[0] < 13) ? 'am' : 'pm'; }
+  /* ---- translations ---- */
+  var T = {
+    en: {
+      htmlLang:'en',
+      pageTitle:'Full Programme Invitation · GGAES 2026',
+      formH1:'Full Programme Invitation',
+      formSub:"Enter a guest's name to generate an invitation showing the complete three-day GGAES 2026 programme and the meeting IDs for every session.",
+      guestLabel:'Guest Name', guestPh:"Enter the guest's name",
+      guestTip:'One invitation per guest: enter a name, download, then move on to the next.',
+      emailLabel:'Contact Email', emailPh:'e.g. ggaes@artdico.co',
+      emailTip:'Appears at the bottom of the invitation.',
+      dlBtn:'Download JPEG', pdfBtn:'Print / Save PDF',
+      hint:'The programme, times and meeting IDs are pre-set from the official GGAES 2026 schedule. All times are China Standard Time (UTC+8).',
+      resTitle:'Resources for guests',
+      resGuide:'VooV Meeting Registration Guide', resGuideSub:'(PDF)',
+      resDl:'Download VooV Meeting', resDlSub:'(voovmeeting.com)',
+      summitTitle:'Global Game & Animation Education Summit in China 2026',
+      inviteTitle:'Invitation',
+      welcome:'On behalf of the Global Game & Animation Education Summit 2026, we are delighted to invite you to join us across all three days. The full programme and the meeting ID for each session are listed below — we look forward to seeing you there!',
+      tzNote:'All times shown in China Standard Time (UTC+8).',
+      guestWord:'Guest',
+      morning:'Morning', afternoon:'Afternoon', meetingId:'Meeting ID',
+      keynote:'Keynote', institution:'Institution', tba:'To be announced',
+      notesTitle:'Participation Notes:',
+      notes:[
+        'Participants in mainland China should use Tencent Meeting; participants outside mainland China should use VooV Meeting. Please register an account in advance.',
+        'Each summit day uses one meeting room in the morning and another in the afternoon — use the meeting ID shown for the half-day you are joining.'
+      ],
+      days:['Day 1 · Friday, June 26, 2026','Day 2 · Saturday, June 27, 2026','Day 3 · Sunday, June 28, 2026'],
+      greeting:function(n){ return 'Dear ' + n + ','; },
+      footer:function(e){ return e ? ('For enquiries, please contact the GGAES organising team: ' + e) : 'For enquiries, please contact the GGAES organising team.'; }
+    },
+    zh: {
+      htmlLang:'zh-Hans',
+      pageTitle:'完整日程邀请函 · GGAES 2026',
+      formH1:'完整日程邀请函',
+      formSub:'输入嘉宾姓名，即可生成包含 GGAES 2026 完整三天日程及各场次会议号的邀请函。',
+      guestLabel:'嘉宾姓名', guestPh:'请输入嘉宾姓名',
+      guestTip:'每位嘉宾一份：输入姓名、下载，再处理下一位。',
+      emailLabel:'联系邮箱', emailPh:'例如 ggaes@artdico.co',
+      emailTip:'将显示在邀请函底部。',
+      dlBtn:'下载 JPEG', pdfBtn:'打印 / 存为 PDF',
+      hint:'日程、时间与会议号均取自 GGAES 2026 官方时间表，所有时间均为中国标准时间（UTC+8）。',
+      resTitle:'嘉宾参考资源',
+      resGuide:'VooV Meeting 注册指南', resGuideSub:'（PDF）',
+      resDl:'下载 VooV Meeting', resDlSub:'（voovmeeting.com）',
+      summitTitle:'全球游戏与动画教育峰会 · 中国 2026',
+      inviteTitle:'邀请函',
+      welcome:'谨代表全球游戏与动画教育峰会 2026，诚挚邀请您出席为期三天的峰会。完整日程及各场次会议号如下，期待与您线上相见！',
+      tzNote:'下列时间均为中国标准时间（UTC+8）。',
+      guestWord:'嘉宾',
+      morning:'上午场', afternoon:'下午场', meetingId:'会议号',
+      keynote:'主题演讲', institution:'院校场次', tba:'主题待公布',
+      notesTitle:'参会须知：',
+      notes:[
+        '中国大陆参会者请使用腾讯会议；中国大陆以外参会者请使用 VooV Meeting，并请提前注册账号。',
+        '每个峰会日上午、下午各使用一个会议室——请使用您参加的半天所对应的会议号。'
+      ],
+      days:['第一天 · 2026年6月26日 周五','第二天 · 2026年6月27日 周六','第三天 · 2026年6月28日 周日'],
+      greeting:function(n){ return '尊敬的 ' + n + '：'; },
+      footer:function(e){ return e ? ('如有疑问，请联系 GGAES 主办团队：' + e) : '如有疑问，请联系 GGAES 主办团队。'; }
+    }
+  };
 
+  function block(time){ return (+time.split(':')[0] < 13) ? 'am' : 'pm'; }
   function endTime(time, dur){
     var tp = time.split(':');
     var total = (+tp[0])*60 + (+tp[1]) + dur;
@@ -334,26 +423,43 @@
     return (h<10?'0':'')+h + ':' + (m<10?'0':'')+m;
   }
 
-  function tagLabel(t){ return t==='keynote' ? 'Keynote' : 'Institution'; }
+  /* ---------- static UI text ---------- */
+  function applyI18n(){
+    var t = T[lang];
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(t[k] != null) el.textContent = t[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-ph');
+      if(t[k] != null) el.placeholder = t[k];
+    });
+    Array.prototype.forEach.call($('langToggle').children, function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+  }
 
-  /* ---------- render the full schedule ---------- */
+  /* ---------- full schedule ---------- */
   function renderSchedule(){
+    var t = T[lang];
     var wrap = $('pvSchedule');
     wrap.innerHTML = '';
 
-    DAYS.forEach(function(d){
+    DAY_KEYS.forEach(function(dayKey, di){
       var dayEl = document.createElement('div');
       dayEl.className = 'day';
 
       var title = document.createElement('div');
       title.className = 'day-title';
-      title.textContent = d.label;
+      title.textContent = t.days[di];
       dayEl.appendChild(title);
 
-      [['am','Morning'], ['pm','Afternoon']].forEach(function(pair){
+      [['am', t.morning], ['pm', t.afternoon]].forEach(function(pair){
         var part = pair[0], partName = pair[1];
         var rows = SESSIONS.filter(function(s){
-          return s.day === d.key && block(s.time) === part;
+          return s.day === dayKey && block(s.time) === part;
         });
         if(!rows.length) return;
 
@@ -367,8 +473,12 @@
         pn.textContent = partName;
         var pr = document.createElement('div');
         pr.className = 'part-room';
-        var room = (MEETING_IDS[d.key] || {})[part] || TBA;
-        pr.innerHTML = '<span class="rk">Meeting ID</span>' + room;
+        var room = (MEETING_IDS[dayKey] || {})[part] || t.tba;
+        var rk = document.createElement('span');
+        rk.className = 'rk';
+        rk.textContent = t.meetingId;
+        pr.appendChild(rk);
+        pr.appendChild(document.createTextNode(room));
         head.appendChild(pn); head.appendChild(pr);
         partEl.appendChild(head);
 
@@ -378,17 +488,21 @@
 
           var time = document.createElement('div');
           time.className = 'time';
-          time.innerHTML = s.time + '–' + endTime(s.time, s.dur) +
-            '<br><span class="tag">' + tagLabel(s.type) + '</span>';
+          time.appendChild(document.createTextNode(s.time + '–' + endTime(s.time, s.dur)));
+          time.appendChild(document.createElement('br'));
+          var tag = document.createElement('span');
+          tag.className = 'tag';
+          tag.textContent = (s.type === 'keynote') ? t.keynote : t.institution;
+          time.appendChild(tag);
 
           var body = document.createElement('div');
           body.className = 'body';
           var topic = document.createElement('div');
           topic.className = 'topic';
-          topic.textContent = s.topic || TBA;
+          topic.textContent = (lang === 'zh' ? s.topicZh : s.topicEn) || t.tba;
           var who = document.createElement('div');
           who.className = 'who';
-          who.textContent = s.speaker + ' · ' + s.name;
+          who.textContent = (lang === 'zh' ? s.whoZh : s.whoEn);
           body.appendChild(topic);
           body.appendChild(who);
 
@@ -405,24 +519,19 @@
   }
 
   function render(){
-    var gname = $('guest').value.trim();
-    $('pvGreeting').textContent = 'Dear ' + (gname || 'Guest') + ',';
+    var t = T[lang];
+    var gname = $('guest').value.trim() || t.guestWord;
+    $('pvGreeting').textContent = t.greeting(gname);
 
     var ul = $('pvNotes');
     ul.innerHTML = '';
-    DEFAULT_NOTES.split('\n').map(function(x){return x.trim();})
-      .filter(function(x){return x.length;})
-      .forEach(function(t){
-        var li = document.createElement('li');
-        li.textContent = t;
-        ul.appendChild(li);
-      });
+    t.notes.forEach(function(line){
+      var li = document.createElement('li');
+      li.textContent = line;
+      ul.appendChild(li);
+    });
 
-    var email = $('email').value.trim();
-    $('pvFooter').textContent = email
-      ? ('For enquiries, please contact the GGAES organising team: ' + email)
-      : 'For enquiries, please contact the GGAES organising team.';
-
+    $('pvFooter').textContent = t.footer($('email').value.trim());
     fit();
   }
 
@@ -437,13 +546,25 @@
   $('email').addEventListener('input', render);
   window.addEventListener('resize', fit);
 
+  $('langToggle').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-lang]');
+    if(!b) return;
+    lang = b.getAttribute('data-lang');
+    applyI18n();
+    renderSchedule();
+    render();
+  });
+
   /* ---------- download JPEG ---------- */
   $('dlBtn').addEventListener('click', async function(){
-    if(!$('guest').value.trim()){ alert("Please enter the guest's name first."); return; }
+    if(!$('guest').value.trim()){
+      alert(lang === 'zh' ? '请先输入嘉宾姓名。' : "Please enter the guest's name first.");
+      return;
+    }
     var btn = this;
     btn.disabled = true;
     var label = btn.textContent;
-    btn.textContent = 'Generating...';
+    btn.textContent = (lang === 'zh' ? '生成中…' : 'Generating...');
     try{
       if(document.fonts && document.fonts.ready){ await document.fonts.ready; }
       var canvas = await html2canvas($('card'), {
@@ -458,7 +579,7 @@
       a.click();
       document.body.removeChild(a);
     }catch(err){
-      alert('Failed to generate image: ' + err.message);
+      alert((lang === 'zh' ? '生成图片失败：' : 'Failed to generate image: ') + err.message);
     }finally{
       btn.disabled = false;
       btn.textContent = label;
@@ -468,6 +589,7 @@
   /* ---------- print / PDF ---------- */
   $('pdfBtn').addEventListener('click', function(){ window.print(); });
 
+  applyI18n();
   renderSchedule();
   render();
 })();
