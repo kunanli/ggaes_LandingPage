@@ -472,6 +472,22 @@
       day:'Day 3', date:'2026-06-28', time:'18:00', meetingId:'' }
   ];
 
+  /* ---------- meeting IDs (one VooV room per half-day block) ----------
+     Each summit day shares one meeting room in the morning (09:00–13:00
+     China time) and another in the afternoon (15:30–19:30 China time).
+     A session's room is resolved from its day + China-time start hour. */
+  var MEETING_IDS = {
+    'Day 1': { am:'646 488 336', pm:'656 551 479' },
+    'Day 2': { am:'981 425 908', pm:'378 780 806' },
+    'Day 3': { am:'476 861 832', pm:'228 629 949' }
+  };
+  function sessionMeetingId(s){
+    if(s.meetingId) return s.meetingId;
+    var ids = MEETING_IDS[s.day];
+    if(!ids || !s.time) return '';
+    return (+s.time.split(':')[0] < 13) ? ids.am : ids.pm;
+  }
+
   /* ---------- time zone helpers ---------- */
   function tzCity(tz){ return tz.split('/').pop().replace(/_/g,' '); }
 
@@ -575,7 +591,7 @@
     $('pvTopic').textContent   = s.topic || TBA;
     $('pvSpeaker').textContent = s.speaker || TBA;
     $('pvDay').textContent     = s.day || TBA;
-    $('pvMid').textContent     = s.meetingId || TBA;
+    $('pvMid').textContent     = sessionMeetingId(s) || TBA;
     $('pvMplat').textContent   = s.platform || 'Tencent Meeting / VooV Meeting';
 
     // session time -> China time, plus the entity's local time
@@ -641,7 +657,7 @@
       ['Session', sessionTxt],
       ['Topic', s.topic || TBA],
       ['Speaker', s.speaker || TBA],
-      ['Meeting ID', s.meetingId || TBA]
+      ['Meeting ID', sessionMeetingId(s) || TBA]
     ];
     rows.forEach(function(r){
       var row = document.createElement('div');

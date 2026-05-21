@@ -560,6 +560,34 @@ Please apply the official virtual background. See the attachment for the Voov Me
     box.style.height = (card.offsetHeight * scale) + 'px';
   }
 
+  /* ---------- meeting IDs (one VooV room per half-day block) ----------
+     Each summit day shares one room in the morning (09:00–13:00 China
+     time) and another in the afternoon (15:30–19:30 China time); test
+     runs use separate rooms one week earlier. The block is resolved from
+     the session's China-converted start hour, so it stays correct
+     whatever institution time zone the organiser enters. */
+  var MEETING_IDS = {
+    'Day 1': { am:'646 488 336', pm:'656 551 479', testAm:'426 934 919', testPm:'696 991 798' },
+    'Day 2': { am:'981 425 908', pm:'378 780 806', testAm:'511 829 579', testPm:'461 314 980' },
+    'Day 3': { am:'476 861 832', pm:'228 629 949', testAm:'693 492 034', testPm:'240 317 043' }
+  };
+
+  function chinaBlock(){
+    var dv=$('sdate').value, tv=$('stime').value, tz=$('tz').value;
+    if(!dv||!tv||!tz) return 'am';
+    var dp=dv.split('-'), tp=tv.split(':');
+    var inst=wallToInstant(+dp[0],+dp[1],+dp[2],+tp[0],+tp[1],tz);
+    return (+getParts(inst,'Asia/Shanghai').hour < 13) ? 'am' : 'pm';
+  }
+
+  function autofillMeetingIds(){
+    var ids = MEETING_IDS[$('day').value];
+    if(!ids) return;
+    var blk = chinaBlock();
+    $('mid').value = blk==='am' ? ids.am : ids.pm;
+    $('tid').value = blk==='am' ? ids.testAm : ids.testPm;
+  }
+
   // bind inputs
   ['logoSelect','speaker','topic','day','tz','sdate','stime','mplat','mid','tdate','ttime','tid','notes','footer']
     .forEach(function(id){
@@ -567,6 +595,11 @@ Please apply the official virtual background. See the attachment for the Voov Me
       el.addEventListener('input', render);
       el.addEventListener('change', render);
     });
+
+  // re-fill the official meeting IDs whenever the day / time / zone changes
+  ['day','sdate','stime','tz'].forEach(function(id){
+    $(id).addEventListener('change', function(){ autofillMeetingIds(); render(); });
+  });
 
   // ---- institution logo (pre-loaded) ----
   var INSTITUTIONS = [
@@ -638,6 +671,7 @@ Please apply the official virtual background. See the attachment for the Voov Me
     window.print();
   });
 
+  autofillMeetingIds();
   render();
 })();
 </script>
