@@ -425,8 +425,8 @@
             },
             {
               start: "2026-06-28T10:30:00+08:00", end: "2026-06-28T11:15:00+08:00", type: "us",
-              titleEn: "Game and Entertainment Design Overview",
-              titleZh: "游戏与娱乐设计概览",
+              titleEn: "Designing the Future of Play: Where Game Design and Toy Design Meet Art, Industry and Imagination",
+              titleZh: "设计玩乐的未来：当游戏设计与玩具设计相遇于艺术、产业与想象力",
               speakerEn: "Joffery Black (Chair, Game & Entertainment Design) & Darren Phillipson (Lecturer, BFA Toy Design) · Otis College of Art and Design",
               speakerZh: "Joffery Black（游戏与娱乐设计系主任）& Darren Phillipson（玩具设计讲师）· 奥蒂斯艺术与设计学院"
             }
