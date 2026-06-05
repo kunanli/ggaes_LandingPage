@@ -400,7 +400,8 @@
             },
             {
               start: "2026-06-27T18:00:00+08:00", end: "2026-06-27T19:00:00+08:00", type: "uk",
-              titleEn: null, titleZh: null,
+              titleEn: "The Future of the International Games Industry",
+              titleZh: "国际游戏产业的未来",
               speakerEn: "Chris Headleand · Head of Games, University of Staffordshire",
               speakerZh: "Chris Headleand · 斯泰福厦大学 游戏科系主管"
             }
