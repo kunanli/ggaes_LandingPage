@@ -123,7 +123,7 @@
       zh: "斯泰福厦大学\n数字、技术、创新与商业系主任"
     },
     {
-      name: "Kieran Hicks", img: "Kieran Hicks.webp",
+      name: "Kieran Hicks", img: "KieranHicks.jpeg",
       en: "University of Staffordshire\nCourse Director, Digital, Tech, Innovation & Business",
       zh: "斯泰福厦大学\n数字、科技、创新与商业 课程总监"
     },
