@@ -123,6 +123,11 @@
       zh: "斯泰福厦大学\n数字、技术、创新与商业系主任"
     },
     {
+      name: "Kieran Hicks", img: "Kieran Hicks.webp",
+      en: "University of Staffordshire\nCourse Director, Digital, Tech, Innovation & Business",
+      zh: "斯泰福厦大学\n数字、科技、创新与商业 课程总监"
+    },
+    {
       name: "Philip Meredith", img: "Philip Meredith.webp",
       en: "Head of Games, Escape Studios\nCredits: Harry Potter and the Deathly Hallows, Silent Hill",
       zh: "Escape Studios 游戏科系主管\n曾参与《哈利·波特：死亡圣器》《寂静岭：破碎的记忆》"
@@ -437,9 +442,10 @@
           sessions: [
             {
               start: "2026-06-28T15:30:00+08:00", end: "2026-06-28T16:00:00+08:00", type: "keynote",
-              titleEn: null, titleZh: null,
-              speakerEn: "Christopher Headleand · University of Staffordshire",
-              speakerZh: "Christopher Headleand · 斯泰福厦大学"
+              titleEn: "A World Leader in Games Education",
+              titleZh: "游戏教育的世界领跑者",
+              speakerEn: "Kieran Hicks · University of Staffordshire",
+              speakerZh: "Kieran Hicks · 斯泰福厦大学"
             },
             {
               start: "2026-06-28T16:00:00+08:00", end: "2026-06-28T16:45:00+08:00", type: "uk",
