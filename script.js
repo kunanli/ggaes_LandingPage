@@ -387,7 +387,7 @@
             },
             {
               start: "2026-06-27T16:00:00+08:00", end: "2026-06-27T16:45:00+08:00", type: "uk",
-              titleEn: null, titleZh: null,
+              titleEn: "Games and Beyond: Game Art & Design In and Beyond the Entertainment Industry", titleZh: "游戏及超越：娱乐产业内外的游戏美术与设计",
               speakerEn: "Russell Miller (UG) & Daniel Livingstone (PG) · The Glasgow School of Art",
               speakerZh: "Russell Miller（本科）& Daniel Livingstone（研究生）· 格拉斯哥艺术学院"
             },
