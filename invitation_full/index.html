@@ -42,6 +42,19 @@
     font-size:13px;font-weight:700;padding:8px 16px;cursor:pointer;
   }
   .lang-toggle button.active{background:var(--purple);color:#fff;}
+  .mode-toggle{
+    display:inline-flex;border:1px solid #d6d9e6;border-radius:9px;
+    overflow:hidden;margin:0 0 16px 10px;vertical-align:top;
+  }
+  .mode-toggle button{
+    border:none;background:#fff;color:#5a5e74;font-family:inherit;
+    font-size:13px;font-weight:700;padding:8px 16px;cursor:pointer;
+  }
+  .mode-toggle button.active{background:#c0392b;color:#fff;}
+  .test-badge{
+    display:inline-block;margin-top:8px;padding:4px 12px;border-radius:6px;
+    background:#c0392b;color:#fff;font-size:13px;font-weight:800;letter-spacing:.04em;
+  }
   .form-col h1{font-size:22px;margin:0 0 4px;color:var(--deep);}
   .form-col .sub{font-size:13px;color:#7a7e93;margin:0 0 18px;}
   .field{margin-bottom:16px;}
@@ -245,6 +258,10 @@
       <button type="button" data-lang="en" class="active">EN</button>
       <button type="button" data-lang="zh">中文</button>
     </div>
+    <div class="mode-toggle" id="modeToggle">
+      <button type="button" data-mode="official" class="active" data-i18n="modeOfficial">Official</button>
+      <button type="button" data-mode="test" data-i18n="modeTest">Test</button>
+    </div>
 
     <h1 data-i18n="formH1">Full Programme Invitation</h1>
     <p class="sub" data-i18n="formSub">Enter a guest's name to generate an invitation showing the complete three-day GGAES 2026 programme and the meeting IDs for every session.</p>
@@ -296,6 +313,7 @@
 
           <div class="invite-block">
             <div class="invite-title" data-i18n="inviteTitle">Invitation</div>
+            <div class="test-badge" id="pvTestBadge" style="display:none;"></div>
           </div>
 
           <div class="greeting" id="pvGreeting">Dear Guest,</div>
@@ -322,12 +340,14 @@
 (function(){
   var $ = function(id){return document.getElementById(id);};
   var lang = 'en';
+  var mode = 'official';  // 'official' | 'test'
 
-  /* ---- meeting IDs: one VooV room per half-day block ---- */
+  /* ---- meeting IDs: one VooV room per half-day block.
+     Test runs use separate rooms one week earlier (see daysTest). ---- */
   var MEETING_IDS = {
-    'Day 1': { am:'646 488 336', pm:'656 551 479' },
-    'Day 2': { am:'981 425 908', pm:'378 780 806' },
-    'Day 3': { am:'476 861 832', pm:'228 629 949' }
+    'Day 1': { am:'646 488 336', pm:'656 551 479', testAm:'426 934 919', testPm:'696 991 798' },
+    'Day 2': { am:'981 425 908', pm:'378 780 806', testAm:'511 829 579', testPm:'461 314 980' },
+    'Day 3': { am:'476 861 832', pm:'228 629 949', testAm:'693 492 034', testPm:'240 317 043' }
   };
 
   var DAY_KEYS = ['Day 1', 'Day 2', 'Day 3'];
@@ -437,6 +457,8 @@
         'Each summit day uses one meeting room in the morning and another in the afternoon — use the meeting ID shown for the half-day you are joining.'
       ],
       days:['Day 1 · Friday, June 26, 2026','Day 2 · Saturday, June 27, 2026','Day 3 · Sunday, June 28, 2026'],
+      daysTest:['Day 1 · Friday, June 19, 2026','Day 2 · Saturday, June 20, 2026','Day 3 · Sunday, June 21, 2026'],
+      modeOfficial:'Official', modeTest:'Test', testBadge:'TEST RUN',
       greeting:function(n){ return 'Dear ' + n + ','; },
       footer:function(e){ return e ? ('For enquiries, please contact the GGAES organising team: ' + e) : 'For enquiries, please contact the GGAES organising team.'; }
     },
@@ -467,6 +489,8 @@
         '每个峰会日上午、下午各使用一个会议室——请使用您参加的半天所对应的会议号。'
       ],
       days:['第一天 · 2026年6月26日 周五','第二天 · 2026年6月27日 周六','第三天 · 2026年6月28日 周日'],
+      daysTest:['第一天 · 2026年6月19日 周五','第二天 · 2026年6月20日 周六','第三天 · 2026年6月21日 周日'],
+      modeOfficial:'正式', modeTest:'测试', testBadge:'测试预演',
       greeting:function(n){ return '尊敬的 ' + n + '：'; },
       footer:function(e){ return e ? ('如有疑问，请联系 GGAES 主办团队：' + e) : '如有疑问，请联系 GGAES 主办团队。'; }
     }
@@ -496,6 +520,9 @@
     Array.prototype.forEach.call($('langToggle').children, function(b){
       b.classList.toggle('active', b.getAttribute('data-lang') === lang);
     });
+    Array.prototype.forEach.call($('modeToggle').children, function(b){
+      b.classList.toggle('active', b.getAttribute('data-mode') === mode);
+    });
   }
 
   /* ---------- full schedule ---------- */
@@ -510,7 +537,7 @@
 
       var title = document.createElement('div');
       title.className = 'day-title';
-      title.textContent = t.days[di];
+      title.textContent = (mode === 'test' ? t.daysTest : t.days)[di];
       dayEl.appendChild(title);
 
       [['am', t.morning], ['pm', t.afternoon]].forEach(function(pair){
@@ -530,7 +557,8 @@
         pn.textContent = partName;
         var pr = document.createElement('div');
         pr.className = 'part-room';
-        var room = (MEETING_IDS[dayKey] || {})[part] || t.tba;
+        var ids = MEETING_IDS[dayKey] || {};
+        var room = (mode === 'test' ? (part === 'am' ? ids.testAm : ids.testPm) : ids[part]) || t.tba;
         var rk = document.createElement('span');
         rk.className = 'rk';
         rk.textContent = t.meetingId;
@@ -588,6 +616,10 @@
       ul.appendChild(li);
     });
 
+    var badge = $('pvTestBadge');
+    if(mode === 'test'){ badge.textContent = t.testBadge; badge.style.display = ''; }
+    else { badge.style.display = 'none'; }
+
     $('pvFooter').textContent = t.footer($('email').value.trim());
     fit();
   }
@@ -612,6 +644,15 @@
     render();
   });
 
+  $('modeToggle').addEventListener('click', function(e){
+    var b = e.target.closest('button[data-mode]');
+    if(!b) return;
+    mode = b.getAttribute('data-mode');
+    applyI18n();
+    renderSchedule();
+    render();
+  });
+
   /* ---------- download JPEG ---------- */
   $('dlBtn').addEventListener('click', async function(){
     if(!$('guest').value.trim()){
@@ -631,7 +672,7 @@
       var a = document.createElement('a');
       var name = ($('guest').value || 'guest').replace(/[^\w一-龥-]+/g,'_');
       a.href = url;
-      a.download = 'invitation_full_' + name + '.jpg';
+      a.download = 'invitation_full_' + (mode === 'test' ? 'TEST_' : '') + name + '.jpg';
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
