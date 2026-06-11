@@ -55,6 +55,7 @@
     display:inline-block;margin-top:8px;padding:4px 12px;border-radius:6px;
     background:#c0392b;color:#fff;font-size:13px;font-weight:800;letter-spacing:.04em;
   }
+  .test-note{margin-top:8px;font-size:24px;color:#c0392b;font-weight:700;}
   .form-col h1{font-size:22px;margin:0 0 4px;color:var(--deep);}
   .form-col .sub{font-size:13px;color:#7a7e93;margin:0 0 18px;}
   .field{margin-bottom:16px;}
@@ -320,6 +321,7 @@
 
           <div class="welcome" data-i18n="welcome">On behalf of the Global Game &amp; Animation Education Summit 2026, we are delighted to invite you to join us across all three days. The full programme and the meeting ID for each session are listed below — we look forward to seeing you there!</div>
           <div class="tz-note" data-i18n="tzNote">All times shown in China Standard Time (UTC+8).</div>
+          <div class="test-note" id="pvTestNote" style="display:none;"></div>
 
           <div id="pvSchedule"></div>
 
@@ -459,6 +461,7 @@
       days:['Day 1 · Friday, June 26, 2026','Day 2 · Saturday, June 27, 2026','Day 3 · Sunday, June 28, 2026'],
       daysTest:['Day 1 · Friday, June 19, 2026','Day 2 · Saturday, June 20, 2026','Day 3 · Sunday, June 21, 2026'],
       modeOfficial:'Official', modeTest:'Test', testBadge:'TEST RUN',
+      testNote:'This is a test run — each session lasts 15 minutes. Start times follow the schedule below.',
       greeting:function(n){ return 'Dear ' + n + ','; },
       footer:function(e){ return e ? ('For enquiries, please contact the GGAES organising team: ' + e) : 'For enquiries, please contact the GGAES organising team.'; }
     },
@@ -491,6 +494,7 @@
       days:['第一天 · 2026年6月26日 周五','第二天 · 2026年6月27日 周六','第三天 · 2026年6月28日 周日'],
       daysTest:['第一天 · 2026年6月19日 周五','第二天 · 2026年6月20日 周六','第三天 · 2026年6月21日 周日'],
       modeOfficial:'正式', modeTest:'测试', testBadge:'测试预演',
+      testNote:'本场为测试预演——每个场次仅持续 15 分钟，开始时间以下方日程为准。',
       greeting:function(n){ return '尊敬的 ' + n + '：'; },
       footer:function(e){ return e ? ('如有疑问，请联系 GGAES 主办团队：' + e) : '如有疑问，请联系 GGAES 主办团队。'; }
     }
@@ -573,7 +577,7 @@
 
           var time = document.createElement('div');
           time.className = 'time';
-          time.appendChild(document.createTextNode(s.time + '–' + endTime(s.time, s.dur)));
+          time.appendChild(document.createTextNode(s.time + '–' + endTime(s.time, mode === 'test' ? 15 : s.dur)));
           time.appendChild(document.createElement('br'));
           var tag = document.createElement('span');
           tag.className = 'tag';
@@ -616,9 +620,14 @@
       ul.appendChild(li);
     });
 
-    var badge = $('pvTestBadge');
-    if(mode === 'test'){ badge.textContent = t.testBadge; badge.style.display = ''; }
-    else { badge.style.display = 'none'; }
+    var badge = $('pvTestBadge'), tnote = $('pvTestNote');
+    if(mode === 'test'){
+      badge.textContent = t.testBadge; badge.style.display = '';
+      tnote.textContent = t.testNote; tnote.style.display = '';
+    } else {
+      badge.style.display = 'none';
+      tnote.style.display = 'none';
+    }
 
     $('pvFooter').textContent = t.footer($('email').value.trim());
     fit();
