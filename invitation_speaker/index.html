@@ -239,14 +239,20 @@
   }
 
   /* ---------- Print / PDF ---------- */
+  /* keep each session's lines + QR together when the PDF paginates */
+  .sess-group{ break-inside:avoid; page-break-inside:avoid; }
+  .notes{ break-inside:avoid; page-break-inside:avoid; }
+  .reg-line, .reg-qr{ break-inside:avoid; page-break-inside:avoid; }
+
   @media print{
-    @page{size:285mm 489mm;margin:0;}
+    @page{size:285mm 710mm;margin:0;}
     body{background:#fff;}
     .form-col,.preview-col .panel-title,.app{gap:0;padding:0;}
     .form-col{display:none;}
     #previewBox{box-shadow:none;border-radius:0;overflow:visible;height:auto!important;}
     #scaler{transform:none!important;width:1080px;}
     .preview-col .panel-title{display:none;}
+    .sess-group, .notes, .reg-line, .reg-qr{ break-inside:avoid; page-break-inside:avoid; }
   }
 
   /* ---------- Access gate ---------- */
@@ -494,21 +500,25 @@ See the attachment for the Voov Meeting download, installation, and registration
           <!-- meta -->
           <div class="meta">
             <div class="line">Session day：<span id="pvDay"></span></div>
-            <div class="line" style="margin-top:14px;">Your session time：</div>
-            <div class="tzline"><span id="pvSlocal"></span></div>
-            <div class="tzline sub"><span id="pvScn"></span></div>
+            <div class="sess-group">
+              <div class="line" style="margin-top:14px;">Your session time：</div>
+              <div class="tzline"><span id="pvSlocal"></span></div>
+              <div class="tzline sub"><span id="pvScn"></span></div>
 
-            <div class="line" style="margin-top:14px;">Your session ID：<span id="pvMid"></span></div>
-            <div class="reg-line" id="pvMidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvMidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
-            <img class="reg-qr" id="pvMidQr" alt="Speaker registration QR">
+              <div class="line" style="margin-top:14px;">Your session ID：<span id="pvMid"></span></div>
+              <div class="reg-line" id="pvMidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvMidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
+              <img class="reg-qr" id="pvMidQr" alt="Speaker registration QR">
+            </div>
 
-            <div class="line" style="margin-top:26px;">Test session time：</div>
-            <div class="tzline"><span id="pvTlocal"></span></div>
-            <div class="tzline sub"><span id="pvTcn"></span></div>
+            <div class="sess-group">
+              <div class="line" style="margin-top:26px;">Test session time：</div>
+              <div class="tzline"><span id="pvTlocal"></span></div>
+              <div class="tzline sub"><span id="pvTcn"></span></div>
 
-            <div class="line" style="margin-top:14px;">Test session ID：<span id="pvTid"></span></div>
-            <div class="reg-line" id="pvTidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvTidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
-            <img class="reg-qr" id="pvTidQr" alt="Test speaker registration QR">
+              <div class="line" style="margin-top:14px;">Test session ID：<span id="pvTid"></span></div>
+              <div class="reg-line" id="pvTidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvTidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
+              <img class="reg-qr" id="pvTidQr" alt="Test speaker registration QR">
+            </div>
           </div>
 
           <!-- notes -->
