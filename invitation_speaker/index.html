@@ -632,9 +632,12 @@ See the attachment for the Voov Meeting download, installation, and registration
     var selSess = SESSIONS[$('sessionSelect').value];
     var logoFile = selSess ? selSess.logo : '';
     if(logoFile){
+      pv.style.display = '';
       pv.innerHTML = '<img src="'+logoFile+'" alt="logo">';
     }else{
-      pv.innerHTML = '<div class="ph">學校 / 機構 LOGO</div>';
+      // individual speakers (e.g. Day 3 keynote) have no institution logo
+      pv.style.display = 'none';
+      pv.innerHTML = '';
     }
 
     // notes
