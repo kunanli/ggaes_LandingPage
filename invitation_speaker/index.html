@@ -8,7 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <style>
   :root{
     --purple:#6c3fd6;
@@ -693,8 +692,10 @@ Please apply the official virtual background. See the attachment for the Voov Me
     var url = linkForId(idVal);
     if(url){
       linkEl.textContent = url; linkEl.href = url;
-      qrEl.src = qrDataUrl(url);
-      regEl.style.display = ''; qrEl.style.display = '';
+      regEl.style.display = '';
+      var data = qrDataUrl(url);
+      if(data){ qrEl.src = data; qrEl.style.display = ''; }
+      else { qrEl.removeAttribute('src'); qrEl.style.display = 'none'; }
     } else {
       regEl.style.display = 'none'; qrEl.style.display = 'none';
     }
@@ -887,6 +888,18 @@ Please apply the official virtual background. See the attachment for the Voov Me
 
   $('sessionSelect').value = '0';
   applySession();
+
+  // Load the QR library lazily so it can never block the preview from
+  // rendering. Once ready, re-render to fill in the QR codes; if it fails
+  // to load, the clickable link + URL text still work on their own.
+  (function loadQR(){
+    if(typeof qrcode !== 'undefined'){ render(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js';
+    s.async = true;
+    s.onload = function(){ render(); };
+    document.head.appendChild(s);
+  })();
 })();
 </script>
 </body>
