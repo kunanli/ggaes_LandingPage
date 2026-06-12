@@ -464,7 +464,8 @@
             },
             {
               start: "2026-06-28T18:00:00+08:00", end: "2026-06-28T19:00:00+08:00", type: "uk",
-              titleEn: null, titleZh: null,
+              titleEn: "From Pencils to Pixels: Training the Next Generation of Games and Visual Effects Artists",
+              titleZh: "从铅笔到像素：培养下一代游戏与视觉特效美术师",
               speakerEn: "David Tree · University of Hertfordshire",
               speakerZh: "David Tree · 赫特福德大学"
             }
