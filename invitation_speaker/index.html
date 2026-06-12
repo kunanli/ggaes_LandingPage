@@ -8,6 +8,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <style>
   :root{
     --purple:#6c3fd6;
@@ -209,6 +210,10 @@
     font-size:31px;color:#23252e;margin:6px 0 6px 42px;font-weight:400;
   }
   .meta .tzline.sub{color:#6f6f7e;font-size:27px;}
+  .meta .reg-line{font-size:27px;color:#23252e;margin:8px 0 0 42px;font-weight:400;}
+  .meta .reg-line .reg-hint{color:#6f6f7e;font-size:23px;}
+  .meta .reg-link{color:#2b5fd9;text-decoration:underline;text-underline-offset:4px;word-break:break-all;}
+  .meta .reg-qr{display:block;width:200px;height:200px;margin:14px 0 4px 42px;}
 
   .notes{margin-top:46px;position:relative;z-index:2;}
   .notes .nt-title{
@@ -495,12 +500,16 @@ Please apply the official virtual background. See the attachment for the Voov Me
             <div class="tzline sub"><span id="pvScn"></span></div>
 
             <div class="line" style="margin-top:14px;">Your session ID：<span id="pvMid"></span></div>
+            <div class="reg-line" id="pvMidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvMidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
+            <img class="reg-qr" id="pvMidQr" alt="Speaker registration QR">
 
             <div class="line" style="margin-top:26px;">Test session time：</div>
             <div class="tzline"><span id="pvTlocal"></span></div>
             <div class="tzline sub"><span id="pvTcn"></span></div>
 
             <div class="line" style="margin-top:14px;">Test session ID：<span id="pvTid"></span></div>
+            <div class="reg-line" id="pvTidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvTidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
+            <img class="reg-qr" id="pvTidQr" alt="Test speaker registration QR">
           </div>
 
           <!-- notes -->
@@ -602,6 +611,8 @@ Please apply the official virtual background. See the attachment for the Voov Me
     $('pvDay').textContent     = $('day').value || ' ';
     $('pvMid').textContent     = $('mid').value || ' ';
     $('pvTid').textContent     = $('tid').value || '';
+    setReg($('mid').value, $('pvMidReg'), $('pvMidLink'), $('pvMidQr'));
+    setReg($('tid').value, $('pvTidReg'), $('pvTidLink'), $('pvTidQr'));
     $('pvFooter').textContent  = $('footer').value || '';
 
     renderSession('sdate','stime','pvSlocal','pvScn');
@@ -652,6 +663,42 @@ Please apply the official virtual background. See the attachment for the Voov Me
     'Day 2': { am:'981 425 908', pm:'378 780 806', testAm:'511 829 579', testPm:'461 314 980' },
     'Day 3': { am:'476 861 832', pm:'228 629 949', testAm:'693 492 034', testPm:'240 317 043' }
   };
+
+  /* Speaker pre-registration links — one Tencent room per meeting ID, from
+     the official MeetingCodeSpeaker list. Keyed by the digits of the ID so
+     the link always follows whichever ID is shown. */
+  var MEETING_LINKS = {
+    '646488336':'https://meeting.tencent.com/dm/2nbzzn8t4OQ4',  // Day1 AM
+    '656551479':'https://meeting.tencent.com/dm/LxIpMB74Cm24',  // Day1 PM
+    '981425908':'https://meeting.tencent.com/dm/Lrhagn40Q2B7',  // Day2 AM
+    '378780806':'https://meeting.tencent.com/dm/Njd1SXXnJRP8',  // Day2 PM
+    '476861832':'https://meeting.tencent.com/dm/9iOABJOh3qrj',  // Day3 AM
+    '228629949':'https://meeting.tencent.com/dm/qx13VxWjgbsl',  // Day3 PM
+    '426934919':'https://meeting.tencent.com/dm/HCwDFgWEWERZ',  // Test Day1 AM
+    '696991798':'https://meeting.tencent.com/dm/etbFAQwtoIMi',  // Test Day1 PM
+    '511829579':'https://meeting.tencent.com/dm/Ysh6dfUnEZxS',  // Test Day2 AM
+    '461314980':'https://meeting.tencent.com/dm/wUQPWYMXjf1w',  // Test Day2 PM
+    '693492034':'https://meeting.tencent.com/dm/G2LW4jRX3tea',  // Test Day3 AM
+    '240317043':'https://meeting.tencent.com/dm/mIiZe8IDRo9D'   // Test Day3 PM
+  };
+  function linkForId(idVal){ return MEETING_LINKS[(idVal||'').replace(/\D/g,'')] || ''; }
+  function qrDataUrl(url){
+    if(typeof qrcode === 'undefined' || !url) return '';
+    var qr = qrcode(0, 'M');
+    qr.addData(url);
+    qr.make();
+    return qr.createDataURL(8, 1);
+  }
+  function setReg(idVal, regEl, linkEl, qrEl){
+    var url = linkForId(idVal);
+    if(url){
+      linkEl.textContent = url; linkEl.href = url;
+      qrEl.src = qrDataUrl(url);
+      regEl.style.display = ''; qrEl.style.display = '';
+    } else {
+      regEl.style.display = 'none'; qrEl.style.display = 'none';
+    }
+  }
 
   function chinaBlock(){
     var tv=$('stime').value;  // session time is entered in China time
@@ -803,6 +850,14 @@ Please apply the official virtual background. See the attachment for the Voov Me
     btn.textContent = '產生中...';
     try{
       if(document.fonts && document.fonts.ready){ await document.fonts.ready; }
+      // make sure the QR images are decoded before capture
+      await Promise.all(['pvMidQr','pvTidQr'].map(function(id){
+        var img = $(id);
+        if(img && img.src && img.style.display !== 'none' && img.decode){
+          return img.decode().catch(function(){});
+        }
+        return Promise.resolve();
+      }));
       var canvas = await html2canvas($('card'), {
         scale: 2,
         backgroundColor: '#ffffff',
