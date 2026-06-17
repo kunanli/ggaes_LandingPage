@@ -64,12 +64,13 @@
     margin-bottom:6px;color:#3a3f57;
   }
   .field label .req{color:var(--purple);}
-  .field input[type=text]{
+  .field input[type=text], .field textarea{
     width:100%;border:1px solid #d6d9e6;border-radius:9px;
     padding:9px 11px;font-size:14px;font-family:inherit;
     color:#1f2333;background:#fbfbfe;
   }
-  .field input[type=text]:focus{outline:none;border-color:var(--purple);background:#fff;}
+  .field textarea{resize:vertical;line-height:1.5;}
+  .field input[type=text]:focus, .field textarea:focus{outline:none;border-color:var(--purple);background:#fff;}
   .field .tip{font-size:11px;color:#9498ab;margin-top:4px;}
 
   .actions{display:flex;gap:10px;margin-top:8px;}
@@ -220,36 +221,7 @@
   .gate-err{color:#d23b3b;font-size:12px;margin-top:10px;min-height:16px;}
 </style>
 </head>
-<body class="locked">
-
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <h2>GGAES 2026</h2>
-    <p>This tool is for authorised GGAES organisers only.<br>本工具仅供 GGAES 授权工作人员使用。<br>Please enter the access password · 请输入访问密码</p>
-    <input type="password" id="gatePw" placeholder="Access password · 访问密码" autocomplete="off">
-    <button type="button" id="gateBtn">Enter · 进入</button>
-    <div class="gate-err" id="gateErr"></div>
-  </div>
-</div>
-<script>
-(function(){
-  var KEY='ggaes_access', PW='artdico2026ggaes';
-  try{ if(sessionStorage.getItem(KEY)==='1'){ document.body.classList.remove('locked'); } }catch(e){}
-  var pw=document.getElementById('gatePw'), btn=document.getElementById('gateBtn'), err=document.getElementById('gateErr');
-  function tryUnlock(){
-    if(pw.value===PW){
-      try{ sessionStorage.setItem(KEY,'1'); }catch(e){}
-      document.body.classList.remove('locked');
-    }else{
-      err.textContent='Incorrect password · 密码错误';
-      pw.value=''; pw.focus();
-    }
-  }
-  btn.addEventListener('click', tryUnlock);
-  pw.addEventListener('keydown', function(e){ if(e.key==='Enter'){ tryUnlock(); } });
-  setTimeout(function(){ if(document.body.classList.contains('locked')){ pw.focus(); } }, 50);
-})();
-</script>
+<body>
 
 <div class="app">
 
@@ -277,6 +249,12 @@
       <label data-i18n="emailLabel">Contact Email</label>
       <input type="text" id="email" data-i18n-ph="emailPh" placeholder="e.g. ggaes@artdico.co">
       <div class="tip" data-i18n="emailTip">Appears at the bottom of the invitation.</div>
+    </div>
+
+    <div class="field">
+      <label data-i18n="remarkLabel">Remarks</label>
+      <textarea id="remark" rows="3" data-i18n-ph="remarkPh" placeholder="Optional note shown on the invitation (one line each)"></textarea>
+      <div class="tip" data-i18n="remarkTip">Optional. Shown on the invitation only when filled in.</div>
     </div>
 
     <div class="actions">
@@ -328,6 +306,10 @@
           <div class="notes">
             <div class="nt-title" data-i18n="notesTitle">Participation Notes:</div>
             <ul id="pvNotes"></ul>
+          </div>
+          <div class="notes" id="pvRemarkBlock" style="display:none;">
+            <div class="nt-title" id="pvRemarkTitle"></div>
+            <ul id="pvRemark"></ul>
           </div>
           <div class="footer-line" id="pvFooter"></div>
 
@@ -441,6 +423,9 @@
       guestTip:'One invitation per guest: enter a name, download, then move on to the next.',
       emailLabel:'Contact Email', emailPh:'e.g. ggaes@artdico.co',
       emailTip:'Appears at the bottom of the invitation.',
+      remarkLabel:'Remarks', remarkPh:'Optional note shown on the invitation (one line each)',
+      remarkTip:'Optional. Shown on the invitation only when filled in.',
+      remarkTitle:'Remarks:',
       dlBtn:'Download JPEG', pdfBtn:'Print / Save PDF',
       hint:'The programme, times and meeting IDs are pre-set from the official GGAES 2026 schedule. All times are China Standard Time (UTC+8).',
       resTitle:'Resources for guests',
@@ -474,6 +459,9 @@
       guestTip:'每位嘉宾一份：输入姓名、下载，再处理下一位。',
       emailLabel:'联系邮箱', emailPh:'例如 ggaes@artdico.co',
       emailTip:'将显示在邀请函底部。',
+      remarkLabel:'备注', remarkPh:'可选，将显示在邀请函上（每行一条）',
+      remarkTip:'选填。仅在填写时显示于邀请函。',
+      remarkTitle:'备注：',
       dlBtn:'下载 JPEG', pdfBtn:'打印 / 存为 PDF',
       hint:'日程、时间与会议号均取自 GGAES 2026 官方时间表，所有时间均为中国标准时间（UTC+8）。',
       resTitle:'嘉宾参考资源',
@@ -629,6 +617,21 @@
       tnote.style.display = 'none';
     }
 
+    var rlines = $('remark').value.split('\n').map(function(s){return s.trim();}).filter(function(s){return s.length;});
+    var rblock = $('pvRemarkBlock'), rul = $('pvRemark');
+    rul.innerHTML = '';
+    if(rlines.length){
+      $('pvRemarkTitle').textContent = t.remarkTitle;
+      rlines.forEach(function(line){
+        var li = document.createElement('li');
+        li.textContent = line;
+        rul.appendChild(li);
+      });
+      rblock.style.display = '';
+    } else {
+      rblock.style.display = 'none';
+    }
+
     $('pvFooter').textContent = t.footer($('email').value.trim());
     fit();
   }
@@ -642,6 +645,7 @@
 
   $('guest').addEventListener('input', render);
   $('email').addEventListener('input', render);
+  $('remark').addEventListener('input', render);
   window.addEventListener('resize', fit);
 
   $('langToggle').addEventListener('click', function(e){

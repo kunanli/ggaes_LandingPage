@@ -283,36 +283,7 @@
   .gate-err{color:#d23b3b;font-size:12px;margin-top:10px;min-height:16px;}
 </style>
 </head>
-<body class="locked">
-
-<div class="gate" id="gate">
-  <div class="gate-box">
-    <h2>GGAES 2026</h2>
-    <p>本工具仅供 GGAES 授权工作人员使用。<br>This tool is for authorised GGAES organisers only.<br>请输入访问密码 · Please enter the access password</p>
-    <input type="password" id="gatePw" placeholder="访问密码 · Access password" autocomplete="off">
-    <button type="button" id="gateBtn">进入 · Enter</button>
-    <div class="gate-err" id="gateErr"></div>
-  </div>
-</div>
-<script>
-(function(){
-  var KEY='ggaes_access', PW='artdico2026ggaes';
-  try{ if(sessionStorage.getItem(KEY)==='1'){ document.body.classList.remove('locked'); } }catch(e){}
-  var pw=document.getElementById('gatePw'), btn=document.getElementById('gateBtn'), err=document.getElementById('gateErr');
-  function tryUnlock(){
-    if(pw.value===PW){
-      try{ sessionStorage.setItem(KEY,'1'); }catch(e){}
-      document.body.classList.remove('locked');
-    }else{
-      err.textContent='密码错误 · Incorrect password';
-      pw.value=''; pw.focus();
-    }
-  }
-  btn.addEventListener('click', tryUnlock);
-  pw.addEventListener('keydown', function(e){ if(e.key==='Enter'){ tryUnlock(); } });
-  setTimeout(function(){ if(document.body.classList.contains('locked')){ pw.focus(); } }, 50);
-})();
-</script>
+<body>
 
 <div class="app">
 
