@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex" />
+<title>GGAES 2026 · 公告 Announcement</title>
+<meta name="description" content="GGAES 2026 live session announcement screen." />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='9' fill='%236e3ad6'/%3E%3Cpath d='M11 10v11a9 9 0 0 0 18 0V10' fill='none' stroke='white' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Noto+Sans+SC:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --purple-900:#1d1147;
+    --purple-700:#3b2486;
+    --purple-600:#5b34b0;
+    --purple-500:#6e3ad6;
+    --purple-400:#8a5cf0;
+    --accent:#b69bff;
+    --hold:#ffd36e;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{height:100%;}
+  body{
+    font-family:"Sora","Noto Sans SC",system-ui,-apple-system,Segoe UI,sans-serif;
+    color:#fff;
+    background:radial-gradient(120% 120% at 50% 0%, #4226a0 0%, #2a1860 45%, #170d3a 100%);
+    min-height:100vh;
+    overflow:hidden;
+  }
+
+  /* animated soft glows in the background */
+  .bg-orb{
+    position:fixed;border-radius:50%;filter:blur(80px);opacity:.5;
+    pointer-events:none;z-index:0;
+  }
+  .bg-orb.a{width:46vmax;height:46vmax;left:-12vmax;top:-14vmax;background:#6e3ad6;animation:float1 16s ease-in-out infinite;}
+  .bg-orb.b{width:38vmax;height:38vmax;right:-10vmax;bottom:-12vmax;background:#3f5bff;opacity:.35;animation:float2 20s ease-in-out infinite;}
+  @keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(4vmax,3vmax)}}
+  @keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-4vmax,-3vmax)}}
+
+  .stage{
+    position:relative;z-index:1;
+    min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;
+    padding:clamp(2rem,5vh,5rem) clamp(1.5rem,6vw,5rem);
+    gap:clamp(1.4rem,3vh,2.6rem);
+  }
+
+  /* brand mark + wordmark */
+  .brand{display:flex;flex-direction:column;align-items:center;gap:1.1rem;}
+  .mark{width:clamp(96px,12vmax,160px);height:auto;display:block;
+    filter:drop-shadow(0 12px 32px rgba(0,0,0,.35));}
+  .wordmark{display:flex;flex-direction:column;align-items:center;gap:.2rem;}
+  .wordmark .ggaes{
+    font-weight:800;letter-spacing:.04em;line-height:1;
+    font-size:clamp(1.7rem,3.4vmax,2.8rem);
+  }
+  .wordmark .ggaes span{color:var(--accent);}
+  .wordmark .full{
+    font-size:clamp(.72rem,1.25vmax,1rem);
+    font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(255,255,255,.7);
+  }
+
+  /* status pill with live pulse */
+  .pill{
+    display:inline-flex;align-items:center;gap:.7rem;
+    padding:.6rem 1.4rem;border-radius:999px;
+    font-size:clamp(.85rem,1.4vmax,1.1rem);
+    font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+    background:rgba(255,255,255,.1);
+    border:1px solid rgba(255,255,255,.28);
+    backdrop-filter:blur(6px);
+  }
+  .pill .dot{
+    width:.7em;height:.7em;border-radius:50%;background:var(--accent);
+    box-shadow:0 0 0 0 var(--accent);
+    animation:ping 1.8s cubic-bezier(0,0,.2,1) infinite;
+  }
+  @keyframes ping{
+    0%{box-shadow:0 0 0 0 rgba(182,155,255,.7)}
+    70%{box-shadow:0 0 0 .9em rgba(182,155,255,0)}
+    100%{box-shadow:0 0 0 0 rgba(182,155,255,0)}
+  }
+
+  /* headlines */
+  .headline{display:flex;flex-direction:column;gap:.5rem;max-width:92vw;}
+  .h-zh{
+    font-family:"Noto Sans SC","Sora",sans-serif;
+    font-weight:900;line-height:1.1;letter-spacing:.01em;
+    font-size:clamp(2.4rem,7vmax,5.5rem);
+    text-shadow:0 6px 30px rgba(0,0,0,.3);
+  }
+  .h-en{
+    font-weight:700;line-height:1.15;letter-spacing:-.01em;
+    font-size:clamp(1.2rem,3vmax,2.4rem);
+    color:rgba(255,255,255,.92);
+  }
+
+  .sub{display:flex;flex-direction:column;gap:.55rem;max-width:min(92vw,46ch);}
+  .s-zh{
+    font-family:"Noto Sans SC","Sora",sans-serif;
+    font-size:clamp(1rem,2vmax,1.5rem);font-weight:400;line-height:1.6;
+    color:rgba(255,255,255,.85);
+  }
+  .s-en{
+    font-size:clamp(.85rem,1.5vmax,1.15rem);font-weight:400;line-height:1.55;
+    color:rgba(255,255,255,.6);
+  }
+
+  /* bouncing wait dots */
+  .waitdots{display:flex;gap:.6rem;margin-top:.2rem;}
+  .waitdots i{
+    width:.7rem;height:.7rem;border-radius:50%;background:var(--accent);
+    display:block;animation:bounce 1.4s ease-in-out infinite;
+  }
+  .waitdots i:nth-child(2){animation-delay:.2s;}
+  .waitdots i:nth-child(3){animation-delay:.4s;}
+  @keyframes bounce{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-.6rem);opacity:1}}
+
+  /* footer meta */
+  .meta{
+    position:fixed;left:0;right:0;bottom:clamp(1rem,3vh,2.2rem);z-index:1;
+    display:flex;align-items:center;justify-content:center;gap:1.2rem;flex-wrap:wrap;
+    font-size:clamp(.78rem,1.3vmax,1rem);color:rgba(255,255,255,.6);letter-spacing:.04em;
+    padding:0 1.5rem;
+  }
+  .meta .clock{font-variant-numeric:tabular-nums;font-weight:700;color:rgba(255,255,255,.85);}
+  .meta .sep{opacity:.4;}
+
+  /* ON HOLD theme */
+  body.mode-hold{background:radial-gradient(120% 120% at 50% 0%, #5a3a14 0%, #2b1c4a 45%, #160d33 100%);}
+  body.mode-hold .bg-orb.a{background:#c98a2a;}
+  body.mode-hold .wordmark .ggaes span{color:var(--hold);}
+  body.mode-hold .waitdots i,
+  body.mode-hold .pill .dot{background:var(--hold);}
+  body.mode-hold .pill .dot{animation:pingHold 1.8s cubic-bezier(0,0,.2,1) infinite;}
+  @keyframes pingHold{
+    0%{box-shadow:0 0 0 0 rgba(255,211,110,.7)}
+    70%{box-shadow:0 0 0 .9em rgba(255,211,110,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,211,110,0)}
+  }
+
+  /* control bar (auto-hides) */
+  .controls{
+    position:fixed;top:1rem;left:50%;transform:translateX(-50%);z-index:10;
+    display:flex;align-items:center;gap:.5rem;
+    padding:.5rem;border-radius:999px;
+    background:rgba(15,8,40,.7);border:1px solid rgba(255,255,255,.18);
+    backdrop-filter:blur(10px);
+    transition:opacity .4s ease,transform .4s ease;
+  }
+  body.idle .controls{opacity:0;transform:translateX(-50%) translateY(-140%);pointer-events:none;}
+  body.idle{cursor:none;}
+  .controls button{
+    font-family:inherit;font-size:.85rem;font-weight:700;
+    color:#fff;background:transparent;border:0;cursor:pointer;
+    padding:.55rem 1rem;border-radius:999px;
+    display:inline-flex;align-items:center;gap:.45rem;white-space:nowrap;
+    transition:background .15s ease;
+  }
+  .controls button:hover{background:rgba(255,255,255,.12);}
+  .controls button.active{background:var(--purple-500);}
+  body.mode-hold .controls button.active{background:#c98a2a;color:#1a1205;}
+  .controls .key{
+    font-size:.7rem;font-weight:800;opacity:.6;
+    border:1px solid rgba(255,255,255,.35);border-radius:5px;
+    padding:.05rem .35rem;line-height:1.2;
+  }
+  .controls .divider{width:1px;height:22px;background:rgba(255,255,255,.2);margin:0 .15rem;}
+
+  .hint{
+    position:fixed;top:4.6rem;left:50%;transform:translateX(-50%);z-index:10;
+    font-size:.8rem;color:rgba(255,255,255,.55);
+    background:rgba(15,8,40,.55);padding:.35rem .9rem;border-radius:999px;
+    transition:opacity .5s ease;
+  }
+  body.idle .hint{opacity:0;}
+
+  @media (max-width:640px){
+    .controls{flex-wrap:wrap;justify-content:center;max-width:94vw;border-radius:20px;}
+    .controls .key{display:none;}
+    .controls .divider{display:none;}
+  }
+</style>
+</head>
+<body class="mode-standby">
+
+  <div class="bg-orb a"></div>
+  <div class="bg-orb b"></div>
+
+  <!-- Control bar (hidden after a few seconds idle; move mouse to show) -->
+  <div class="controls" id="controls">
+    <button type="button" data-mode="standby" class="active" onclick="setMode('standby')">
+      讲者稍候 · Standby <span class="key">1</span>
+    </button>
+    <button type="button" data-mode="hold" onclick="setMode('hold')">
+      场次暂停 · Paused <span class="key">2</span>
+    </button>
+    <span class="divider"></span>
+    <button type="button" onclick="toggleFullscreen()">
+      全屏 · Fullscreen <span class="key">F</span>
+    </button>
+  </div>
+  <div class="hint" id="hint">按 1 / 2 切换画面 · 按 F 全屏投影 · Press 1 / 2 to switch · F for fullscreen</div>
+
+  <main class="stage">
+    <div class="brand">
+      <!-- GGAES brand mark, redrawn in white for dark backgrounds -->
+      <svg class="mark" viewBox="0 0 200 230" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="2" y="2" width="92" height="92" rx="4" fill="#fff"/>
+        <circle cx="153" cy="48" r="47" fill="#fff"/>
+        <path d="M14 108 v6 a86 86 0 0 0 172 0 v-6" fill="none" stroke="#fff" stroke-width="34" stroke-linecap="butt"/>
+      </svg>
+      <div class="wordmark">
+        <div class="ggaes">GGAES <span>2026</span></div>
+        <div class="full">Global Game &amp; Animation Education Summit</div>
+      </div>
+    </div>
+
+    <span class="pill"><span class="dot"></span><span id="pill-text">即将开始 · Starting soon</span></span>
+
+    <div class="headline">
+      <div class="h-zh" id="h-zh">本场次即将开始</div>
+      <div class="h-en" id="h-en">The session will begin shortly</div>
+    </div>
+
+    <div class="sub">
+      <div class="s-zh" id="s-zh">讲者正在接入，敬请稍候片刻，感谢您的耐心等待。</div>
+      <div class="s-en" id="s-en">Our speaker is connecting and will join momentarily. Thank you for your patience.</div>
+    </div>
+
+    <div class="waitdots" aria-hidden="true"><i></i><i></i><i></i></div>
+  </main>
+
+  <div class="meta">
+    <span class="clock" id="clock">--:--</span>
+    <span class="sep">·</span>
+    <span>ggaes.global</span>
+    <span class="sep">·</span>
+    <span>2026年6月26–28日 · June 26–28, 2026</span>
+  </div>
+
+<script>
+  var MODES = {
+    standby: {
+      pill: "即将开始 · Starting soon",
+      hzh:  "本场次即将开始",
+      hen:  "The session will begin shortly",
+      szh:  "讲者正在接入，敬请稍候片刻，感谢您的耐心等待。",
+      sen:  "Our speaker is connecting and will join momentarily. Thank you for your patience."
+    },
+    hold: {
+      pill: "暂停中 · On hold",
+      hzh:  "本场次暂停",
+      hen:  "This session is paused",
+      szh:  "我们将于下一场次继续，敬请留意议程时间，稍后再回来。",
+      sen:  "We will resume with the next session. Please check the schedule and join us again shortly."
+    }
+  };
+
+  function setMode(mode){
+    var m = MODES[mode]; if(!m) return;
+    document.body.classList.toggle("mode-hold", mode === "hold");
+    document.body.classList.toggle("mode-standby", mode === "standby");
+    document.getElementById("pill-text").textContent = m.pill;
+    document.getElementById("h-zh").textContent = m.hzh;
+    document.getElementById("h-en").textContent = m.hen;
+    document.getElementById("s-zh").textContent = m.szh;
+    document.getElementById("s-en").textContent = m.sen;
+    document.documentElement.lang = "zh";
+    var btns = document.querySelectorAll(".controls button[data-mode]");
+    btns.forEach(function(b){ b.classList.toggle("active", b.getAttribute("data-mode") === mode); });
+    document.title = (mode === "hold" ? "场次暂停 Paused" : "讲者稍候 Standby") + " · GGAES 2026";
+  }
+
+  function toggleFullscreen(){
+    if(!document.fullscreenElement){
+      (document.documentElement.requestFullscreen || function(){}).call(document.documentElement);
+    } else {
+      (document.exitFullscreen || function(){}).call(document);
+    }
+  }
+
+  // keyboard shortcuts
+  document.addEventListener("keydown", function(e){
+    if(e.key === "1") setMode("standby");
+    else if(e.key === "2") setMode("hold");
+    else if(e.key.toLowerCase() === "f") toggleFullscreen();
+    else if(e.key === " "){ e.preventDefault();
+      setMode(document.body.classList.contains("mode-hold") ? "standby" : "hold"); }
+  });
+
+  // live clock
+  function tick(){
+    var d = new Date();
+    var hh = String(d.getHours()).padStart(2,"0");
+    var mm = String(d.getMinutes()).padStart(2,"0");
+    document.getElementById("clock").textContent = hh + ":" + mm;
+  }
+  tick(); setInterval(tick, 1000);
+
+  // auto-hide controls / cursor when idle
+  var idleTimer;
+  function wake(){
+    document.body.classList.remove("idle");
+    clearTimeout(idleTimer);
+    idleTimer = setTimeout(function(){ document.body.classList.add("idle"); }, 3500);
+  }
+  ["mousemove","mousedown","keydown","touchstart"].forEach(function(ev){
+    document.addEventListener(ev, wake, {passive:true});
+  });
+  wake();
+</script>
+</body>
+</html>
