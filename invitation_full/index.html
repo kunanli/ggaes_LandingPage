@@ -269,6 +269,10 @@
         <span class="rs-icon">↓</span>
         <span><span data-i18n="resGuide">VooV Meeting Registration Guide</span> <span class="rs-sub" data-i18n="resGuideSub">(PDF)</span></span>
       </a>
+      <a href="../TencentMeetingVooVSpeakerGuide-EN.pdf" data-i18n-href="resSpkHref" target="_blank" rel="noopener" download>
+        <span class="rs-icon">↓</span>
+        <span><span data-i18n="resSpk">Tencent Meeting (VooV) Speaker Guide</span> <span class="rs-sub" data-i18n="resSpkSub">(PDF)</span></span>
+      </a>
       <a href="https://voovmeeting.com/download-center.html" target="_blank" rel="noopener">
         <span class="rs-icon">↗</span>
         <span><span data-i18n="resDl">Download VooV Meeting</span> <span class="rs-sub" data-i18n="resDlSub">(voovmeeting.com)</span></span>
@@ -430,6 +434,8 @@
       hint:'The programme, times and meeting IDs are pre-set from the official GGAES 2026 schedule. All times are China Standard Time (UTC+8).',
       resTitle:'Resources for guests',
       resGuide:'VooV Meeting Registration Guide', resGuideSub:'(PDF)',
+      resSpk:'Tencent Meeting (VooV) Speaker Guide', resSpkSub:'(PDF)',
+      resSpkHref:'../TencentMeetingVooVSpeakerGuide-EN.pdf',
       resDl:'Download VooV Meeting', resDlSub:'(voovmeeting.com)',
       summitTitle:'Global Game & Animation Education Summit in China 2026',
       inviteTitle:'Invitation',
@@ -466,6 +472,8 @@
       hint:'日程、时间与会议号均取自 GGAES 2026 官方时间表，所有时间均为中国标准时间（UTC+8）。',
       resTitle:'嘉宾参考资源',
       resGuide:'VooV Meeting 注册指南', resGuideSub:'（PDF）',
+      resSpk:'腾讯会议（VooV）演讲嘉宾指南', resSpkSub:'（PDF）',
+      resSpkHref:'../TencentMeetingVooVSpeakerGuide-CH.pdf',
       resDl:'下载 VooV Meeting', resDlSub:'（voovmeeting.com）',
       summitTitle:'全球游戏与动画教育峰会 · 中国 2026',
       inviteTitle:'邀请函',
@@ -508,6 +516,10 @@
     document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
       var k = el.getAttribute('data-i18n-ph');
       if(t[k] != null) el.placeholder = t[k];
+    });
+    document.querySelectorAll('[data-i18n-href]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-href');
+      if(t[k] != null) el.href = t[k];
     });
     Array.prototype.forEach.call($('langToggle').children, function(b){
       b.classList.toggle('active', b.getAttribute('data-lang') === lang);

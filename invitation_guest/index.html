@@ -35,6 +35,16 @@
   }
   .form-col h1{font-size:22px;margin:0 0 4px;color:var(--deep);}
   .form-col .sub{font-size:13px;color:#7a7e93;margin:0 0 18px;}
+  .lang-toggle{
+    display:inline-flex;gap:4px;margin-bottom:14px;
+    background:#f0eefb;border-radius:9px;padding:3px;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;border-radius:7px;
+    padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;
+    color:var(--deep);font-family:inherit;
+  }
+  .lang-toggle button.active{background:var(--purple);color:#fff;}
   .field{margin-bottom:16px;}
   .field label{
     display:block;font-size:13px;font-weight:600;
@@ -214,52 +224,61 @@
 
   <!-- ============ FORM ============ -->
   <div class="form-col">
-    <h1>Guest Invitation Generator</h1>
-    <p class="sub">Select your session to auto-fill its details, then enter a guest's name to generate that guest's invitation.</p>
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
+
+    <h1 data-i18n="formH1">Guest Invitation Generator</h1>
+    <p class="sub" data-i18n="formSub">Select your session to auto-fill its details, then enter a guest's name to generate that guest's invitation.</p>
 
     <div class="field">
-      <label>Your Session <span class="req">*</span></label>
+      <label><span data-i18n="lblSession">Your Session</span> <span class="req">*</span></label>
       <select id="session">
-        <option value="">— Select your session —</option>
+        <option value="" data-i18n="optChoose">— Select your session —</option>
       </select>
     </div>
 
     <div class="field">
-      <label>Guest Name <span class="req">*</span></label>
-      <input type="text" id="guest" placeholder="Enter the guest's name">
-      <div class="tip">One invitation per guest: enter a name, download, then move on to the next.</div>
+      <label><span data-i18n="lblGuest">Guest Name</span> <span class="req">*</span></label>
+      <input type="text" id="guest" data-i18n-ph="phGuest" placeholder="Enter the guest's name">
+      <div class="tip" data-i18n="tipGuest">One invitation per guest: enter a name, download, then move on to the next.</div>
     </div>
 
     <div class="field">
-      <label>Admissions / Contact Email</label>
-      <input type="text" id="email" placeholder="e.g. admissions@your-institution.edu">
-      <div class="tip">The admissions office enters this; it appears at the bottom of the invitation.</div>
+      <label data-i18n="lblEmail">Admissions / Contact Email</label>
+      <input type="text" id="email" data-i18n-ph="phEmail" placeholder="e.g. admissions@your-institution.edu">
+      <div class="tip" data-i18n="tipEmail">The admissions office enters this; it appears at the bottom of the invitation.</div>
     </div>
 
-    <div class="info-panel empty" id="infoPanel">Session details will appear here once you select your session.</div>
+    <div class="info-panel empty" id="infoPanel" data-i18n="infoEmpty">Session details will appear here once you select your session.</div>
 
     <div class="actions">
-      <button class="btn btn-primary" id="dlBtn">Download JPEG</button>
-      <button class="btn btn-ghost" id="pdfBtn">Print / Save PDF</button>
+      <button class="btn btn-primary" id="dlBtn" data-i18n="dlBtn">Download JPEG</button>
+      <button class="btn btn-ghost" id="pdfBtn" data-i18n="pdfBtn">Print / Save PDF</button>
     </div>
-    <div class="hint">Session, topic, speaker and meeting ID are pre-set by the organiser and cannot be edited here. Contact the organiser if any detail is incorrect.</div>
+    <div class="hint" data-i18n="hint">Session, topic, speaker and meeting ID are pre-set by the organiser and cannot be edited here. Contact the organiser if any detail is incorrect.</div>
 
     <div class="resources">
-      <div class="rs-title">Resources for guests</div>
+      <div class="rs-title" data-i18n="resTitle">Resources for guests</div>
       <a href="../VooVMeetingRegistrationGuide.pdf" target="_blank" rel="noopener" download>
         <span class="rs-icon">↓</span>
-        <span>VooV Meeting Registration Guide <span class="rs-sub">(PDF)</span></span>
+        <span><span data-i18n="resGuide">VooV Meeting Registration Guide</span> <span class="rs-sub" data-i18n="resGuideSub">(PDF)</span></span>
+      </a>
+      <a href="../TencentMeetingVooVSpeakerGuide-EN.pdf" data-i18n-href="resSpkHref" target="_blank" rel="noopener" download>
+        <span class="rs-icon">↓</span>
+        <span><span data-i18n="resSpk">Tencent Meeting (VooV) Speaker Guide</span> <span class="rs-sub" data-i18n="resSpkSub">(PDF)</span></span>
       </a>
       <a href="https://voovmeeting.com/download-center.html" target="_blank" rel="noopener">
         <span class="rs-icon">↗</span>
-        <span>Download VooV Meeting <span class="rs-sub">(voovmeeting.com)</span></span>
+        <span><span data-i18n="resDl">Download VooV Meeting</span> <span class="rs-sub" data-i18n="resDlSub">(voovmeeting.com)</span></span>
       </a>
     </div>
   </div>
 
   <!-- ============ PREVIEW ============ -->
   <div class="preview-col">
-    <p class="panel-title">Live preview</p>
+    <p class="panel-title" data-i18n="cardPreview">Live preview</p>
     <div id="previewBox">
       <div id="scaler">
         <div class="card" id="card">
@@ -268,11 +287,11 @@
             <div class="summit-mark">
               <img src="SummitLOGO.png" alt="Global Game &amp; Animation Education Summit">
             </div>
-            <div class="summit-title">Global Game &amp; Animation Education Summit in China 2026</div>
+            <div class="summit-title" data-i18n="summitTitle">Global Game &amp; Animation Education Summit in China 2026</div>
           </div>
 
           <div class="invite-block">
-            <div class="invite-title">Invitation</div>
+            <div class="invite-title" data-i18n="inviteTitle">Invitation</div>
           </div>
 
           <div class="school-logo" id="pvLogo">
@@ -281,31 +300,31 @@
 
           <div class="speaker" id="pvGreeting">Dear Guest,</div>
 
-          <div class="welcome">On behalf of the Global Game &amp; Animation Education Summit 2026, we are delighted to welcome you to join the session below. We look forward to seeing you there!</div>
+          <div class="welcome" data-i18n="welcome">On behalf of the Global Game &amp; Animation Education Summit 2026, we are delighted to welcome you to join the session below. We look forward to seeing you there!</div>
 
           <div class="topic-row">
-            <div class="lbl">Presentation Topic：</div>
+            <div class="lbl" data-i18n="cardTopic">Presentation Topic：</div>
             <div class="val" id="pvTopic"></div>
           </div>
           <div class="topic-row" style="margin-top:14px;">
-            <div class="lbl">Speaker：</div>
+            <div class="lbl" data-i18n="cardSpeaker">Speaker：</div>
             <div class="val" id="pvSpeaker"></div>
           </div>
           <div class="topic-row" style="margin-top:14px;">
-            <div class="lbl">Meeting Platform：</div>
+            <div class="lbl" data-i18n="cardPlat">Meeting Platform：</div>
             <div class="val" id="pvMplat"></div>
           </div>
 
           <div class="meta">
-            <div class="line">Session day：<span id="pvDay"></span></div>
-            <div class="line" style="margin-top:14px;">Your session time：</div>
+            <div class="line"><span data-i18n="cardDay">Session day：</span><span id="pvDay"></span></div>
+            <div class="line" style="margin-top:14px;" data-i18n="cardStime">Your session time：</div>
             <div class="tzline"><span id="pvSlocal"></span></div>
             <div class="tzline sub"><span id="pvScn"></span></div>
-            <div class="line" style="margin-top:14px;">Your session ID：<span id="pvMid"></span></div>
+            <div class="line" style="margin-top:14px;"><span data-i18n="cardMid">Your session ID：</span><span id="pvMid"></span></div>
           </div>
 
           <div class="notes">
-            <div class="nt-title">Participation Notes:</div>
+            <div class="nt-title" data-i18n="notesTitle">Participation Notes:</div>
             <ul id="pvNotes"></ul>
           </div>
           <div class="footer-line" id="pvFooter"></div>
@@ -320,7 +339,125 @@
 <script>
 (function(){
   var $ = function(id){return document.getElementById(id);};
-  var TBA = 'To be announced';
+
+  /* ---------- i18n ---------- */
+  var T = {
+    en: {
+      htmlLang:'en',
+      pageTitle:'Guest Invitation Generator · GGAES 2026',
+      formH1:'Guest Invitation Generator',
+      formSub:"Select your session to auto-fill its details, then enter a guest's name to generate that guest's invitation.",
+      lblSession:'Your Session', optChoose:'— Select your session —',
+      lblGuest:'Guest Name', phGuest:"Enter the guest's name",
+      tipGuest:'One invitation per guest: enter a name, download, then move on to the next.',
+      lblEmail:'Admissions / Contact Email', phEmail:'e.g. admissions@your-institution.edu',
+      tipEmail:'The admissions office enters this; it appears at the bottom of the invitation.',
+      infoEmpty:'Session details will appear here once you select your session.',
+      dlBtn:'Download JPEG', pdfBtn:'Print / Save PDF',
+      hint:'Session, topic, speaker and meeting ID are pre-set by the organiser and cannot be edited here. Contact the organiser if any detail is incorrect.',
+      resTitle:'Resources for guests',
+      resGuide:'VooV Meeting Registration Guide', resGuideSub:'(PDF)',
+      resSpk:'Tencent Meeting (VooV) Speaker Guide', resSpkSub:'(PDF)',
+      resSpkHref:'../TencentMeetingVooVSpeakerGuide-EN.pdf',
+      resDl:'Download VooV Meeting', resDlSub:'(voovmeeting.com)',
+      cardPreview:'Live preview',
+      summitTitle:'Global Game & Animation Education Summit in China 2026',
+      inviteTitle:'Invitation',
+      welcome:'On behalf of the Global Game & Animation Education Summit 2026, we are delighted to welcome you to join the session below. We look forward to seeing you there!',
+      cardTopic:'Presentation Topic：', cardSpeaker:'Speaker：', cardPlat:'Meeting Platform：',
+      cardDay:'Session day：', cardStime:'Your session time：', cardMid:'Your session ID：',
+      notesTitle:'Participation Notes:',
+      timeSuffix:' Time', chinaTime:'China Standard Time (UTC+8)', infoChinaTime:' China Time',
+      infoTitle:'Session details (set by the organiser)',
+      ipSession:'Session', ipTopic:'Topic', ipSpeaker:'Speaker', ipMid:'Meeting ID',
+      dayDash:'Day —', tba:'To be announced', guestWord:'Guest', keynoteTag:' · Keynote',
+      defaultNotes:'Participants in mainland China should use Tencent Meeting; participants outside mainland China should use VooV Meeting. Please register an account in advance.',
+      greeting:function(n){ return 'Dear ' + n + ','; },
+      footerKeynote:function(name,email){ return email ? ('For enquiries, please contact ' + name + ': ' + email) : ('For enquiries, please contact ' + name + '.'); },
+      footerSchool:function(name,email){ return email ? ('For enquiries, please contact the ' + name + ' Admissions Office: ' + email) : ('For enquiries, please contact the ' + name + ' Admissions Office.'); },
+      alertSession:'Please select your session first.',
+      alertGuest:"Please enter the guest's name first.",
+      busy:'Generating...', genFail:'Failed to generate image: '
+    },
+    zh: {
+      htmlLang:'zh-Hans',
+      pageTitle:'嘉宾邀请函生成器 · GGAES 2026',
+      formH1:'嘉宾邀请函生成器',
+      formSub:'选择您的场次以自动填入详情，再输入嘉宾姓名即可生成该嘉宾的邀请函。',
+      lblSession:'您的场次', optChoose:'— 选择您的场次 —',
+      lblGuest:'嘉宾姓名', phGuest:'请输入嘉宾姓名',
+      tipGuest:'每位嘉宾一份：输入姓名、下载，再处理下一位。',
+      lblEmail:'招生 / 联系邮箱', phEmail:'例如 admissions@your-institution.edu',
+      tipEmail:'由招生办填写；将显示在邀请函底部。',
+      infoEmpty:'选择场次后，这里将显示场次详情。',
+      dlBtn:'下载 JPEG', pdfBtn:'打印 / 存为 PDF',
+      hint:'场次、主题、讲者与会议号由主办方预设，此处不可修改。如有错误请联系主办方。',
+      resTitle:'嘉宾参考资源',
+      resGuide:'VooV Meeting 注册指南', resGuideSub:'（PDF）',
+      resSpk:'腾讯会议（VooV）演讲嘉宾指南', resSpkSub:'（PDF）',
+      resSpkHref:'../TencentMeetingVooVSpeakerGuide-CH.pdf',
+      resDl:'下载 VooV Meeting', resDlSub:'（voovmeeting.com）',
+      cardPreview:'实时预览',
+      summitTitle:'全球游戏与动画教育峰会 · 中国 2026',
+      inviteTitle:'邀请函',
+      welcome:'谨代表全球游戏与动画教育峰会 2026，诚挚欢迎您参加下列场次。期待与您线上相见！',
+      cardTopic:'讲座主题：', cardSpeaker:'主讲人：', cardPlat:'会议平台：',
+      cardDay:'场次日：', cardStime:'您的场次时间：', cardMid:'您的会议号：',
+      notesTitle:'参会须知：',
+      timeSuffix:' 时间', chinaTime:'中国标准时间（UTC+8）', infoChinaTime:' 中国时间',
+      infoTitle:'场次详情（由主办方设定）',
+      ipSession:'场次', ipTopic:'主题', ipSpeaker:'主讲人', ipMid:'会议号',
+      dayDash:'第 — 天', tba:'待公布', guestWord:'嘉宾', keynoteTag:' · 主题演讲',
+      defaultNotes:'中国大陆参会者请使用腾讯会议；中国大陆以外参会者请使用 VooV Meeting，并请提前注册账号。',
+      greeting:function(n){ return '尊敬的 ' + n + '：'; },
+      footerKeynote:function(name,email){ return email ? ('如有疑问，请联系 ' + name + '：' + email) : ('如有疑问，请联系 ' + name + '。'); },
+      footerSchool:function(name,email){ return email ? ('如有疑问，请联系 ' + name + ' 招生办：' + email) : ('如有疑问，请联系 ' + name + ' 招生办。'); },
+      alertSession:'请先选择您的场次。',
+      alertGuest:'请先输入嘉宾姓名。',
+      busy:'生成中...', genFail:'生成图片失败：'
+    }
+  };
+  var lang = 'en';
+
+  function applyI18n(){
+    var t = T[lang];
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(t[k] != null) el.textContent = t[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-ph');
+      if(t[k] != null) el.placeholder = t[k];
+    });
+    document.querySelectorAll('[data-i18n-href]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-href');
+      if(t[k] != null) el.href = t[k];
+    });
+    Array.prototype.forEach.call($('langToggle').children, function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+    rebuildSessionOptions();
+  }
+
+  // rebuild the session dropdown labels in the active language, keeping
+  // the current selection.
+  function rebuildSessionOptions(){
+    var keep = sel.value;
+    sel.innerHTML = '';
+    var first = document.createElement('option');
+    first.value = '';
+    first.textContent = T[lang].optChoose;
+    sel.appendChild(first);
+    SESSIONS.forEach(function(s,i){
+      var o = document.createElement('option');
+      o.value = String(i);
+      o.textContent = s.name + ' · ' + s.day + (s.type==='keynote' ? T[lang].keynoteTag : '');
+      sel.appendChild(o);
+    });
+    sel.value = keep;
+  }
 
   /* ============================================================
      SESSION DATA — maintained by the organiser.
@@ -341,7 +478,7 @@
        time      : session time 'HH:MM', 24-hour, in China time (UTC+8)
        meetingId : meeting ID for the session
        notes     : optional; participation notes, one per line (\n).
-                   Omit to use DEFAULT_NOTES below.
+                   Omit to use the language-aware default notes (T[lang].defaultNotes).
 
      day / date / time / topic / speaker come from the official GGAES
      2026 schedule (times stored in China Standard Time, UTC+8; the card
@@ -350,9 +487,6 @@
      by the user. tz values are best-guess from each entity's location —
      please verify.
      ============================================================ */
-  var DEFAULT_NOTES =
-    'Participants in mainland China should use Tencent Meeting; participants outside mainland China should use VooV Meeting. Please register an account in advance.';
-
   var SESSIONS = [
     /* ---- Day 1 — Fri, Jun 26 ---- */
     { name:'Global Game Jam', type:'keynote', logo:'GGJ.webp',
@@ -552,14 +686,10 @@
     return new Date(sessionInstant(s).getTime() + sessionDuration(s)*60000);
   }
 
-  /* ---------- populate session dropdown ---------- */
+  /* ---------- populate session dropdown ----------
+     Options are built (and rebuilt on language switch) by
+     rebuildSessionOptions(), invoked from applyI18n(). */
   var sel = $('session');
-  SESSIONS.forEach(function(s,i){
-    var o = document.createElement('option');
-    o.value = String(i);
-    o.textContent = s.name + ' · ' + s.day + (s.type==='keynote' ? ' · Keynote' : '');
-    sel.appendChild(o);
-  });
 
   function currentSession(){
     var v = sel.value;
@@ -569,8 +699,9 @@
   /* ---------- render ---------- */
   function render(){
     var s = currentSession();
+    var t = T[lang];
     var gname = $('guest').value.trim();
-    $('pvGreeting').textContent = 'Dear ' + (gname || 'Guest') + ',';
+    $('pvGreeting').textContent = t.greeting(gname || t.guestWord);
 
     var pv = $('pvLogo');
     pv.innerHTML = '';
@@ -590,7 +721,7 @@
       $('pvNotes').innerHTML = '';
       $('pvFooter').textContent = '';
       $('infoPanel').className = 'info-panel empty';
-      $('infoPanel').textContent = 'Session details will appear here once you select your session.';
+      $('infoPanel').textContent = t.infoEmpty;
       fit();
       return;
     }
@@ -608,34 +739,34 @@
       pv.appendChild(lt);
     }
 
-    $('pvTopic').textContent   = s.topic || TBA;
-    $('pvSpeaker').textContent = s.speaker || TBA;
-    $('pvDay').textContent     = s.day || TBA;
-    $('pvMid').textContent     = sessionMeetingId(s) || TBA;
+    $('pvTopic').textContent   = s.topic || t.tba;
+    $('pvSpeaker').textContent = s.speaker || t.tba;
+    $('pvDay').textContent     = s.day || t.tba;
+    $('pvMid').textContent     = sessionMeetingId(s) || t.tba;
     $('pvMplat').textContent   = s.platform || 'Tencent Meeting / VooV Meeting';
 
     // session time -> China time, plus the entity's local time
     if(hasSessionTime(s)){
       var instant = sessionInstant(s);
       var endInst = sessionEndInstant(s);
-      var chinaTxt = fmtRange(instant,endInst,'Asia/Shanghai')+'   China Standard Time (UTC+8)';
+      var chinaTxt = fmtRange(instant,endInst,'Asia/Shanghai')+'   '+t.chinaTime;
       if(s.tz && s.tz !== 'Asia/Shanghai'){
         var off = offsetLabel(instant, s.tz);
-        $('pvSlocal').textContent = fmtRange(instant,endInst,s.tz)+'   '+tzCity(s.tz)+' Time'+(off?' ('+off+')':'');
+        $('pvSlocal').textContent = fmtRange(instant,endInst,s.tz)+'   '+tzCity(s.tz)+t.timeSuffix+(off?' ('+off+')':'');
         $('pvScn').textContent = chinaTxt;
       }else{
         $('pvSlocal').textContent = chinaTxt;
         $('pvScn').textContent = '';
       }
     }else{
-      $('pvSlocal').textContent = TBA;
+      $('pvSlocal').textContent = t.tba;
       $('pvScn').textContent = '';
     }
 
     // notes
     var ul = $('pvNotes');
     ul.innerHTML = '';
-    (s.notes || DEFAULT_NOTES).split('\n').map(function(x){return x.trim();})
+    (s.notes || t.defaultNotes).split('\n').map(function(x){return x.trim();})
       .filter(function(x){return x.length;})
       .forEach(function(t){
         var li = document.createElement('li');
@@ -645,40 +776,35 @@
 
     // footer (contact email entered in the form)
     var email = $('email').value.trim();
-    if(s.type === 'keynote'){
-      $('pvFooter').textContent = email
-        ? ('For enquiries, please contact ' + s.name + ': ' + email)
-        : ('For enquiries, please contact ' + s.name + '.');
-    }else{
-      $('pvFooter').textContent = email
-        ? ('For enquiries, please contact the ' + s.name + ' Admissions Office: ' + email)
-        : ('For enquiries, please contact the ' + s.name + ' Admissions Office.');
-    }
+    $('pvFooter').textContent = (s.type === 'keynote')
+      ? t.footerKeynote(s.name, email)
+      : t.footerSchool(s.name, email);
 
     renderInfoPanel(s);
     fit();
   }
 
   function renderInfoPanel(s){
+    var t = T[lang];
     var panel = $('infoPanel');
     panel.className = 'info-panel';
     panel.innerHTML = '';
     var title = document.createElement('div');
     title.className = 'ip-title';
-    title.textContent = 'Session details (set by the organiser)';
+    title.textContent = t.infoTitle;
     panel.appendChild(title);
     var sessionTxt;
     if(hasSessionTime(s)){
       var inst = sessionInstant(s);
-      sessionTxt = s.day + ' · ' + fmtRange(inst,sessionEndInstant(s),'Asia/Shanghai') + ' China Time';
+      sessionTxt = s.day + ' · ' + fmtRange(inst,sessionEndInstant(s),'Asia/Shanghai') + t.infoChinaTime;
     }else{
-      sessionTxt = (s.day || 'Day —') + ' · ' + TBA;
+      sessionTxt = (s.day || t.dayDash) + ' · ' + t.tba;
     }
     var rows = [
-      ['Session', sessionTxt],
-      ['Topic', s.topic || TBA],
-      ['Speaker', s.speaker || TBA],
-      ['Meeting ID', sessionMeetingId(s) || TBA]
+      [t.ipSession, sessionTxt],
+      [t.ipTopic, s.topic || t.tba],
+      [t.ipSpeaker, s.speaker || t.tba],
+      [t.ipMid, sessionMeetingId(s) || t.tba]
     ];
     rows.forEach(function(r){
       var row = document.createElement('div');
@@ -727,12 +853,12 @@
 
   /* ---------- download JPEG ---------- */
   $('dlBtn').addEventListener('click', async function(){
-    if(!currentSession()){ alert('Please select your session first.'); return; }
-    if(!$('guest').value.trim()){ alert("Please enter the guest's name first."); return; }
+    if(!currentSession()){ alert(T[lang].alertSession); return; }
+    if(!$('guest').value.trim()){ alert(T[lang].alertGuest); return; }
     var btn = this;
     btn.disabled = true;
     var label = btn.textContent;
-    btn.textContent = 'Generating...';
+    btn.textContent = T[lang].busy;
     try{
       if(document.fonts && document.fonts.ready){ await document.fonts.ready; }
       var canvas = await html2canvas($('card'), {
@@ -748,7 +874,7 @@
       document.body.removeChild(a);
       logGeneration();
     }catch(err){
-      alert('Failed to generate image: ' + err.message);
+      alert(T[lang].genFail + err.message);
     }finally{
       btn.disabled = false;
       btn.textContent = label;
@@ -757,10 +883,19 @@
 
   /* ---------- print / PDF ---------- */
   $('pdfBtn').addEventListener('click', function(){
-    if(!currentSession()){ alert('Please select your session first.'); return; }
+    if(!currentSession()){ alert(T[lang].alertSession); return; }
     window.print();
   });
 
+  // language toggle
+  $('langToggle').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    lang = b.getAttribute('data-lang');
+    applyI18n();
+    render();
+  });
+
+  applyI18n();
   render();
 })();
 </script>
