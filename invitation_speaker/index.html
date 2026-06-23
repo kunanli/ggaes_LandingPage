@@ -58,6 +58,16 @@
     color:#7a7e93;
     margin:0 0 18px;
   }
+  .lang-toggle{
+    display:inline-flex;gap:4px;margin-bottom:14px;
+    background:#f0eefb;border-radius:9px;padding:3px;
+  }
+  .lang-toggle button{
+    border:none;background:transparent;border-radius:7px;
+    padding:6px 14px;font-size:13px;font-weight:700;cursor:pointer;
+    color:var(--deep);font-family:inherit;
+  }
+  .lang-toggle button.active{background:var(--purple);color:#fff;}
   .field{margin-bottom:16px;}
   .field label{
     display:block;
@@ -289,29 +299,34 @@
 
   <!-- ============ FORM ============ -->
   <div class="form-col">
-    <h1>邀請函生成器</h1>
-    <p class="sub">填寫下列欄位，右側即時預覽。完成後可下載 JPEG 或列印成 PDF。</p>
+    <div class="lang-toggle" id="langToggle">
+      <button type="button" data-lang="en" class="active">EN</button>
+      <button type="button" data-lang="zh">中文</button>
+    </div>
+
+    <h1 data-i18n="formH1">邀請函生成器</h1>
+    <p class="sub" data-i18n="formSub">填寫下列欄位，右側即時預覽。完成後可下載 JPEG 或列印成 PDF。</p>
 
     <div class="field">
-      <label>場次 Session <span class="req">*</span></label>
+      <label><span data-i18n="lblSession">場次 Session</span> <span class="req">*</span></label>
       <select id="sessionSelect">
-        <option value="">— 選擇場次 —</option>
+        <option value="" data-i18n="optChoose">— 選擇場次 —</option>
       </select>
-      <div class="tip">選擇場次後，自動帶入 LOGO、講師、主題、時間（中國時間）與時區，可再手動調整。</div>
+      <div class="tip" data-i18n="tipSession">選擇場次後，自動帶入 LOGO、講師、主題、時間（中國時間）與時區，可再手動調整。</div>
     </div>
 
     <div class="field">
-      <label>講師姓名 <span class="req">*</span></label>
+      <label><span data-i18n="lblSpeaker">講師姓名</span> <span class="req">*</span></label>
       <input type="text" id="speaker" value="Niccolo Temperanza">
     </div>
 
     <div class="field">
-      <label>講座名稱 / Presentation Topic <span class="req">*</span></label>
+      <label><span data-i18n="lblTopic">講座名稱 / Presentation Topic</span> <span class="req">*</span></label>
       <textarea id="topic">From Concept to Screen: How Professional Game Artists Work at Escape Studios</textarea>
     </div>
 
     <div class="field">
-      <label>場次日 Session Day <span class="req">*</span></label>
+      <label><span data-i18n="lblDay">場次日 Session Day</span> <span class="req">*</span></label>
       <select id="day">
         <option value="Day 1">Day 1</option>
         <option value="Day 2">Day 2</option>
@@ -321,44 +336,44 @@
     </div>
 
     <div class="field">
-      <label>院校所在時區 Institution Time Zone <span class="req">*</span></label>
+      <label><span data-i18n="lblTz">院校所在時區 Institution Time Zone</span> <span class="req">*</span></label>
       <select id="tz">
-        <option value="America/Los_Angeles">美國 洛杉磯 / 太平洋時間</option>
-        <option value="America/Denver">美國 丹佛 / 山區時間</option>
-        <option value="America/Chicago">美國 芝加哥 / 中部時間</option>
-        <option value="America/New_York">美國 紐約 / 東部時間</option>
-        <option value="America/Toronto">加拿大 多倫多</option>
-        <option value="America/Vancouver">加拿大 溫哥華</option>
-        <option value="America/Sao_Paulo">巴西 聖保羅</option>
-        <option value="Europe/London" selected>英國 倫敦</option>
-        <option value="Europe/Dublin">愛爾蘭 都柏林</option>
-        <option value="Europe/Lisbon">葡萄牙 里斯本</option>
-        <option value="Europe/Paris">法國 巴黎</option>
-        <option value="Europe/Berlin">德國 柏林</option>
-        <option value="Europe/Madrid">西班牙 馬德里</option>
-        <option value="Europe/Rome">義大利 羅馬</option>
-        <option value="Europe/Amsterdam">荷蘭 阿姆斯特丹</option>
-        <option value="Europe/Stockholm">瑞典 斯德哥爾摩</option>
-        <option value="Europe/Athens">希臘 雅典</option>
-        <option value="Europe/Moscow">俄羅斯 莫斯科</option>
-        <option value="Asia/Dubai">阿聯酋 杜拜</option>
-        <option value="Asia/Kolkata">印度</option>
-        <option value="Asia/Bangkok">泰國 曼谷</option>
-        <option value="Asia/Singapore">新加坡</option>
-        <option value="Asia/Hong_Kong">香港</option>
-        <option value="Asia/Taipei">台灣</option>
-        <option value="Asia/Shanghai">中國（北京）</option>
-        <option value="Asia/Tokyo">日本 東京</option>
-        <option value="Asia/Seoul">韓國 首爾</option>
-        <option value="Australia/Perth">澳洲 伯斯</option>
-        <option value="Australia/Sydney">澳洲 雪梨</option>
-        <option value="Pacific/Auckland">紐西蘭 奧克蘭</option>
+        <option value="America/Los_Angeles" data-i18n="tzLA">美國 洛杉磯 / 太平洋時間</option>
+        <option value="America/Denver" data-i18n="tzDenver">美國 丹佛 / 山區時間</option>
+        <option value="America/Chicago" data-i18n="tzChicago">美國 芝加哥 / 中部時間</option>
+        <option value="America/New_York" data-i18n="tzNY">美國 紐約 / 東部時間</option>
+        <option value="America/Toronto" data-i18n="tzToronto">加拿大 多倫多</option>
+        <option value="America/Vancouver" data-i18n="tzVancouver">加拿大 溫哥華</option>
+        <option value="America/Sao_Paulo" data-i18n="tzSaoPaulo">巴西 聖保羅</option>
+        <option value="Europe/London" selected data-i18n="tzLondon">英國 倫敦</option>
+        <option value="Europe/Dublin" data-i18n="tzDublin">愛爾蘭 都柏林</option>
+        <option value="Europe/Lisbon" data-i18n="tzLisbon">葡萄牙 里斯本</option>
+        <option value="Europe/Paris" data-i18n="tzParis">法國 巴黎</option>
+        <option value="Europe/Berlin" data-i18n="tzBerlin">德國 柏林</option>
+        <option value="Europe/Madrid" data-i18n="tzMadrid">西班牙 馬德里</option>
+        <option value="Europe/Rome" data-i18n="tzRome">義大利 羅馬</option>
+        <option value="Europe/Amsterdam" data-i18n="tzAmsterdam">荷蘭 阿姆斯特丹</option>
+        <option value="Europe/Stockholm" data-i18n="tzStockholm">瑞典 斯德哥爾摩</option>
+        <option value="Europe/Athens" data-i18n="tzAthens">希臘 雅典</option>
+        <option value="Europe/Moscow" data-i18n="tzMoscow">俄羅斯 莫斯科</option>
+        <option value="Asia/Dubai" data-i18n="tzDubai">阿聯酋 杜拜</option>
+        <option value="Asia/Kolkata" data-i18n="tzIndia">印度</option>
+        <option value="Asia/Bangkok" data-i18n="tzBangkok">泰國 曼谷</option>
+        <option value="Asia/Singapore" data-i18n="tzSingapore">新加坡</option>
+        <option value="Asia/Hong_Kong" data-i18n="tzHongKong">香港</option>
+        <option value="Asia/Taipei" data-i18n="tzTaipei">台灣</option>
+        <option value="Asia/Shanghai" data-i18n="tzBeijing">中國（北京）</option>
+        <option value="Asia/Tokyo" data-i18n="tzTokyo">日本 東京</option>
+        <option value="Asia/Seoul" data-i18n="tzSeoul">韓國 首爾</option>
+        <option value="Australia/Perth" data-i18n="tzPerth">澳洲 伯斯</option>
+        <option value="Australia/Sydney" data-i18n="tzSydney">澳洲 雪梨</option>
+        <option value="Pacific/Auckland" data-i18n="tzAuckland">紐西蘭 奧克蘭</option>
       </select>
-      <div class="tip">下方時間請以中國時間輸入，會依此時區自動換算成講者當地時間。</div>
+      <div class="tip" data-i18n="tipTz">下方時間請以中國時間輸入，會依此時區自動換算成講者當地時間。</div>
     </div>
 
     <div class="field">
-      <label>Your session time（中國時間輸入）<span class="req">*</span></label>
+      <label><span data-i18n="lblStime">Your session time（中國時間輸入）</span><span class="req">*</span></label>
       <div class="grid2">
         <input type="date" id="sdate" value="2026-06-26">
         <input type="time" id="stime" value="09:00">
@@ -366,73 +381,77 @@
     </div>
 
     <div class="field">
-      <label>場次時長 Duration <span class="req">*</span></label>
+      <label><span data-i18n="lblDur">場次時長 Duration</span> <span class="req">*</span></label>
       <select id="dur">
-        <option value="30">30 分鐘（Keynote 主題演講）</option>
-        <option value="45" selected>45 分鐘（院校場次）</option>
-        <option value="60">60 分鐘（壓軸場次 18:00–19:00）</option>
+        <option value="30" data-i18n="durKeynote">30 分鐘（Keynote 主題演講）</option>
+        <option value="45" selected data-i18n="durInstitution">45 分鐘（院校場次）</option>
+        <option value="60" data-i18n="durClosing">60 分鐘（壓軸場次 18:00–19:00）</option>
       </select>
-      <div class="tip">選擇場次後自動帶入，可手動調整；Test 場次採相同時長。</div>
+      <div class="tip" data-i18n="tipDur">選擇場次後自動帶入，可手動調整；Test 場次採相同時長。</div>
     </div>
 
     <div class="field">
-      <label>會議平台 Platform</label>
+      <label data-i18n="lblPlat">會議平台 Platform</label>
       <input type="text" id="mplat" value="Voov Meeting">
     </div>
 
     <div class="field">
-      <label>Your session ID（會議號）<span class="req">*</span></label>
-      <input type="text" id="mid" value="" placeholder="例如：123 456 789">
+      <label><span data-i18n="lblMid">Your session ID（會議號）</span><span class="req">*</span></label>
+      <input type="text" id="mid" value="" data-i18n-ph="phMid" placeholder="例如：123 456 789">
     </div>
 
     <div class="field">
-      <label>Test session time（中國時間輸入）<span class="req">*</span></label>
+      <label><span data-i18n="lblTtime">Test session time（中國時間輸入）</span><span class="req">*</span></label>
       <div class="grid2">
         <input type="date" id="tdate" value="2026-06-19">
         <input type="time" id="ttime" value="09:00">
       </div>
-      <div class="tip">與演講同一時間，提前一週。</div>
+      <div class="tip" data-i18n="tipTtime">與演講同一時間，提前一週。</div>
     </div>
 
     <div class="field">
-      <label>Test session ID（測試會議號）<span class="req">*</span></label>
-      <input type="text" id="tid" value="" placeholder="例如：987 654 321">
+      <label><span data-i18n="lblTid">Test session ID（測試會議號）</span><span class="req">*</span></label>
+      <input type="text" id="tid" value="" data-i18n-ph="phTid" placeholder="例如：987 654 321">
     </div>
 
     <div class="field">
-      <label>Participation Notes（每行一條）<span class="req">*</span></label>
+      <label><span data-i18n="lblNotes">Participation Notes（每行一條）</span><span class="req">*</span></label>
       <textarea id="notes" rows="5">Please join the meeting 15 minutes early and wait. Rename yourself to your real name; we will promote you to speaker when your session begins.
 See the attachment for the Voov Meeting download, installation, and registration guide.</textarea>
-      <div class="tip">每一行會自動變成一個項目符號。</div>
+      <div class="tip" data-i18n="tipNotes">每一行會自動變成一個項目符號。</div>
     </div>
 
     <div class="field">
-      <label>結尾聯絡語</label>
+      <label data-i18n="lblFooter">結尾聯絡語</label>
       <input type="text" id="footer" value="Do feel free to contact us - ggaes@artdico.co; We look forward to seeing you on Summit!">
     </div>
 
     <div class="actions">
-      <button class="btn btn-primary" id="dlBtn">下載 JPEG</button>
-      <button class="btn btn-ghost" id="pdfBtn">列印 / 存 PDF</button>
+      <button class="btn btn-primary" id="dlBtn" data-i18n="dlBtn">下載 JPEG</button>
+      <button class="btn btn-ghost" id="pdfBtn" data-i18n="pdfBtn">列印 / 存 PDF</button>
     </div>
-    <div class="hint">頂部峰會標題為固定樣式，不可修改。</div>
+    <div class="hint" data-i18n="hint">頂部峰會標題為固定樣式，不可修改。</div>
 
     <div class="resources">
-      <div class="rs-title">參考資源</div>
+      <div class="rs-title" data-i18n="resTitle">參考資源</div>
       <a href="../VooVMeetingRegistrationGuide.pdf" target="_blank" rel="noopener" download>
         <span class="rs-icon">↓</span>
-        <span>VooV Meeting 註冊指南 <span class="rs-sub">(PDF)</span></span>
+        <span><span data-i18n="resGuide">VooV Meeting 註冊指南</span> <span class="rs-sub" data-i18n="resGuideSub">(PDF)</span></span>
+      </a>
+      <a href="../TencentMeetingVooVSpeakerGuide-CH.pdf" data-i18n-href="resSpkHref" target="_blank" rel="noopener" download>
+        <span class="rs-icon">↓</span>
+        <span><span data-i18n="resSpk">騰訊會議（VooV）演講嘉賓指南</span> <span class="rs-sub" data-i18n="resSpkSub">(PDF)</span></span>
       </a>
       <a href="https://voovmeeting.com/download-center.html" target="_blank" rel="noopener">
         <span class="rs-icon">↗</span>
-        <span>下載 VooV Meeting <span class="rs-sub">(voovmeeting.com)</span></span>
+        <span><span data-i18n="resDl">下載 VooV Meeting</span> <span class="rs-sub" data-i18n="resDlSub">(voovmeeting.com)</span></span>
       </a>
     </div>
   </div>
 
   <!-- ============ PREVIEW ============ -->
   <div class="preview-col">
-    <p class="panel-title">即時預覽</p>
+    <p class="panel-title" data-i18n="cardPreview">即時預覽</p>
     <div id="previewBox">
       <div id="scaler">
         <div class="card" id="card">
@@ -442,17 +461,17 @@ See the attachment for the Voov Meeting download, installation, and registration
             <div class="summit-mark">
               <img src="SummitLOGO.png" alt="Global Game &amp; Animation Education Summit">
             </div>
-            <div class="summit-title">Global Game &amp; Animation Education Summit in China 2026</div>
+            <div class="summit-title" data-i18n="summitTitle">Global Game &amp; Animation Education Summit in China 2026</div>
           </div>
 
           <!-- invitation -->
           <div class="invite-block">
-            <div class="invite-title">Invitation</div>
+            <div class="invite-title" data-i18n="inviteTitle">Invitation</div>
           </div>
 
           <!-- school logo -->
           <div class="school-logo" id="pvLogo">
-            <div class="ph">學校 / 機構 LOGO</div>
+            <div class="ph" data-i18n="logoPh">學校 / 機構 LOGO</div>
           </div>
 
           <!-- speaker -->
@@ -460,41 +479,41 @@ See the attachment for the Voov Meeting download, installation, and registration
 
           <!-- topic -->
           <div class="topic-row">
-            <div class="lbl">Presentation Topic：</div>
+            <div class="lbl" data-i18n="cardTopic">Presentation Topic：</div>
             <div class="val" id="pvTopic"></div>
           </div>
           <div class="topic-row" style="margin-top:14px;">
-            <div class="lbl">Meeting Platform：</div>
+            <div class="lbl" data-i18n="cardPlat">Meeting Platform：</div>
             <div class="val" id="pvMplat"></div>
           </div>
 
           <!-- meta -->
           <div class="meta">
-            <div class="line">Session day：<span id="pvDay"></span></div>
+            <div class="line"><span data-i18n="cardDay">Session day：</span><span id="pvDay"></span></div>
             <div class="sess-group">
-              <div class="line" style="margin-top:14px;">Your session time：</div>
+              <div class="line" style="margin-top:14px;" data-i18n="cardStime">Your session time：</div>
               <div class="tzline"><span id="pvSlocal"></span></div>
               <div class="tzline sub"><span id="pvScn"></span></div>
 
-              <div class="line" style="margin-top:14px;">Your session ID：<span id="pvMid"></span></div>
-              <div class="reg-line" id="pvMidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvMidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
+              <div class="line" style="margin-top:14px;"><span data-i18n="cardMid">Your session ID：</span><span id="pvMid"></span></div>
+              <div class="reg-line" id="pvMidReg"><span data-i18n="regPre">Pre-register as speaker</span> <span class="reg-hint" data-i18n="regHint">(VooV / Tencent account required)</span>：<a id="pvMidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
               <img class="reg-qr" id="pvMidQr" alt="Speaker registration QR">
             </div>
 
             <div class="sess-group">
-              <div class="line" style="margin-top:26px;">Test session time：</div>
+              <div class="line" style="margin-top:26px;" data-i18n="cardTtime">Test session time：</div>
               <div class="tzline"><span id="pvTlocal"></span></div>
               <div class="tzline sub"><span id="pvTcn"></span></div>
 
-              <div class="line" style="margin-top:14px;">Test session ID：<span id="pvTid"></span></div>
-              <div class="reg-line" id="pvTidReg">Pre-register as speaker <span class="reg-hint">(VooV / Tencent account required)</span>：<a id="pvTidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
+              <div class="line" style="margin-top:14px;"><span data-i18n="cardTid">Test session ID：</span><span id="pvTid"></span></div>
+              <div class="reg-line" id="pvTidReg"><span data-i18n="regPre">Pre-register as speaker</span> <span class="reg-hint" data-i18n="regHint">(VooV / Tencent account required)</span>：<a id="pvTidLink" class="reg-link" target="_blank" rel="noopener"></a></div>
               <img class="reg-qr" id="pvTidQr" alt="Test speaker registration QR">
             </div>
           </div>
 
           <!-- notes -->
           <div class="notes">
-            <div class="nt-title">Participation Notes:</div>
+            <div class="nt-title" data-i18n="notesTitle">Participation Notes:</div>
             <ul id="pvNotes"></ul>
           </div>
           <div class="footer-line" id="pvFooter"></div>
@@ -509,6 +528,138 @@ See the attachment for the Voov Meeting download, installation, and registration
 <script>
 (function(){
   var $ = function(id){return document.getElementById(id);};
+
+  /* ---------- i18n ---------- */
+  var T = {
+    en: {
+      htmlLang:'en',
+      pageTitle:'Speaker Invitation Generator · GGAES 2026',
+      formH1:'Speaker Invitation Generator',
+      formSub:'Fill in the fields below for a live preview on the right. When done, download a JPEG or print to PDF.',
+      lblSession:'Session', optChoose:'— Select a session —',
+      tipSession:"Selecting a session auto-fills the logo, speaker, topic, time (China time) and time zone — all still editable.",
+      lblSpeaker:'Speaker Name',
+      lblTopic:'Presentation Topic',
+      lblDay:'Session Day',
+      lblTz:'Institution Time Zone',
+      tipTz:"Enter the time below in China time; it is converted to the speaker's local time using this zone.",
+      tzLA:'USA · Los Angeles / Pacific Time', tzDenver:'USA · Denver / Mountain Time',
+      tzChicago:'USA · Chicago / Central Time', tzNY:'USA · New York / Eastern Time',
+      tzToronto:'Canada · Toronto', tzVancouver:'Canada · Vancouver', tzSaoPaulo:'Brazil · São Paulo',
+      tzLondon:'UK · London', tzDublin:'Ireland · Dublin', tzLisbon:'Portugal · Lisbon',
+      tzParis:'France · Paris', tzBerlin:'Germany · Berlin', tzMadrid:'Spain · Madrid',
+      tzRome:'Italy · Rome', tzAmsterdam:'Netherlands · Amsterdam', tzStockholm:'Sweden · Stockholm',
+      tzAthens:'Greece · Athens', tzMoscow:'Russia · Moscow', tzDubai:'UAE · Dubai', tzIndia:'India',
+      tzBangkok:'Thailand · Bangkok', tzSingapore:'Singapore', tzHongKong:'Hong Kong', tzTaipei:'Taiwan',
+      tzBeijing:'China (Beijing)', tzTokyo:'Japan · Tokyo', tzSeoul:'South Korea · Seoul',
+      tzPerth:'Australia · Perth', tzSydney:'Australia · Sydney', tzAuckland:'New Zealand · Auckland',
+      lblStime:'Your session time (enter in China time)',
+      lblDur:'Duration',
+      durKeynote:'30 min (Keynote)', durInstitution:'45 min (Institution session)',
+      durClosing:'60 min (Closing session 18:00–19:00)',
+      tipDur:'Auto-filled when a session is selected; editable. Test runs use the same length.',
+      lblPlat:'Meeting Platform',
+      lblMid:'Your session ID (Meeting ID)', phMid:'e.g. 123 456 789',
+      lblTtime:'Test session time (enter in China time)',
+      tipTtime:'Same time as the talk, one week earlier.',
+      lblTid:'Test session ID', phTid:'e.g. 987 654 321',
+      lblNotes:'Participation Notes (one per line)',
+      tipNotes:'Each line becomes its own bullet point.',
+      lblFooter:'Closing / contact line',
+      dlBtn:'Download JPEG', pdfBtn:'Print / Save PDF',
+      hint:'The summit title at the top is a fixed style and cannot be edited.',
+      resTitle:'Resources',
+      resGuide:'VooV Meeting Registration Guide', resGuideSub:'(PDF)',
+      resSpk:'Tencent Meeting (VooV) Speaker Guide', resSpkSub:'(PDF)',
+      resSpkHref:'../TencentMeetingVooVSpeakerGuide-EN.pdf',
+      resDl:'Download VooV Meeting', resDlSub:'(voovmeeting.com)',
+      cardPreview:'Live preview',
+      summitTitle:'Global Game & Animation Education Summit in China 2026',
+      inviteTitle:'Invitation', logoPh:'School / Institution Logo',
+      cardTopic:'Presentation Topic：', cardPlat:'Meeting Platform：', cardDay:'Session day：',
+      cardStime:'Your session time：', cardMid:'Your session ID：',
+      regPre:'Pre-register as speaker', regHint:'(VooV / Tencent account required)',
+      cardTtime:'Test session time：', cardTid:'Test session ID：',
+      notesTitle:'Participation Notes:',
+      timeSuffix:' Time', chinaTime:'China Standard Time (UTC+8)',
+      busy:'Generating...', genFail:'Failed to generate image: '
+    },
+    zh: {
+      htmlLang:'zh-Hant',
+      pageTitle:'邀請函生成器 · Invitation Generator',
+      formH1:'邀請函生成器',
+      formSub:'填寫下列欄位，右側即時預覽。完成後可下載 JPEG 或列印成 PDF。',
+      lblSession:'場次 Session', optChoose:'— 選擇場次 —',
+      tipSession:'選擇場次後，自動帶入 LOGO、講師、主題、時間（中國時間）與時區，可再手動調整。',
+      lblSpeaker:'講師姓名',
+      lblTopic:'講座名稱 / Presentation Topic',
+      lblDay:'場次日 Session Day',
+      lblTz:'院校所在時區 Institution Time Zone',
+      tipTz:'下方時間請以中國時間輸入，會依此時區自動換算成講者當地時間。',
+      tzLA:'美國 洛杉磯 / 太平洋時間', tzDenver:'美國 丹佛 / 山區時間',
+      tzChicago:'美國 芝加哥 / 中部時間', tzNY:'美國 紐約 / 東部時間',
+      tzToronto:'加拿大 多倫多', tzVancouver:'加拿大 溫哥華', tzSaoPaulo:'巴西 聖保羅',
+      tzLondon:'英國 倫敦', tzDublin:'愛爾蘭 都柏林', tzLisbon:'葡萄牙 里斯本',
+      tzParis:'法國 巴黎', tzBerlin:'德國 柏林', tzMadrid:'西班牙 馬德里',
+      tzRome:'義大利 羅馬', tzAmsterdam:'荷蘭 阿姆斯特丹', tzStockholm:'瑞典 斯德哥爾摩',
+      tzAthens:'希臘 雅典', tzMoscow:'俄羅斯 莫斯科', tzDubai:'阿聯酋 杜拜', tzIndia:'印度',
+      tzBangkok:'泰國 曼谷', tzSingapore:'新加坡', tzHongKong:'香港', tzTaipei:'台灣',
+      tzBeijing:'中國（北京）', tzTokyo:'日本 東京', tzSeoul:'韓國 首爾',
+      tzPerth:'澳洲 伯斯', tzSydney:'澳洲 雪梨', tzAuckland:'紐西蘭 奧克蘭',
+      lblStime:'Your session time（中國時間輸入）',
+      lblDur:'場次時長 Duration',
+      durKeynote:'30 分鐘（Keynote 主題演講）', durInstitution:'45 分鐘（院校場次）',
+      durClosing:'60 分鐘（壓軸場次 18:00–19:00）',
+      tipDur:'選擇場次後自動帶入，可手動調整；Test 場次採相同時長。',
+      lblPlat:'會議平台 Platform',
+      lblMid:'Your session ID（會議號）', phMid:'例如：123 456 789',
+      lblTtime:'Test session time（中國時間輸入）',
+      tipTtime:'與演講同一時間，提前一週。',
+      lblTid:'Test session ID（測試會議號）', phTid:'例如：987 654 321',
+      lblNotes:'Participation Notes（每行一條）',
+      tipNotes:'每一行會自動變成一個項目符號。',
+      lblFooter:'結尾聯絡語',
+      dlBtn:'下載 JPEG', pdfBtn:'列印 / 存 PDF',
+      hint:'頂部峰會標題為固定樣式，不可修改。',
+      resTitle:'參考資源',
+      resGuide:'VooV Meeting 註冊指南', resGuideSub:'(PDF)',
+      resSpk:'騰訊會議（VooV）演講嘉賓指南', resSpkSub:'(PDF)',
+      resSpkHref:'../TencentMeetingVooVSpeakerGuide-CH.pdf',
+      resDl:'下載 VooV Meeting', resDlSub:'(voovmeeting.com)',
+      cardPreview:'即時預覽',
+      summitTitle:'全球遊戲與動畫教育峰會 · 中國 2026',
+      inviteTitle:'邀請函', logoPh:'學校 / 機構 LOGO',
+      cardTopic:'講座主題：', cardPlat:'會議平台：', cardDay:'場次日：',
+      cardStime:'您的場次時間：', cardMid:'您的會議號：',
+      regPre:'講者預先註冊', regHint:'（需 VooV / 騰訊會議帳號）',
+      cardTtime:'測試場次時間：', cardTid:'測試會議號：',
+      notesTitle:'參會須知：',
+      timeSuffix:' 時間', chinaTime:'中國標準時間（UTC+8）',
+      busy:'產生中...', genFail:'產生圖片失敗：'
+    }
+  };
+  var lang = 'en';
+
+  function applyI18n(){
+    var t = T[lang];
+    document.documentElement.lang = t.htmlLang;
+    document.title = t.pageTitle;
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var k = el.getAttribute('data-i18n');
+      if(t[k] != null) el.textContent = t[k];
+    });
+    document.querySelectorAll('[data-i18n-ph]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-ph');
+      if(t[k] != null) el.placeholder = t[k];
+    });
+    document.querySelectorAll('[data-i18n-href]').forEach(function(el){
+      var k = el.getAttribute('data-i18n-href');
+      if(t[k] != null) el.href = t[k];
+    });
+    Array.prototype.forEach.call($('langToggle').children, function(b){
+      b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+    });
+  }
 
   function tzCity(tz){ return tz.split('/').pop().replace(/_/g,' '); }
 
@@ -567,8 +718,8 @@ See the attachment for the Voov Meeting download, installation, and registration
       var p=getParts(start,zone);
       return p.year+'.'+p.month+'.'+p.day+'  '+fmtClock(start,zone)+'–'+fmtClock(end,zone);
     }
-    $(localEl).textContent = range(tz)+'   '+tzCity(tz)+' Time'+(off?' ('+off+')':'');
-    $(cnEl).textContent = range('Asia/Shanghai')+'   China Standard Time (UTC+8)';
+    $(localEl).textContent = range(tz)+'   '+tzCity(tz)+T[lang].timeSuffix+(off?' ('+off+')':'');
+    $(cnEl).textContent = range('Asia/Shanghai')+'   '+T[lang].chinaTime;
   }
 
   function render(){
@@ -827,12 +978,20 @@ See the attachment for the Voov Meeting download, installation, and registration
 
   window.addEventListener('resize', fit);
 
+  // language toggle: re-translate static text, then re-render dynamic card text
+  $('langToggle').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if(!b) return;
+    lang = b.getAttribute('data-lang');
+    applyI18n();
+    render();
+  });
+
   // download JPEG
   $('dlBtn').addEventListener('click', async function(){
     var btn = this;
     btn.disabled = true;
     var label = btn.textContent;
-    btn.textContent = '產生中...';
+    btn.textContent = T[lang].busy;
     try{
       if(document.fonts && document.fonts.ready){ await document.fonts.ready; }
       // make sure the QR images are decoded before capture
@@ -858,7 +1017,7 @@ See the attachment for the Voov Meeting download, installation, and registration
       a.click();
       document.body.removeChild(a);
     }catch(err){
-      alert('產生圖片失敗：' + err.message);
+      alert(T[lang].genFail + err.message);
     }finally{
       btn.disabled = false;
       btn.textContent = label;
@@ -870,6 +1029,7 @@ See the attachment for the Voov Meeting download, installation, and registration
     window.print();
   });
 
+  applyI18n();
   $('sessionSelect').value = '0';
   applySession();
 
